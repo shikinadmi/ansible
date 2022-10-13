@@ -2,4 +2,4 @@
 127.0.0.1 ansible_connection=local
 
 [vmcloud]
-vmcloud ansible_host=178.154.223.157 ansible_user=cloud         # ssh-keygen && cat .ssh/id_rsa.pub
+cloudhost ansible_host=178.154.223.157 ansible_user=cloud         # ssh-keygen && cat .ssh/id_rsa.pub
