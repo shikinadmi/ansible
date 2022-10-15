@@ -1,0 +1,24 @@
+---
+- name: install dnf utils
+  dnf:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - tree
+  listen: "manuals"
+  become: true
+
+- name: tree
+  shell: |
+    tree /home/{{app_user}} ; \
+    ls -al /home/{{app_user}}/configuration/app_configuration.conf ; \
+    cat /home/{{app_user}}/configuration/app_configuration.conf
+  register: output_tree
+  become: true
+  listen: "manuals"
+
+- debug:
+    msg: "{{output_tree.stdout_lines}}"
+  listen: "manuals"
+
+...
