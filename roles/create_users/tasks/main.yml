@@ -1,0 +1,23 @@
+---
+- name: create or remove testuser
+  block:
+    - name: create group "{{app_user_group}}"
+      group:
+        name: "{{app_user_group}}"
+        state: present
+    - name: create user "{{app_user}}" group "{{app_user_group}}"
+      user:
+        name: "{{app_user}}"
+        group: "{{app_user_group}}"
+        state: present
+    - name: remove user "{{app_user}}" group "{{app_user_group}}"
+      user:
+        name: "{{app_user}}"
+        state: absent
+        remove: true
+    - name: remove group "{{app_user_group}}"
+      group:
+        name: "{{app_user_group}}"
+        state: absent
+  become: true
+...

@@ -1,11 +1,18 @@
 ---
-- name: get env
-  hosts: vmcloud
-  tasks:
-    - name: shell execute
-      shell: |
-        df -h ; ls -al / ; env ; cat /etc/*-release
-      register: output
-    - debug:
-        msg: "{{output.stdout_lines}}"
+- name: get env and release version
+  hosts: "{{HOSTS}}"
+  gather_facts: false
+  strategy: free
+  roles:
+    - create_users
+
+
+
+#  tasks:
+#    - name: shell execute
+#      shell: |
+#        df -h ; ls -al / ; env ; cat /etc/*-release
+#      register: output
+#    - debug:
+#        msg: "{{output.stdout_lines}}"
 ...
