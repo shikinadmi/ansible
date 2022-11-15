@@ -1,0 +1,11 @@
+---
+- name: get env
+  hosts: vmcloud
+  tasks:
+    - name: shell execute
+      shell: |
+        df -h ; ls -al / ; env ; cat /etc/*-release
+      register: output
+    - debug:
+        msg: "{{output.stdout_lines}}"
+...
