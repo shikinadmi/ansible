@@ -1,0 +1,28 @@
+---
+- name: create configuration
+  block:
+    - name: create directory configuration
+      file:
+        path: "{{APP.CONF.PATH}}"
+        state: directory
+        owner: "{{app_user}}"
+        group: "{{app_user_group}}"
+    - name: create file configuration
+      file:
+        path: "{{APP.CONF.FILE}}"
+        state: touch
+        owner: "{{app_user}}"
+        group: "{{app_user_group}}"
+    - name: create configuration file app
+      blockinfile:
+        dest: "{{APP.CONF.FILE}}"
+        block: |
+          test configuration file
+    - get_url:
+        url: https://github.com/shikinadmi/gb_ansible/blob/master/README.md
+        dest: "/home/{{app_user}}/README.md"
+      notify:
+        - manuals
+  become: true
+  become_user: "{{app_user}}"
+...

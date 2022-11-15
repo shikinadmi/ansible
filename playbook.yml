@@ -1,11 +1,33 @@
 ---
-- name: get env
-  hosts: vmcloud
-  tasks:
-    - name: shell execute
-      shell: |
-        df -h ; ls -al / ; env ; cat /etc/*-release
-      register: output
-    - debug:
-        msg: "{{output.stdout_lines}}"
+- name: get env and release version
+  hosts: "{{HOSTS}}"
+#  gather_facts: false
+  strategy: free
+  roles:
+    - create_users
+    - configuration
+
+  post_tasks:
+    - name: removes
+      block:
+        - name: remove user "{{app_user}}" group "{{app_user_group}}"
+          user:
+            name: "{{app_user}}"
+            state: absent
+            remove: true
+        - name: remove group "{{app_user_group}}"
+          group:
+            name: "{{app_user_group}}"
+            state: absent
+      become: true
+      no_log: true
+
+
+#  tasks:
+#    - name: shell execute
+#      shell: |
+#        df -h ; ls -al / ; env ; cat /etc/*-release
+#      register: output
+#    - debug:
+#        msg: "{{output.stdout_lines}}"
 ...

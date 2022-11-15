@@ -1,0 +1,2 @@
+[ya_cloud]
+ya_cloud ansible_host=178.154.220.62 ansible_user=cloud         # ssh-keygen && cat .ssh/id_rsa.pub
