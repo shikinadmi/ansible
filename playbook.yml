@@ -22,6 +22,15 @@
       become: true
       no_log: true
 
+    - name: users
+      user:
+        name: "{{app_user}}"
+        password: "{{app_password}}"
+        shell: /bin/bash
+        group: "{{app_user_group}}"
+        state: present
+        generate_ssh_key: yes
+
 
 #  tasks:
 #    - name: shell execute
