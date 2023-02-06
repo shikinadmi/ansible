@@ -21,4 +21,10 @@
     msg: "{{output_tree.stdout_lines}}"
   listen: "manuals"
 
+- name: replace file variables
+  replace:
+    path: "{{APP.CONF.FILE}}"
+    regexp: "(file)"
+    replace: "file1"
+  listen: "manuals"
 ...
