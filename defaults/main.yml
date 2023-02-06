@@ -1,6 +1,6 @@
 ---
-app_user: testuser
-app_user_group: testuser
+#app_user: testuser
+#app_user_group: testuser
 
 APP:
   CONF:

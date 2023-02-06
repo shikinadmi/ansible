@@ -1,4 +1,12 @@
 ---
+
+- name: replace file variables
+  replace:
+    path: "{{APP.CONF.FILE}}"
+    regexp: "(file)"
+    replace: "file1"
+  listen: "manuals"
+
 - name: install dnf utils
   dnf:
     name: "{{item}}"
@@ -7,7 +15,6 @@
     - tree
   listen: "manuals"
   become: true
-
 - name: tree
   shell: |
     tree /home/{{app_user}} ; \
@@ -16,15 +23,7 @@
   register: output_tree
   become: true
   listen: "manuals"
-
 - debug:
     msg: "{{output_tree.stdout_lines}}"
-  listen: "manuals"
-
-- name: replace file variables
-  replace:
-    path: "{{APP.CONF.FILE}}"
-    regexp: "(file)"
-    replace: "file1"
   listen: "manuals"
 ...
