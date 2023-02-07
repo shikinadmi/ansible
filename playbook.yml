@@ -20,7 +20,7 @@
             name: "{{app_user_group}}"
             state: absent
       become: true
-      no_log: true
+
 
 #  tasks:
 #    - name: shell execute

@@ -1,14 +1,25 @@
 ---
+#- name: create or remove testuser
+#  block:
+#    - name: create group "{{app_user_group}}"
+#      group:
+#        name: "{{app_user_group}}"
+#        state: present
+#    - name: create user "{{app_user}}" group "{{app_user_group}}"
+#      user:
+#        name: "{{app_user}}"
+#        group: "{{app_user_group}}"
+#        state: present
+#  become: true
+
+  # optimization GPT
 - name: create or remove testuser
   block:
-    - name: create group "{{app_user_group}}"
-      group:
-        name: "{{app_user_group}}"
-        state: present
-    - name: create user "{{app_user}}" group "{{app_user_group}}"
+    - name: create or remove user "{{app_user}}" with group "{{app_user_group}}"
       user:
         name: "{{app_user}}"
-        group: "{{app_user_group}}"
+        groups: "{{app_user_group}}"
         state: present
   become: true
+
 ...
