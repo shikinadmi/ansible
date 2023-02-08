@@ -57,7 +57,7 @@ ok: [ya_cloud] => {
     "msg": [
         "/home/testuser",
         "├── configuration",
-        "│   └── app_configuration.conf",
+        "│ └── app_configuration.conf",
         "└── README.md",
         "",
         "1 directory, 2 files",
