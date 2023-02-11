@@ -1,7 +1,7 @@
 ---
 - name: get env and release version
   hosts: "{{HOSTS}}"
-  gather_facts: false
+  gather_facts: yes
   strategy: free
   roles:
     - create_users

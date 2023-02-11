@@ -1,12 +1,6 @@
 ---
   # Optimized GPT
-- name: update configuration file
-  replace:
-    path: "{{APP.CONF.FILE}}"
-    regexp: "(file)"
-    replace: "file1"
-  become: true
-  listen: "manuals"
+
 
 - name: install necessary utilities
   dnf:

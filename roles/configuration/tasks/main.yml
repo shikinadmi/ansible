@@ -16,7 +16,7 @@
     - name: create configuration file app
       blockinfile:
         dest: "{{APP.CONF.FILE}}"
-        block: |
+        content: |
           test configuration file
       notify:
         - manuals
@@ -25,6 +25,11 @@
 #        dest: "/home/{{app_user}}/README.md"
 #      notify:
 #        - manuals
+    - name: update configuration file
+      replace:
+        path: "{{APP.CONF.FILE}}"
+        regexp: "(file)"
+        replace: "file1"
   become: true
   become_user: "{{app_user}}"
 ...
