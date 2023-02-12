@@ -20,7 +20,6 @@
             name: "{{app_user_group}}"
             state: absent
       become: true
-      when: inventory_hostname == groups['nodes_dbs'][0]
 
 
 # Представленный выше playbook используется для удаления пользователя и группы пользователя с установленными параметрами из среды и версии релиза. 
