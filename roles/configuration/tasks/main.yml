@@ -32,17 +32,17 @@
         replace: "file1"
   become: true
   become_user: "{{app_user}}"
-
-
 # Установка NGINX и изменения конфигурационного файла по шаблону
 - name: Install NGINX
   dnf:
     name: nginx
     state: present
-# Теперь нам нужно настроить конфигурационный файл NGINX. Это можно сделать с помощью следующего задания Ansible:
-
 - name: Copy NGINX template configuration
   template:
     src: nginx.conf.j2
     dest: /etc/nginx/nginx.conf
-...
+# ansible nginx перезапуск
+#- name: Restart nginx
+#  service:
+#    name: nginx
+#    state: restarted
