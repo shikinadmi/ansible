@@ -4,8 +4,8 @@
   gather_facts: yes
   strategy: free
   roles:
-    - tests
     - create_users
+    - tests
     - configuration
     - nginx
 
