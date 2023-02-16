@@ -4,22 +4,24 @@
   gather_facts: yes
   strategy: free
   roles:
+    - tests
     - create_users
     - configuration
+    - nginx
 
-  post_tasks:
-    - name: removes
-      block:
-        - name: remove user "{{app_user}}" group "{{app_user_group}}"
-          user:
-            name: "{{app_user}}"
-            state: absent
-            remove: true
-        - name: remove group "{{app_user_group}}"
-          group:
-            name: "{{app_user_group}}"
-            state: absent
-      become: true
+#  post_tasks:
+#    - name: removes
+#      block:
+#        - name: remove user "{{app_user}}" group "{{app_user_group}}"
+#          user:
+#            name: "{{app_user}}"
+#            state: absent
+#            remove: true
+#        - name: remove group "{{app_user_group}}"
+#          group:
+#            name: "{{app_user_group}}"
+#            state: absent
+#      become: true
 
 
 # Представленный выше playbook используется для удаления пользователя и группы пользователя с установленными параметрами из среды и версии релиза. 
