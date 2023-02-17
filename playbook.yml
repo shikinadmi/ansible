@@ -1,13 +1,41 @@
 ---
+#- name: Notify host has less than 500 GB of RAM
+#  hosts: localhost
+#  tasks:
+#    - name: Ensure sufficient memory
+#      fail:
+#        msg: "На машине не достаточно памяти | необходимо не менее 500mb"
+#      when: ansible_memtotal_mb < 500
+
 - name: get env and release version
   hosts: "{{HOSTS}}"
-  gather_facts: yes
+  gather_facts: no
   strategy: free
   roles:
     - create_users
     - tests
     - configuration
     - nginx
+#  pre_tasks:
+
+
+
+
+#    - name: Ensure sufficient memory
+#      # fail:
+#      debug:
+#        msg: "На машине не достаточно памяти | необходимо не менее 500mb | Доступно: {{ansible_memfree_mb}} из {{ansible_memtotal_mb}}"
+#      when: ansible_memfree_mb < 4000
+#    - name: Check available RAM
+#      command: cat /proc/meminfo | grep MemTotal
+#      register: meminfo_out
+#
+#    - name: 17 GB memory available?
+#      fail:
+#        msg: 17 GB Memory is not available!
+#      when: meminfo_out.stdout|int < 17000000
+
+
 
 #  post_tasks:
 #    - name: removes

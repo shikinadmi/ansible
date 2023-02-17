@@ -1,3 +1,28 @@
 ---
+#- name: Check available memory
+#  shell: |
+#    #!/bin/bash
+#    MEMORY_BYTES=$(cat /proc/meminfo | grep MemTotal | tr -dc '0-9')
+#    MEMORY_GB=$(expr $MEMORY_BYTES / 1024 / 1024)
+#    if [[ "$MEMORY_GB" -lt "1" ]]; then
+#      echo -e "Memory is critically low: ${MEMORY_GB}GB. Aborting playbook."
+#    else
+#      echo -e "Memory is adequate: ${MEMORY_GB}GB."
+#    fi
+#  register: cmd_result
+#
+#- name: Conditionally stop playbook
+#  fail:
+#    msg: "no memory available"
+#  when: cmd_result.stdout|search('Aborting')
+
+#- name: Check available memory
+#  warn:
+#    msg: "Available memory less than 20GB"
+#  when: ansible_memtotal_mb or ansible_memfree_mb < 21474836480
+#
+#- name: Abort playbook run
+#  meta: end_play
+#  when: ansible_memtotal_mb or ansible_memfree_mb < 21474836480
 
 ...
