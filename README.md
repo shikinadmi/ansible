@@ -1,3 +1,123 @@
+# ansible playbook практики
+
+1. Начинайте с декларативного языка, а не c программного интерфейса. Начните с определения результатов, которые вы собираетесь получить, а не определения того, как вы можете получить эти результаты.
+
+2. Пишите грамотные и понятные сценарии. Ваши сценарии должны быть легки для чтения и понимания. Задавайте вопросы вроде: «Что этот таск делает? Какие настройки от него ожидаются в результате?»
+
+3. Делите задачу на две части: предварительные проверки и обработку. Отдельно задавайте такие задачи, как проверка требований и готовности и такие задачи как установка, проверка и работа.
+
+4. Используйте модульное и инкрементальное программирование. Для бо́льших тасков, например, если вам нужно установить приложение, лучше разделить процесс на множество маленьких тасков, которые можно выполнить по одному.
+
+5. Используйте отладочные инструменты, чтобы проверить последовательность и результаты тасков.
+
+6. Отрефакторите ваш код: удалите лишние задачи, завершите проработку тасков, замените переменные и убедитесь, что логика явна и проста.
+
+7. Протестируйте ваши Ansible-playbook-сценарии до реальной деплой. Используйте набор инструментов и проверьте ваши playbook'и перед выполнением.
+
+8. Поддерживайте ваши Ansible Playbook'и. Следите за изменениями и обновляйте проекты, чтобы избежать несовместимости.
+
+примеры хорошо описанных типовых  playbook можно найти здесь
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
+
+примеры playbook:
+
+```
+--
+- name: Install and configure Apache web server
+  hosts: web
+  tasks:
+    - name: Check for existing install
+      tags: install
+      command: 'apache2 -v'
+      register: apache_check
+
+    - name: Install Apache web server
+      tags: install
+      apt: name=apache2 state=present
+      when: apache_check.rc != 0
+
+    - name: Configure Apache settings
+      tags: configure
+      template: src=templates/apache.conf.j2 dest=/etc/apache2/apache2.conf
+      notify: restart apache
+
+далее можно использовать модули для автоматизации Ansible:
+
+--
+- name: Install and configure Apache web server
+  hosts: web
+  tasks:
+    - name: Check for existing install
+      tags: install
+      command: 'apache2 -v'
+      register: apache_check
+
+    - name: Install Apache web server
+      tags: install
+      apt:
+      name: "{{ item }}"
+      state: present
+      with_items:
+        - apache2
+        - libapache2-mod-wsgi
+          when: apache_check.rc != 0
+
+    - name: Configure Apache settings
+      tags: configure
+      template: src=templates/apache.conf.j2 dest=/etc/apache2/apache2.conf
+      notify: restart apache
+
+еще примеры:
+
+- name: Setup firewall
+  hosts: firewalld
+  tasks:
+    - name: Install and start firewall
+      tags: install
+      service:
+      name: firewalld
+      state: started
+      enabled: yes
+
+    - name: Add SSH to zone
+      tags: configure
+      firewalld:
+      zone: public
+      service: ssh
+      state: enabled
+
+пример установки owncloud
+
+--
+- name: Install OwnCloud Server
+  hosts: web
+  tasks:
+    - name: Ensure necessary packages are installed
+      tags: install
+      apt:
+      package:
+      - apache2
+      - php
+      - owncloud
+      state: present
+      notify: restart apache
+
+    - name: Configure the web server
+      tags: configure
+      template:
+      src: templates/owncloud.conf.j2
+      dest: /etc/apache2/owncloud.conf
+      notify: restart apache
+
+    - name: Update Apache configuration
+      tags: configure
+      lineinfile:
+      dest: /etc/apache2/apache2.conf
+      line: "Include /etc/apache2/owncloud.conf"
+      notify: restart apache
+
+```
+
 # gb_ansible
 
 > lesson 1:
