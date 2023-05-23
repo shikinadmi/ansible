@@ -1,7 +1,5 @@
 ---
   # Optimized GPT
-
-
 - name: install necessary utilities
   dnf:
     name: tree

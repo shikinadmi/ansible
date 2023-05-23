@@ -7,17 +7,16 @@
 #        msg: "На машине не достаточно памяти | необходимо не менее 500mb"
 #      when: ansible_memtotal_mb < 500
 
-- name: get env and release version
+- name: configurations
   hosts: "{{HOSTS}}"
   gather_facts: no
   strategy: free
   roles:
     - create_users
     - tests
-    - configuration
-    - nginx
+#    - configuration
+#    - nginx
 #  pre_tasks:
-
 
 
 
