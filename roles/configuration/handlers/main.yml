@@ -9,8 +9,7 @@
   become: true
 
 - name: "Execute tree command"
-  shell:
-    cmd: |
+  shell: |
       tree /home/{{app_user}}
       ls -al /home/{{app_user}}/configuration/app_configuration.conf
       cat /home/{{app_user}}/configuration/app_configuration.conf
