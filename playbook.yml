@@ -14,7 +14,7 @@
   roles:
     - create_users
     - tests
-#    - configuration
+    - configuration
 #    - nginx
 #  pre_tasks:
 

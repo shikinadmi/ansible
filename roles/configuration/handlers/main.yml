@@ -1,23 +1,22 @@
 ---
-  # Optimized GPT
-- name: install necessary utilities
-  dnf:
-    name: tree
+# Optimized GPT
+
+- name: "Install necessary utilities"
+  package:
+    name:
+      - tree
     state: present
   become: true
-  listen: "manuals"
 
-- name: run tree command
-  shell: |
-    tree /home/{{app_user}} ; \
-    ls -al /home/{{app_user}}/configuration/app_configuration.conf ; \
-    cat /home/{{app_user}}/configuration/app_configuration.conf
+- name: "Execute tree command"
+  shell:
+    cmd: |
+      tree /home/{{app_user}}
+      ls -al /home/{{app_user}}/configuration/app_configuration.conf
+      cat /home/{{app_user}}/configuration/app_configuration.conf
   register: output_tree
   become: true
-  listen: "manuals"
 
-- debug:
-    msg: "{{output_tree.stdout_lines}}"
-  listen: "manuals"
-
-...
+- name: "Print stdout_lines"
+  debug:
+    var: output_tree.stdout_lines

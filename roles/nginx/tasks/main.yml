@@ -13,4 +13,10 @@
 #  service:
 #    name: nginx
 #    state: restarted
+
+# Install NGINX
+- name: Install nginx
+  yum:
+    name: nginx
+
 ...

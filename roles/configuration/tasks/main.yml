@@ -3,32 +3,29 @@
   block:
     - name: create directory configuration
       file:
-        path: "{{APP.CONF.PATH}}"
+        path: "{{ APP.CONF.PATH }}"
         state: directory
-        owner: "{{app_user}}"
-        group: "{{app_user_group}}"
+        owner: "{{ app_user }}"
+        group: "{{ app_user_group }}"
     - name: create file configuration
       file:
-        path: "{{APP.CONF.FILE}}"
+        path: "{{ APP.CONF.FILE }}"
         state: touch
-        owner: "{{app_user}}"
-        group: "{{app_user_group}}"
+        owner: "{{ app_user }}"
+        group: "{{ app_user_group }}"
     - name: create configuration file app
       blockinfile:
-        dest: "{{APP.CONF.FILE}}"
+        dest: "{{ APP.CONF.FILE }}"
         content: |
           test configuration file
-      notify:
-        - manuals
-#    - get_url:
-#        url: https://github.com/shikinadmi/gb_ansible/blob/master/README.md
-#        dest: "/home/{{app_user}}/README.md"
-#      notify:
-#        - manuals
     - name: update configuration file
       replace:
-        path: "{{APP.CONF.FILE}}"
-        regexp: "(file)"
+        path: "{{ APP.CONF.FILE }}"
+        regexp: "(^test configuration file$)"
         replace: "file1"
+      notify:
+        - Install necessary utilities
+        - Execute tree command
+        - Print stdout_lines
   become: true
-  become_user: "{{app_user}}"
+  become_user: "{{ app_user }}"

@@ -5,11 +5,11 @@
       group:
         name: "{{app_user_group}}"
         state: present
+
     - name: create user "{{app_user}}" group "{{app_user_group}}"
       user:
         name: "{{app_user}}"
         group: "{{app_user_group}}"
         state: present
   become: true
-
 ...
