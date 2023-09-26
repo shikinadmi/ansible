@@ -16,7 +16,7 @@
 
 8. Поддерживайте ваши Ansible Playbook'и. Следите за изменениями и обновляйте проекты, чтобы избежать несовместимости.
 
-примеры хорошо описанных типовых  playbook можно найти здесь
+примеры хорошо описанных типовых  playbook можно найти здесь.
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
 
 примеры playbook:
