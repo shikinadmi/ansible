@@ -1,5 +1,6 @@
 #!/bin/zsh
-inventory_file="inventories/$1"
+# shellcheck disable=SC2034
+#inventory_file="inventories/$1"
 if ! ansible "$1" -m ping &> /dev/null; then
   echo "Failed to ping $1"
   exit 1
