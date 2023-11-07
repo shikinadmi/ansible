@@ -1,2 +1,0 @@
-[localhost]
-local ansible_connection=local  # ansible_user=cloud      # ssh-keygen && cat .ssh/id_rsa.pub
