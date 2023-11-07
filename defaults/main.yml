@@ -1,9 +1,3 @@
 ---
-app_user: ansible
-app_user_group: ansible
 
-APP:
-  CONF:
-    PATH: "/home/{{app_user}}/configuration"
-    FILE: "/home/{{app_user}}/configuration/app_configuration.conf"
 ...

@@ -1,4 +1,14 @@
 ---
+- name: configurations
+  hosts: "{{HOSTS}}"
+  gather_facts: yes
+  strategy: free
+  roles:
+    - tests
+    - create_users
+    - configuration
+
+
 #- name: Notify host has less than 500 GB of RAM
 #  hosts: localhost
 #  tasks:
@@ -6,19 +16,6 @@
 #      fail:
 #        msg: "На машине не достаточно памяти | необходимо не менее 500mb"
 #      when: ansible_memtotal_mb < 500
-
-- name: configurations
-  hosts: "{{HOSTS}}"
-  gather_facts: yes
-  strategy: free
-  roles:
-    - create_users
-    - tests
-    - configuration
-#    - nginx
-#  pre_tasks:
-
-
 
 #    - name: Ensure sufficient memory
 #      # fail:
