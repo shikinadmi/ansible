@@ -6,7 +6,8 @@
   roles:
     - tests
     - create_users
-#    - configuration
+    - configuration
+    - nginx
 
 
 #- name: Notify host has less than 500 GB of RAM
