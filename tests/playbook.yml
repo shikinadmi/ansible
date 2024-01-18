@@ -5,9 +5,9 @@
   strategy: free
   roles:
     - tests
-    - create_users
-    - configuration
-    - nginx
+#    - create_users
+#    - configuration
+#    - nginx
 
 
 #- name: Notify host has less than 500 GB of RAM
