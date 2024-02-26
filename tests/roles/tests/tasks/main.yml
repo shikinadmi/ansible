@@ -6,6 +6,17 @@
   debug:
     msg: "{{ url | regex_search ('(SP|P)-(\\d+).(\\d+)')}}"
 
+- name: cpu
+  debug:
+    msg: "{{ansible_processor_vcpus -2}}"
+
+#- until:
+#- shell: |
+#    yum update
+#  retries: 2
+#  delay: 2
+#  retries: 10
+#  delay: 3
 
 #- name: Check available memory
 #  shell: |

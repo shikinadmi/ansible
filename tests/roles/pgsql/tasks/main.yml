@@ -1,0 +1,146 @@
+---
+
+#- name: Install PostgreSQL server
+#  yum:
+#    name: postgresql, systemd
+#    state: latest
+#
+#- name: Initialize PostgreSQL database cluster
+#  shell: /usr/bin/postgresql-setup --initdb ; systemctl start postgresql ;
+
+#  ```
+#  # Установите необходимые пакеты.
+#  dnf install postgresql-server postgresql-contrib
+#
+#  # Инициализируйте кластер баз данных.
+#  /usr/bin/postgresql-setup --initdb
+#
+#  # Запустите службу PostgreSQL.
+#  systemctl start postgresql
+#
+#  # Включите службу PostgreSQL для запуска при загрузке.
+#  systemctl enable postgresql
+#
+#  # Создайте учетную запись суперпользователя PostgreSQL.
+#  sudo -u postgres createuser --superuser my_username
+#
+#  # Установите пароль для учетной записи суперпользователя PostgreSQL.
+#  sudo -u postgres psql -c "ALTER USER my_username WITH PASSWORD 'my_password';"
+#
+#  # Выйдите из оболочки PostgreSQL.
+#  \q
+#
+#  # Войдите в оболочку PostgreSQL с помощью учетной записи суперпользователя.
+#  sudo -u postgres psql
+#
+#  # Создайте новую базу данных.
+#  CREATE DATABASE my_database;
+#
+#  # Выберите новую базу данных.
+#  \c my_database
+#
+#  # Создайте новую таблицу.
+#  CREATE TABLE my_table (
+#  id SERIAL PRIMARY KEY,
+#  name VARCHAR(255) NOT NULL,
+#  email VARCHAR(255) UNIQUE NOT NULL
+#  );
+#
+#  # Вставьте данные в новую таблицу.
+#  INSERT INTO my_table (name, email) VALUES
+#  ('John Doe', 'johndoe@example.com'),
+#  ('Jane Smith', 'janesmith@example.com'),
+#  ('Michael Jones', 'michaeljones@example.com');
+#
+#  # Выберите все данные из новой таблицы.
+#  SELECT * FROM my_table;
+#
+#  # Выйдите из оболочки PostgreSQL.
+#  \q
+#  ```
+
+- dnf:
+    name: python3-psycopg2
+
+- name: Create PostgreSQL database
+  postgresql_db:
+    name: my_database
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+
+- name: Create PostgreSQL user
+  postgresql_user:
+    name: my_user
+    password: my_password
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+
+#- name: Grant privileges to PostgreSQL user
+#  postgresql_privs:
+#    user: my_user
+#    priv: ALL
+#    db: my_database
+#    login_host: postgres
+#    login_user: postgres
+#    login_password: postgres
+
+- name: Create PostgreSQL schema
+  postgresql_schema:
+    name: my_schema
+    db: my_database
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+
+#- name: Dump PostgreSQL schema
+#  postgresql_db:
+#    name: my_database
+#    state: dump
+#    target: ./dump_db
+#    login_host: postgres
+#    login_user: postgres
+#    login_password: postgres
+#
+#- name: Restore PostgreSQL schema from dump
+#  postgresql_schema:
+#    name: my_schema
+#    db: my_database
+##    state: present
+##    path: /tmp/my_schema.sql
+#    login_host: postgres
+#    login_user: postgres
+#    login_password: postgres
+
+- name: Create PostgreSQL schema from template
+  postgresql_schema:
+    name: my_template_schema
+    db: my_database
+    state: present
+    schema: my_schema
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+
+- name: Drop PostgreSQL schema
+  postgresql_schema:
+    name: my_schema
+    db: my_database
+    state: absent
+#    schema: my_schema
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+
+- name: Restore PostgreSQL schema from template
+  postgresql_schema:
+    name: my_schema
+    db: my_database
+    state: present
+    schema: my_template_schema
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+#  ansible tasks # Создание БД postgresql с установкой и инициалтзацией БД. # Выдача прав на доступ пользователям. # Создание схемы и ее резервная копия с возможностью пересоздания из дампа или шпблона.
+...
