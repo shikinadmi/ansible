@@ -1,4 +1,93 @@
 ---
+- dnf:
+    name: python3-psycopg2
+
+- name: Create PostgreSQL database
+  postgresql_db:
+    name: my_database
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+
+- name: Create PostgreSQL user
+  postgresql_user:
+    name: my_user
+    password: my_password
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+
+
+- name: Create PostgreSQL schema
+  postgresql_schema:
+    name: my_schema
+    db: my_database
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+
+#- name: Grant privileges to PostgreSQL user
+#  postgresql_privs:
+#    roles: my_user
+#    privs: ALL
+#    database: my_database
+#    schema: my_schema
+#    objs: my_database
+#    login_host: postgres
+#    login_user: postgres
+#    login_password: postgres
+
+#- name: Dump PostgreSQL schema
+#  postgresql_db:
+#    name: my_database
+#    state: dump
+#    target: ./dump_db
+#    login_host: postgres
+#    login_user: postgres
+#    login_password: postgres
+#  delegate_to: postgres
+#
+#- name: Restore PostgreSQL schema from dump
+#  postgresql_schema:
+#    name: my_schema
+#    db: my_database
+##    state: present
+##    path: /tmp/my_schema.sql
+#    login_host: postgres
+#    login_user: postgres
+#    login_password: postgres
+
+- name: Create PostgreSQL schema from template
+  postgresql_schema:
+    name: my_template_schema
+    db: my_database
+    state: present
+    schema: my_schema
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+
+- name: Drop PostgreSQL schema
+  postgresql_schema:
+    name: my_schema
+    db: my_database
+    state: absent
+#    schema: my_schema
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+
+- name: Restore PostgreSQL schema from template
+  postgresql_schema:
+    name: my_schema
+    db: my_database
+    state: present
+    schema: my_template_schema
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+#  ansible tasks # Создание БД postgresql с установкой и инициалтзацией БД. # Выдача прав на доступ пользователям. # Создание схемы и ее резервная копия с возможностью пересоздания из дампа или шпблона.
+...
 
 #- name: Install PostgreSQL server
 #  yum:
@@ -58,89 +147,3 @@
 #  # Выйдите из оболочки PostgreSQL.
 #  \q
 #  ```
-
-- dnf:
-    name: python3-psycopg2
-
-- name: Create PostgreSQL database
-  postgresql_db:
-    name: my_database
-    login_host: postgres
-    login_user: postgres
-    login_password: postgres
-
-- name: Create PostgreSQL user
-  postgresql_user:
-    name: my_user
-    password: my_password
-    login_host: postgres
-    login_user: postgres
-    login_password: postgres
-
-#- name: Grant privileges to PostgreSQL user
-#  postgresql_privs:
-#    user: my_user
-#    priv: ALL
-#    db: my_database
-#    login_host: postgres
-#    login_user: postgres
-#    login_password: postgres
-
-- name: Create PostgreSQL schema
-  postgresql_schema:
-    name: my_schema
-    db: my_database
-    login_host: postgres
-    login_user: postgres
-    login_password: postgres
-
-#- name: Dump PostgreSQL schema
-#  postgresql_db:
-#    name: my_database
-#    state: dump
-#    target: ./dump_db
-#    login_host: postgres
-#    login_user: postgres
-#    login_password: postgres
-#
-#- name: Restore PostgreSQL schema from dump
-#  postgresql_schema:
-#    name: my_schema
-#    db: my_database
-##    state: present
-##    path: /tmp/my_schema.sql
-#    login_host: postgres
-#    login_user: postgres
-#    login_password: postgres
-
-- name: Create PostgreSQL schema from template
-  postgresql_schema:
-    name: my_template_schema
-    db: my_database
-    state: present
-    schema: my_schema
-    login_host: postgres
-    login_user: postgres
-    login_password: postgres
-
-- name: Drop PostgreSQL schema
-  postgresql_schema:
-    name: my_schema
-    db: my_database
-    state: absent
-#    schema: my_schema
-    login_host: postgres
-    login_user: postgres
-    login_password: postgres
-
-- name: Restore PostgreSQL schema from template
-  postgresql_schema:
-    name: my_schema
-    db: my_database
-    state: present
-    schema: my_template_schema
-    login_host: postgres
-    login_user: postgres
-    login_password: postgres
-#  ansible tasks # Создание БД postgresql с установкой и инициалтзацией БД. # Выдача прав на доступ пользователям. # Создание схемы и ее резервная копия с возможностью пересоздания из дампа или шпблона.
-...

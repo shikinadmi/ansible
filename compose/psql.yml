@@ -29,7 +29,8 @@ services:
     volumes:
       - /Users/alexandr/IdeaProjects/ansible/tests/:/root
     entrypoint: sh ./run.sh localhost
-
+    depends_on:
+      - db
 
 networks:
   tests:
