@@ -18,6 +18,7 @@ services:
     #      size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
       POSTGRES_PASSWORD: postgres
+      POSTGRES_MAX_IDENTIFIER_LENGTH: 127
     ports:
       - 5432:5432
 
@@ -32,6 +33,7 @@ services:
 
 networks:
   tests:
+    driver: local
 
 #  adminer:
 #    image: adminer
