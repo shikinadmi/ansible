@@ -8,14 +8,19 @@ services:
 #    container_name: postgres
     hostname: postgres
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: 200M
     # set shared memory limit when using docker-compose
     shm_size: 128mb
     # or set shared memory limit when deploy via swarm stack
-    #volumes:
-    #  - type: tmpfs
-    #    target: /dev/shm
-    #    tmpfs:
-    #      size: 134217728 # 128*2^20 bytes = 128Mb
+    volumes:
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_MAX_IDENTIFIER_LENGTH: 127
