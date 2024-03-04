@@ -4,7 +4,7 @@ version: '3.9'
 services:
 
   db:
-    image: postgres
+    image: postgres:15 # pg_dump v15 ansible tasks
 #    container_name: postgres
     hostname: postgres
     restart: always
@@ -28,7 +28,7 @@ services:
       - '5432:5432'
 
   playbook:
-    image: shikinadmi/ansible
+    image: ansible:latest
 #    container_name: ansible_playbook
     hostname: ansible
     volumes:

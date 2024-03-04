@@ -1,7 +1,7 @@
 ---
-- dnf:
-    name: python3-psycopg2
-  become: yes
+#- dnf:
+#    name: python3-psycopg2
+#  become: yes
 
 
 # Создание пользователя
@@ -67,6 +67,19 @@
     login_user: postgres
     login_password: postgres
 
+## Создание Схемы в БД
+#- name: Create PostgreSQL schema
+#  postgresql_schema:
+#    name: my_schema
+#    db: my_database
+#    state: present
+##    target: ./my_schema.tar
+##    owner: my_user
+#    #    priv: "CONNECT/my_schema:ALL"
+#    login_host: postgres
+#    login_user: postgres
+#    login_password: postgres
+
 #- name: Grant privileges to PostgreSQL user
 #  postgresql_privs:
 #    roles: my_user
@@ -78,14 +91,14 @@
 #    login_user: postgres
 #    login_password: postgres
 
-#- name: Dump PostgreSQL schema
-#  postgresql_db:
-#    name: my_database
-#    state: dump
-#    target: ./dump_db
-#    login_host: postgres
-#    login_user: postgres
-#    login_password: postgres
+- name: Dump PostgreSQL schema
+  postgresql_db:
+    name: my_database
+    state: dump
+    target: ./dump_db
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
 #  delegate_to: postgres
 #
 #- name: Restore PostgreSQL schema from dump
@@ -149,14 +162,14 @@
 
 
 # Создание файла дампа БД
-#- name: Dump DB my_database
-#  postgresql_db:
-#    name: my_database
-#    state: dump
-#    target: /tmp/my_database.tar
-#    login_host: postgres
-#    login_user: postgres
-#    login_password: postgres
+- name: Dump DB my_database
+  postgresql_db:
+    name: my_database
+    state: dump
+    target: /tmp/my_database.tar
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
       # fixme - отсутствует pg_dump в контейнере ansible
       #playbook-1  | TASK [pgsql : Dump DB my_database] *********************************************
       #playbook-1  | fatal: [local]: FAILED! => {"changed": false, "msg": "Failed to find required executable \"pg_dump\" in paths: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"}
