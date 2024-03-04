@@ -167,7 +167,7 @@
       postgresql_db:
         name: my_database
         state: dump
-        target: /tmp/my_database.tar
+        target: /tmp/my_database_schema.tar
         target_opts: "-n my_schema"
     #    schema: my_schema
         login_host: postgres
@@ -189,7 +189,7 @@
       postgresql_db:
         name: my_database
         state: restore
-        target: /tmp/my_database.tar
+        target: /tmp/my_database_schema.tar
     #    schema: my_schema
         login_host: postgres
         login_user: postgres
