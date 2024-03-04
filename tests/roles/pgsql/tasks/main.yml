@@ -3,32 +3,54 @@
     name: python3-psycopg2
   become: yes
 
+
+# Создание пользователя
+- name: Drop PostgreSQL user
+  postgresql_user:
+    db: my_database
+    name: my_user
+    password: my_password
+#    priv: "CONNECT/my_database:ALL"
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+    state: absent
+  ignore_errors: yes
+
 # Удаление БД
 - name: Drop PostgreSQL database
   postgresql_db:
     name: my_database
 #    owner: my_user
+#    priv: "CONNECT/my_database:ALL"
     login_host: postgres
     login_user: postgres
     login_password: postgres
     state: absent
-
-# Создание пользователя
-- name: Create PostgreSQL user
-  postgresql_user:
-    name: my_user
-    password: my_password
-    login_host: postgres
-    login_user: postgres
-    login_password: postgres
-    state: present
+  ignore_errors: yes
+      #playbook-1  | TASK [pgsql : Drop PostgreSQL database] ****************************************
+      #playbook-1  | An exception occurred during task execution. To see the full traceback, use -vvv. The error was: DETAIL:  There are 3 other sessions using the database.
+      #playbook-1  | fatal: [local]: FAILED! => {"changed": false, "msg": "Database query failed: database \"my_database\" is being accessed by other users\nDETAIL:  There are 3 other sessions using the database.\n"}
 
 # Создание БД и назначение владельца
 - name: Create PostgreSQL database
   postgresql_db:
     name: my_database
     encoding: UTF-8
-    owner: my_user
+#    owner: my_user
+#    priv: "CONNECT/my_database:ALL"
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+    state: present
+
+# Создание пользователя
+- name: Create PostgreSQL user
+  postgresql_user:
+    db: my_database
+    name: my_user
+    password: my_password
+#    priv: "CONNECT/my_database:ALL"
     login_host: postgres
     login_user: postgres
     login_password: postgres
@@ -39,6 +61,8 @@
   postgresql_schema:
     name: my_schema
     db: my_database
+    owner: my_user
+#    priv: "CONNECT/my_schema:ALL"
     login_host: postgres
     login_user: postgres
     login_password: postgres
@@ -91,6 +115,7 @@
     name: my_schema
     db: my_database
     state: absent
+    cascade_drop: yes
 #    schema: my_schema
     login_host: postgres
     login_user: postgres
@@ -100,12 +125,28 @@
   postgresql_schema:
     name: my_schema
     db: my_database
+    owner: my_user
     state: present
     schema: my_template_schema
     login_host: postgres
     login_user: postgres
     login_password: postgres
 #  ansible tasks # Создание БД postgresql с установкой и инициалтзацией БД. # Выдача прав на доступ пользователям. # Создание схемы и ее резервная копия с возможностью пересоздания из дампа или шпблона.
+
+#- postgresql_privs:
+#    database: my_database
+#    state: present
+#    privs: ALL
+##    type: schema
+#    objs: ALL_IN_SCHEMA
+#    schema: my_schema
+#    roles: my_user
+#    grant_option: true
+#    login_host: postgres
+#    login_user: postgres
+#    login_password: postgres
+
+
 
 # Создание файла дампа БД
 #- name: Dump DB my_database
