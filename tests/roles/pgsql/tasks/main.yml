@@ -194,7 +194,8 @@
         login_host: postgres
         login_user: postgres
         login_password: postgres
-          # TODO - отсутствует pg_dump в контейнере ansible
+          # TODO - необходимо иметь на машине делегате pg_dump, соответственно играть нужно на машине с postgresql-server /usr/bin/pg_dump
+          # fixed - отсутствует pg_dump в контейнере ansible
           #playbook-1  | TASK [pgsql : Dump DB my_database] *********************************************
           #playbook-1  | fatal: [local]: FAILED! => {"changed": false, "msg": "Failed to find required executable \"pg_dump\" in paths: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"}
 
