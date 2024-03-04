@@ -1,14 +1,19 @@
 ---
 - dnf:
     name: python3-psycopg2
+  become: yes
 
-- name: Create PostgreSQL database
+# Удаление БД
+- name: Drop PostgreSQL database
   postgresql_db:
     name: my_database
+#    owner: my_user
     login_host: postgres
     login_user: postgres
     login_password: postgres
+    state: absent
 
+# Создание пользователя
 - name: Create PostgreSQL user
   postgresql_user:
     name: my_user
@@ -16,8 +21,20 @@
     login_host: postgres
     login_user: postgres
     login_password: postgres
+    state: present
 
+# Создание БД и назначение владельца
+- name: Create PostgreSQL database
+  postgresql_db:
+    name: my_database
+    encoding: UTF-8
+    owner: my_user
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+    state: present
 
+# Создание Схемы в БД
 - name: Create PostgreSQL schema
   postgresql_schema:
     name: my_schema
@@ -52,11 +69,12 @@
 #    name: my_schema
 #    db: my_database
 ##    state: present
-##    path: /tmp/my_schema.sql
+##    target: /tmp/my_schema.sql
 #    login_host: postgres
 #    login_user: postgres
 #    login_password: postgres
 
+# Создание шаблона схемы на основе схемы
 - name: Create PostgreSQL schema from template
   postgresql_schema:
     name: my_template_schema
@@ -67,6 +85,7 @@
     login_user: postgres
     login_password: postgres
 
+# Пересоздание схемы через шаблон схемы
 - name: Drop PostgreSQL schema
   postgresql_schema:
     name: my_schema
@@ -87,6 +106,21 @@
     login_user: postgres
     login_password: postgres
 #  ansible tasks # Создание БД postgresql с установкой и инициалтзацией БД. # Выдача прав на доступ пользователям. # Создание схемы и ее резервная копия с возможностью пересоздания из дампа или шпблона.
+
+# Создание файла дампа БД
+#- name: Dump DB my_database
+#  postgresql_db:
+#    name: my_database
+#    state: dump
+#    target: /tmp/my_database.tar
+#    login_host: postgres
+#    login_user: postgres
+#    login_password: postgres
+      # fixme - отсутствует pg_dump в контейнере ansible
+      #playbook-1  | TASK [pgsql : Dump DB my_database] *********************************************
+      #playbook-1  | fatal: [local]: FAILED! => {"changed": false, "msg": "Failed to find required executable \"pg_dump\" in paths: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"}
+
+
 ...
 
 #- name: Install PostgreSQL server
