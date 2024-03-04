@@ -91,11 +91,11 @@
 #    login_user: postgres
 #    login_password: postgres
 
-- name: Dump PostgreSQL schema
+- name: Dump DB my_database
   postgresql_db:
     name: my_database
     state: dump
-    target: ./dump_db
+    target: /tmp/dump_db.tar
     login_host: postgres
     login_user: postgres
     login_password: postgres
@@ -160,19 +160,88 @@
 #    login_password: postgres
 
 
+- name: Recreate schema into Dump File
+  block:
+    # Создание файла дампа БД
+    - name: Dump DB my_database schema my_schema
+      postgresql_db:
+        name: my_database
+        state: dump
+        target: /tmp/my_database.tar
+        target_opts: "-n my_schema"
+    #    schema: my_schema
+        login_host: postgres
+        login_user: postgres
+        login_password: postgres
 
-# Создание файла дампа БД
-- name: Dump DB my_database
-  postgresql_db:
-    name: my_database
-    state: dump
-    target: /tmp/my_database.tar
-    login_host: postgres
-    login_user: postgres
-    login_password: postgres
-      # fixme - отсутствует pg_dump в контейнере ansible
-      #playbook-1  | TASK [pgsql : Dump DB my_database] *********************************************
-      #playbook-1  | fatal: [local]: FAILED! => {"changed": false, "msg": "Failed to find required executable \"pg_dump\" in paths: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"}
+    - name: Drop PostgreSQL schema
+      postgresql_schema:
+        name: my_schema
+        db: my_database
+        state: absent
+        cascade_drop: yes
+        #    schema: my_schema
+        login_host: postgres
+        login_user: postgres
+        login_password: postgres
+
+    - name: Restore DB my_database schema my_schema
+      postgresql_db:
+        name: my_database
+        state: restore
+        target: /tmp/my_database.tar
+    #    schema: my_schema
+        login_host: postgres
+        login_user: postgres
+        login_password: postgres
+          # fixme - отсутствует pg_dump в контейнере ansible
+          #playbook-1  | TASK [pgsql : Dump DB my_database] *********************************************
+          #playbook-1  | fatal: [local]: FAILED! => {"changed": false, "msg": "Failed to find required executable \"pg_dump\" in paths: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"}
+
+- name: Recreate DB into Dump File tar
+  block:
+    - name: Dump DB my_database
+      postgresql_db:
+        name: my_database
+        state: dump
+        target: /tmp/my_database.tar
+        #    schema: my_schema
+        login_host: postgres
+        login_user: postgres
+        login_password: postgres
+
+    - name: Drop PostgreSQL database
+      postgresql_db:
+        name: my_database
+        #    owner: my_user
+        #    priv: "CONNECT/my_database:ALL"
+        login_host: postgres
+        login_user: postgres
+        login_password: postgres
+        state: absent
+      ignore_errors: yes
+
+    # Создание БД и назначение владельца
+    - name: Create PostgreSQL database
+      postgresql_db:
+        name: my_database
+        encoding: UTF-8
+        #    owner: my_user
+        #    priv: "CONNECT/my_database:ALL"
+        login_host: postgres
+        login_user: postgres
+        login_password: postgres
+        state: present
+
+    - name: Restore DB my_database
+      postgresql_db:
+        name: my_database
+        state: restore
+        target: /tmp/my_database.tar
+        #    schema: my_schema
+        login_host: postgres
+        login_user: postgres
+        login_password: postgres
 
 
 ...
