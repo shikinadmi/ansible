@@ -3,10 +3,31 @@
 #    name: python3-psycopg2
 #  become: yes
 
-- name: Удаление пользлвателя и БД
+- name: >
+    Доступность БД
+    Проверка подключения к БД
+  block:
+    - name: Ping DB
+      postgresql_ping:
+        db: postgres
+        login_host: postgres
+        login_user: postgres
+        login_password: postgres
+      register: result
+    - name: Доступность БД
+      debug:
+        msg: Подключение к БД прошло успешно
+      when: result.is_available == true
+    - fail: msg="Подключение к БД не прошло"
+      when: result.is_available == false
+
+
+- name: Удаление пользователя и БД
   block:
     # Удаление пользователя
-    - name: Drop PostgreSQL user
+    - name: >
+        Удаление пользователя
+        Для дальнейщего пересоздания
       postgresql_user:
         db: my_database
         name: my_user
@@ -29,6 +50,7 @@
         login_password: postgres
         state: absent
       ignore_errors: yes
+#      check_mode: yes
           #playbook-1  | TASK [pgsql : Drop PostgreSQL database] ****************************************
           #playbook-1  | An exception occurred during task execution. To see the full traceback, use -vvv. The error was: DETAIL:  There are 3 other sessions using the database.
           #playbook-1  | fatal: [local]: FAILED! => {"changed": false, "msg": "Database query failed: database \"my_database\" is being accessed by other users\nDETAIL:  There are 3 other sessions using the database.\n"}
@@ -154,6 +176,18 @@
         login_user: postgres
         login_password: postgres
 
+# Удаление БД
+- name: Drop PostgreSQL database
+  postgresql_db:
+    name: my_database
+    #    owner: my_user
+    #    priv: "CONNECT/my_database:ALL"
+    login_host: postgres
+    login_user: postgres
+    login_password: postgres
+    state: absent
+  #      ignore_errors: yes
+#  check_mode: yes
 
 #- name: Dump DB my_database
 #  postgresql_db:
