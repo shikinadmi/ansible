@@ -27,6 +27,16 @@ services:
     ports:
       - '5432:5432'
 
+## поднятие oracle контейнера с выводом портов и задать пользователя
+#  oracle:
+#    image: wnameless/oracle-xe-11g-r2
+#    hostname: oracle
+#    restart: always
+#    ports:
+#      - '1521:1521'
+#    environment:
+#      ORACLE_PASSWORD: oracle
+
   playbook:
     image: ansible:latest
 #    container_name: ansible_playbook

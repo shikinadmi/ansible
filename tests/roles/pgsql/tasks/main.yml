@@ -7,7 +7,7 @@
     Доступность БД
     Проверка подключения к БД
   block:
-    - name: Ping DB
+    - name: Проверка подключения к БД postgres (по умолчанию)
       postgresql_ping:
         db: postgres
         login_host: postgres
@@ -229,4 +229,15 @@
     state: absent
   #      ignore_errors: yes
 #  check_mode: yes
+
+- name: Выдача прав другому reader
+  community.postgresql.postgresql_privs:
+    db: library
+    state: present
+    priv: INSERT
+    obj: books
+    role: reader
+    grant_option: false
+
+
 ...

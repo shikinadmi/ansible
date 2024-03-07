@@ -1,0 +1,407 @@
+---
+#- name: install python-psycopg2
+#  yum:
+#    name: python-psycopg2
+#  become: yes
+#  become_user: ansible
+
+- name: >
+    Проверка доступности БД /
+    Создание БД пользователя и схемы / 
+    Cоздание DUMP File DB / DUMP File Schema User / DUMP File Schema Template/
+    Воссстановеление схемы пользователя /
+    Восстановление схемы шаблона /
+
+  vars:
+    # --- Stand Name
+    stand_name: DomainLogin  # переменная задается только строчными буквами
+    # --- Login Database
+    login_database_host: postgres
+    login_database_port: 5432
+    login_database_user: postgres
+    login_database_password: postgres
+    # --- Database
+    database_name: pprb
+    # --- User Schema
+    database_user: "pprb_user_{{stand_name | lower | replace('_', '')}}" # replace - замена подстроки в строке по регулярному выражению
+    database_password: pprb_user
+    database_schema_name: "{{database_user}}"
+
+    # --- TemplateUser Schema
+    database_template_user: template_users
+    database_template_password: template_users
+    database_template_schema_name: "{{database_template_user}}"
+
+    # --- Trigers
+    restore_database: true
+    # ---
+    drop_user_schema: true
+    create_user_schema: true
+    restore_user_schema: true
+    # ---
+    drop_template_schema: true
+    create_template_schema: true
+    restore_template_schema: true
+
+
+    # --- Dump File DB / Schema User / Schema Template
+    dump_database_template_schema: true
+    dump_database_user_schema: true
+    dump_database: true
+
+    # --- Paths
+    dump_database_path: "/database"
+    restore_database_file: "/database/dump_{{database_name}}.tar.gz"
+    # ---
+    dump_database_file_name: "dump_{{database_name}}"
+    dump_database_file: "{{dump_database_path}}/{{dump_database_file_name}}.tar.gz"
+#    # ---
+    dump_template_schema_path: '{{dump_database_path}}/schema'
+    dump_template_schema_file_name: 'dump_template_schema'
+    dump_template_schema_file: "{{dump_template_schema_path}}/{{dump_template_schema_file_name}}.tar.gz"
+    # ---
+    dump_schema_user_path: "{{dump_database_path}}/stand_{{database_user}}"
+    dump_schema_user_file_name: "dump_schema_{{database_user}}"
+    dump_schema_user_file: "{{dump_schema_user_path}}/{{dump_schema_user_file_name}}.tar.gz"
+
+  block:
+    - name: Проверка доступности БД
+      block:
+        # Для отладки на Docker
+        # Создание БД и назначение владельца схемы
+        - name: "Создание БД и назначение владельца схемы в БД {{database_name}}"
+          postgresql_db:
+            name: "{{database_name}}"
+            encoding: UTF-8
+            #    owner: my_user
+            #    priv: "CONNECT/my_database:ALL"
+            state: present
+            login_host: "{{login_database_host}}"
+            login_port: "{{login_database_port}}"
+            login_user: "{{login_database_user}}"
+            login_password: "{{login_database_password}}"
+
+        - name: "Проверка доступности БД  {{login_database_host}}:{{login_database_port}}/{{database_name}}"
+          postgresql_ping:
+            db: "{{database_name}}"
+            login_host: "{{login_database_host}}"
+            login_port: "{{login_database_port}}"
+            login_user: "{{login_database_user}}"
+            login_password: "{{login_database_password}}"
+          register: ping_result
+        - name: "Доступность БД {{login_database_host}}:{{login_database_port}}/{{database_name}}"
+          debug:
+            msg: "Подключение к БД {{login_database_host}}:{{login_database_port}}/{{database_name}} прошло успешно"
+          when: ping_result.is_available == true
+        - fail:
+            msg: "Подключение к БД {{login_database_host}}:{{login_database_port}}/{{database_name}} не прошло"
+          when: ping_result.is_available == false
+
+    - name: Схемы пользователя в БД
+      block:
+        - name: Удаление Шаблонной Схемы и пользователя Шаблонной Схемы из БД
+          block:
+            - name: "Удаление Шаблонной Схемы {{database_template_schema_name}} из БД {{database_name}}"
+              postgresql_schema:
+                name: "{{database_template_schema_name}}"
+                db: "{{database_name}}"
+                state: absent
+                cascade_drop: yes
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: "Удаление пользователя {{database_template_user}} из БД {{database_name}}"
+              postgresql_user:
+                db: "{{database_name}}"
+                name: "{{database_template_user}}"
+                state: absent
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+          when:
+            - drop_template_schema is defined
+            - drop_template_schema | bool
+        - name: Удаление схемы и пользователя из БД
+          block:
+            - name: "Удаление Схемы {{database_schema_name}} из БД {{database_name}}"
+              postgresql_schema:
+                name: "{{database_schema_name}}"
+                db: "{{database_name}}"
+                state: absent
+                cascade_drop: yes
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: "Удаление пользователя {{database_user}} из БД {{database_name}}"
+              postgresql_user:
+                db: "{{database_name}}"
+                name: "{{database_user}}"
+                state: absent
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+              ignore_errors: yes
+          when:
+            - drop_user_schema is defined
+            - drop_user_schema | bool
+
+        - name: Создание Шаблонной Схемы и Пользователя Шаблонной Схемы, назначение владельцем
+          block:
+            - name: "Создание пользователя {{database_template_user}} в БД {{database_name}}"
+              postgresql_user:
+                db: "{{database_name}}"
+                name: "{{database_template_user}}"
+                password: "{{database_template_password}}"
+                state: present
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: "Создание схемы {{database_template_schema_name}}, владелец {{database_template_user}} в БД {{database_name}}"
+              postgresql_schema:
+                name: "{{database_template_schema_name}}"
+                db: "{{database_name}}"
+                owner: "{{database_template_user}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: "Предоставление владения схемой {{database_template_schema_name}} пользователю {{database_template_user}}"
+              postgresql_privs:
+                database: "{{database_name}}"
+#                schema: "{{database_template_schema_name}}"
+                privs: "ALL"
+                objs: "{{database_template_user}}"
+                type: schema
+                roles: "{{database_template_user}}"
+                grant_option: yes
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+          when:
+            - create_template_schema is defined
+            - create_template_schema | bool
+        - name: Создание Схемы и Пользователя, назначение владельцем
+          block:
+            - name: "Создание пользователя {{database_user}} в БД {{database_name}}"
+              postgresql_user:
+                db: "{{database_name}}"
+                name: "{{database_user}}"
+                password: "{{database_password}}"
+                state: present
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: "Создание схемы {{database_schema_name}}, владелец {{database_user}} в БД {{database_name}}"
+              postgresql_schema:
+                name: "{{database_schema_name}}"
+                db: "{{database_name}}"
+                owner: "{{database_user}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            # Предоставление владения схемой пользователю
+            - name: "Предоставление прав владения схемой {{database_schema_name}} пользователю {{database_user}}"
+              postgresql_privs:
+                database: "{{database_name}}"
+                # schema: my_schema
+                privs: "ALL"
+                objs: "{{database_schema_name}}"
+                type: schema
+                roles: "{{database_user}}"
+                grant_option: yes
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+          when:
+            - create_user_schema is defined
+            - create_user_schema | bool
+
+    - name: Создание дамп файла схемы и БД
+      block:
+        - name: Создание Dump File Schema Template
+          block:
+            - name: "Удаление старого Dump File Schema Template {{dump_template_schema_file}}"
+              file:
+                path: "{{dump_template_schema_file}}"
+                state: absent  # Удалить старый файл дампа шаблонной схемы, если он существует
+            - name: "Создание каталога для Dump FIle Schema Template {{dump_template_schema_path}}"
+              file:
+                path: "{{dump_template_schema_path}}"
+                state: directory  # Создать каталог для файла дампа шаблонной схемы
+            - name: "Создание Dump File Schema Template {{dump_template_schema_file}}"
+              postgresql_db:
+                name: "{{database_name}}"
+                state: dump  # Создать дамп шаблонной схемы базы данных
+                target: "{{dump_template_schema_file}}"
+                target_opts: "-n {{database_template_schema_name}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+          when:
+            - dump_database_template_schema is defined
+            - dump_database_template_schema | bool # Проверить, требуется ли создание дампа шаблонной схемы
+        - name: Создание Dump File Schema User
+          block:
+            - name: "Удаление старого Dump File Schema User {{dump_schema_user_file}}"
+              file:
+                path: "{{dump_schema_user_file}}"
+                state: absent  # Удалить старый файл дампа пользовательской схемы, если он существует
+            - name: "Создание каталога для Dump FIle Schema User {{dump_schema_user_path}}"
+              file:
+                path: "{{dump_schema_user_path}}"
+                state: directory  # Создать каталог для файла дампа пользовательской схемы
+            - name: "Создание Dump File Schema User {{dump_schema_user_file}}"
+              postgresql_db:
+                name: "{{database_name}}"
+                state: dump  # Создать дамп пользовательской схемы базы данных
+                target: "{{dump_schema_user_file}}"
+                target_opts: "-n {{database_schema_name}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+          when:
+            - dump_database_user_schema is defined
+            - dump_database_user_schema | bool  # Проверить, требуется ли создание дампа пользовательской схемы
+        - name: Создание Dump File всей БД
+          block:
+            - name: "Удаление старого Dump File БД {{dump_database_file}}"
+              file:
+                path: "{{dump_database_file}}"
+                state: absent  # Удалить старый файл дампа базы данных, если он существует
+            - name: "Создание каталога для Dump FIle БД {{dump_database_path}}"
+              file:
+                path: "{{dump_database_path}}"
+                state: directory  # Создать каталог для файла дампа базы данных
+            - name: "Создание Dump File БД {{dump_database_file}}"
+              postgresql_db:
+                name: "{{database_name}}"
+                state: dump  # Создать дамп всей базы данных
+                target: "{{dump_database_file}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+          when:
+            - dump_database is defined
+            - dump_database | bool  # Проверить, требуется ли создание дампа базы данных
+
+    - name: Восстановление схемы пользователя, шаблона или всей БД
+      block:
+
+        - name: "Восстановление Шаблонной схемы из файла дампа {{dump_template_schema_file}}"
+          block:
+            - name: "Восстановление Шаблонной схемы из файла дампа {{dump_template_schema_file}}"
+              postgresql_db:
+                name: "{{database_name}}"
+                state: restore
+                target: "{{dump_template_schema_file}}"
+                target_opts: "-n {{database_template_schema_name}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: "Выдача прав Шаблонному пользователю {{database_template_user}} с привелегиями ALL на схему {{database_template_schema_name}}"
+              postgresql_privs:
+                database: "{{database_name}}"
+#                schema: "{{database_template_schema_name}}"
+                privs: "ALL"
+                objs: "{{database_template_schema_name}}"
+                type: schema
+                roles: "{{database_template_user}}"
+                grant_option: yes
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+          when:
+            - restore_template_schema is defined
+            - restore_template_schema | bool
+
+        - name: "Восстановление пользовательной схемы из файла дампа {{dump_schema_user_file}}"
+          block:
+            - name: "Восстановление пользовательной схемы из файла дампа {{dump_schema_user_file}}"
+              postgresql_db:
+                name: "{{database_name}}"
+                state: restore
+                target: "{{dump_schema_user_file}}"
+                target_opts: "-n {{database_schema_name}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: "Выдача прав пользователю {{database_user}} с привелегиями ALL на схему {{database_schema_name}}"
+              postgresql_privs:
+                database: "{{database_name}}"
+    #            schema: "{{database_schema_name}}"
+                privs: "ALL"
+                objs: "{{database_schema_name}}"
+                type: schema
+                roles: "{{database_user}}"
+                grant_option: yes
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+          when:
+            - restore_user_schema is defined
+            - restore_user_schema | bool
+
+...
+
+#
+
+
+
+#      when:
+#        - drop_user_schema is defined
+#        - drop_user_schema | bool
+#        - create_user_schema is defined
+#        - create_user_schema | bool
+#        - restore_user_schema is defined
+#        - restore_user_schema | bool
+
+
+## удаление всех ранее созданных пользователей database_user не указанных в переменных программы "pprb_user_{{stand_name}}" предварительно запросить всех пользователей в БД
+#- name: Запросить перечень всех пользователей в БД {{database_name}} pprb_user_{{stand_name}} и щаблоного пользователя {{database_template_user_name}}
+#  block:
+#    - name: "Запросить перечень всех пользователей в БД {{database_name}} pprb_user_{{stand_name}}"
+#      postgresql_db:
+#        name: "{{database_name}}"
+#        state: list
+#        login_host: "{{login_database_host}}"
+#        login_port: "{{login_database_port}}"
+#        login_user: "{{login_database_user}}"
+#        login_password: "{{login_database_password}}"
+#    - name: "Запросить щаблоного пользователя {{database_template_user_name}}"
+#      postgresql_db:
+#        name: "{{database_name}}"
+#        state: list
+#        target_opts: "-n {{database_template_user_name}}"
+#        login_host: "{{login_database_host}}"
+#        login_port: "{{login_database_port}}"
+#        login_user: "{{login_database_user}}"
+#        login_password: "{{login_database_password}}"
+#
+#- name: "Восстановление всей БД из файла дампа {{restore_database_file}}"
+#  postgresql_db:
+#    name: "{{database_name}}"
+#    state: restore
+#    target: "{{restore_database_file}}"
+#    login_host: "{{login_database_host}}"
+#    login_port: "{{login_database_port}}"
+#    login_user: "{{login_database_user}}"
+#    login_password: "{{login_database_password}}"
+#  when:
+#    - restore_database is defined
+#    - restore_database | bool

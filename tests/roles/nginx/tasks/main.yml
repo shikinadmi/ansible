@@ -19,4 +19,16 @@
   yum:
     name: nginx
 
+# Restart nginx
+- name: Restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+# проверка доступности nginx http uri url
+- name: Check nginx http uri url
+  uri:
+    url: http://localhost
+    validate_certs: false
+
 ...

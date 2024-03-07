@@ -4,7 +4,8 @@
   gather_facts: yes
   strategy: free
   roles:
-    - pgsql
+#    - pgsql
+    - psql_pprb
 #    - tests
 #    - create_users
 #    - configuration
