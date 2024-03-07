@@ -62,7 +62,7 @@
     # ---
     dump_schema_user_path: "{{dump_database_path}}/stand_{{database_user}}"
     dump_schema_user_file_name: "dump_schema_{{database_user}}"
-    dump_schema_user_file: "{{dump_schema_user_path}}/{{dump_schema_user_file_name}}.tar.gz"
+    dump_schema_user_file: "{{dump_template_schema_file}}" # "{{dump_schema_user_path}}/{{dump_schema_user_file_name}}.tar.gz"
 
   block:
     - name: Проверка доступности БД
