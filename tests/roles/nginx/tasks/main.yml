@@ -1,34 +1,43 @@
 ---
+
 # Установка NGINX и изменения конфигурационного файла по шаблону
-- name: Install NGINX
+- name: Установить NGINX
   dnf:
     name: nginx
     state: present
-- name: Copy NGINX template configuration
+
+# Копирование шаблона конфигурации NGINX
+- name: Копировать шаблон конфигурации NGINX
   template:
     src: nginx.conf.j2
     dest: /etc/nginx/nginx.conf
-## ansible nginx перезапуск
-#- name: Restart nginx
-#  service:
-#    name: nginx
-#    state: restarted
 
-# Install NGINX
-- name: Install nginx
+# Установка NGINX
+- name: Установить nginx
   yum:
     name: nginx
 
-# Restart nginx
-- name: Restart nginx
+# Перезапуск NGINX
+- name: Перезапустить nginx
   service:
     name: nginx
     state: restarted
 
-# проверка доступности nginx http uri url
-- name: Check nginx http uri url
+# Проверка доступности nginx http uri url
+- name: Проверить доступность nginx http uri url
   uri:
     url: http://localhost
     validate_certs: false
+
+- name: Вывод лога запуска nginx файда логирования
+  block:
+    - name: Get nginx log
+      shell: cat /var/log/nginx/access.log
+      register: output
+
+    - name: Print stdout_lines
+      debug:
+        var: output.stdout_lines
+
 
 ...

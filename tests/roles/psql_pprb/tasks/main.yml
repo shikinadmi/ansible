@@ -1,4 +1,9 @@
 ---
+
+# Анотация к коду работы с внешней БД PostgreSQL
+# Данная роль подключается к внешней БД PostgreSQL вызывается через ansible glaxy и создает схемы пользователя, шаблона пользователя, схемы шаблона и базы данных
+# vars - переменные для создания схемы пользователя, шаблона пользователя, схемы шаблона и базы данных могут наследоваться из основного playbook - stand_pprb
+
 #- name: install python-psycopg2
 #  yum:
 #    name: python-psycopg2
@@ -11,7 +16,6 @@
     Cоздание DUMP File DB / DUMP File Schema User / DUMP File Schema Template/
     Воссстановеление схемы пользователя /
     Восстановление схемы шаблона /
-
   vars:
     # --- Stand Name
     stand_name: DomainLogin  # переменная задается только строчными буквами
@@ -33,13 +37,14 @@
     database_template_schema_name: "{{database_template_user}}"
 
     # --- Trigers
+    create_database: true
     restore_database: true
     # ---
-    drop_user_schema: true
+    drop_user_schema: false
     create_user_schema: true
     restore_user_schema: true
     # ---
-    drop_template_schema: true
+    drop_template_schema: false
     create_template_schema: true
     restore_template_schema: true
 
@@ -65,7 +70,7 @@
     dump_schema_user_file: "{{dump_template_schema_file}}" # "{{dump_schema_user_path}}/{{dump_schema_user_file_name}}.tar.gz"
 
   block:
-    - name: Проверка доступности БД
+    - name: Проверка доступности БД / Cоздание БД
       block:
         # Для отладки на Docker
         # Создание БД и назначение владельца схемы
@@ -80,6 +85,9 @@
             login_port: "{{login_database_port}}"
             login_user: "{{login_database_user}}"
             login_password: "{{login_database_password}}"
+          when:
+            - create_database is defined
+            - create_database == true
 
         - name: "Проверка доступности БД  {{login_database_host}}:{{login_database_port}}/{{database_name}}"
           postgresql_ping:
@@ -121,8 +129,9 @@
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
           when:
-            - drop_template_schema is defined
+            - drop_template_schema is defined # Необходимо пользователям дать возможность удалить шаблонную схему или нет.
             - drop_template_schema | bool
+
         - name: Удаление схемы и пользователя из БД
           block:
             - name: "Удаление Схемы {{database_schema_name}} из БД {{database_name}}"
@@ -146,7 +155,7 @@
                 login_password: "{{login_database_password}}"
               ignore_errors: yes
           when:
-            - drop_user_schema is defined
+            - drop_user_schema is defined # Необходимо пользователям дать возможность удалить шаблонную схему или нет.
             - drop_user_schema | bool
 
         - name: Создание Шаблонной Схемы и Пользователя Шаблонной Схемы, назначение владельцем
@@ -183,9 +192,16 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+          rescue:
+            - name: Создание Шаблонной Схемы и Пользователя Шаблонной Схемы, назначение владельцем
+              fail:
+                msg: "Схема не создана, т/к не создан пользователь"
+              when:
+                - create_template_user == false
           when:
             - create_template_schema is defined
             - create_template_schema | bool
+
         - name: Создание Схемы и Пользователя, назначение владельцем
           block:
             - name: "Создание пользователя {{database_user}} в БД {{database_name}}"
@@ -221,6 +237,12 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+          rescue:
+            - name: "Создание пользователя {{database_user}} в БД {{database_name}} не удалось"
+              fail:
+                msg: "Создание пользователя {{database_user}} в БД {{database_name}} не удалось"
+              when:
+                - creaate_user == false
           when:
             - create_user_schema is defined
             - create_user_schema | bool
@@ -247,9 +269,16 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+          rescue:
+            - name: Создание Dump File Schema Template не удалось
+              fail:
+                msg: "Создание Dump File Schema Template не удалось т/к схемы шаблона не существует"
+              when:
+                - create_template_schema == false
           when:
             - dump_database_template_schema is defined
             - dump_database_template_schema | bool # Проверить, требуется ли создание дампа шаблонной схемы
+
         - name: Создание Dump File Schema User
           block:
             - name: "Удаление старого Dump File Schema User {{dump_schema_user_file}}"
@@ -270,9 +299,16 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+          rescue:
+            - name: Создание Dump File Schema User не удалось
+              fail:
+                msg: "Создание Dump File Schema User не удалось, т/к пользовательской схемы не существует"
+              when:
+                - create_user_schema == False
           when:
             - dump_database_user_schema is defined
             - dump_database_user_schema | bool  # Проверить, требуется ли создание дампа пользовательской схемы
+
         - name: Создание Dump File всей БД
           block:
             - name: "Удаление старого Dump File БД {{dump_database_file}}"
@@ -292,13 +328,18 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+          rescue:
+            - name: Создание Dump File БД не удалось
+              fail:
+                msg: "Создание Dump File БД не удалось"
+              when:
+                - create_database == false
           when:
             - dump_database is defined
             - dump_database | bool  # Проверить, требуется ли создание дампа базы данных
 
     - name: Восстановление схемы пользователя, шаблона
       block:
-
         - name: "Восстановление Шаблонной схемы из файла дампа {{dump_template_schema_file}}"
           block:
             - name: "Восстановление Шаблонной схемы из файла дампа {{dump_template_schema_file}}"
@@ -324,9 +365,21 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+          rescue:
+            # Если восстановление шаблонной схемы не требуется, то не выполнять блок восстановления шаблонной схемы
+            - name: Восстановление Шаблонной схемы не возможно
+              fail:
+                msg: "Восстановление Шаблонной схемы не возможно"
+              when: "(drop_template_schema == false or create_template_schema == false) or restore_template_schema == true"
           when:
-            - restore_template_schema is defined
+#            - drop_template_schema is defined # Необходимо удалить шаблонную схему, если она существует
+#            - drop_template_schema | bool
+            - create_template_schema is defined # Необходимо создать шаблонную схему, если она не существует
+            - create_template_schema | bool
+            - restore_template_schema is defined # Необходимо восстановить шаблонную схему, если она существует
             - restore_template_schema | bool
+
+
 
         - name: "Восстановление пользовательной схемы из файла дампа {{dump_schema_user_file}}"
           block:
@@ -354,7 +407,11 @@
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
           when:
-            - restore_user_schema is defined
+#            - drop_user_schema is defined # Необходимо удалить пользовательскую схему, если она существует
+#            - drop_user_schema | bool
+            - create_user_schema is defined # Необходимо создать пользовательскую схему, если она не существует
+            - create_user_schema | bool
+            - restore_user_schema is defined  # Необходимо восстановить пользовательскую схему, если она существует
             - restore_user_schema | bool
 
 ...
