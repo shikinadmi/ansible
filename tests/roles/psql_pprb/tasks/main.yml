@@ -474,6 +474,13 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+            - name: "Проверка доступности БД {{database_name}}_testrestoredump"
+              postgresql_ping:
+                db: "{{database_name}}_testrestoredump"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
             - name: Закрытие всех сессий
               postgresql_query:
                 db: "{{database_name}}"
