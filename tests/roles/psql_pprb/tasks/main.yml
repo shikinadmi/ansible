@@ -14,7 +14,7 @@
     Проверка доступности БД /
     Создание БД пользователя и схемы / 
     Cоздание DUMP File DB / DUMP File Schema User / DUMP File Schema Template/
-    Воссстановеление схемы пользователя /
+    Воссстановеление схемы пользователя из DUMP File Schema Template /
     Восстановление схемы шаблона /
   vars:
     # --- Stand Name
@@ -39,20 +39,20 @@
     # --- Trigers
     create_database: true
     restore_database: true
+    # --- Dump File DB / Schema User / Schema Template
+    dump_database_template_schema: true
+    dump_database_user_schema: false
+    dump_database: false
+
     # ---
     drop_user_schema: true
     create_user_schema: true
     restore_user_schema: true
+    restore_user_schema_template: false
     # ---
     drop_template_schema: true
     create_template_schema: true
     restore_template_schema: true
-
-
-    # --- Dump File DB / Schema User / Schema Template
-    dump_database_template_schema: true
-    dump_database_user_schema: true
-    dump_database: true
 
     # --- Paths
     dump_database_path: "/database"
@@ -372,14 +372,42 @@
                 msg: "Восстановление Шаблонной схемы не возможно"
               when: "(drop_template_schema == false or create_template_schema == false) or restore_template_schema == true"
           when:
-#            - drop_template_schema is defined # Необходимо удалить шаблонную схему, если она существует
-#            - drop_template_schema | bool
-            - create_template_schema is defined # Необходимо создать шаблонную схему, если она не существует
-            - create_template_schema | bool
             - restore_template_schema is defined # Необходимо восстановить шаблонную схему, если она существует
             - restore_template_schema | bool
 
-
+        - name: "Восстановление пользовательной схемы из файла дампа шаблона {{dump_template_schema_file}}"
+          block:
+            - name: "Восстановление пользовательной схемы из файла дампа шаблона {{dump_template_schema_file}}"
+              postgresql_db:
+                name: "{{database_name}}"
+                state: restore
+                target: "{{dump_template_schema_file}}"
+                target_opts: "-n {{database_schema_name}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: "Выдача прав пользователю {{database_user}} с привелегиями ALL на схему {{database_schema_name}}"
+              postgresql_privs:
+                database: "{{database_name}}"
+    #            schema: "{{database_schema_name}}"
+                privs: "ALL"
+                objs: "{{database_schema_name}}"
+                type: schema
+                roles: "{{database_user}}"
+                grant_option: yes
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+          rescue:
+            - name: Восстановление пользовательной схемы не возможно
+              fail:
+                msg: "Восстановление пользовательной схемы из файла дампа шаблона не возможно"
+              when: "(drop_user_schema == false or create_user_schema == false) and restore_user_schema_template == true"
+          when:
+            - restore_user_schema_template is defined
+            - restore_user_schema_template | bool
 
         - name: "Восстановление пользовательной схемы из файла дампа {{dump_schema_user_file}}"
           block:
@@ -406,14 +434,16 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+          rescue:
+            - name: Восстановление пользовательной схемы не возможно
+              fail:
+                msg: "Восстановление пользовательной схемы из файла дампа {{dump_schema_user_file}} не возможно"
+              when: "(drop_user_schema == false or create_user_schema == false) and restore_user_schema == true"
           when:
-#            - drop_user_schema is defined # Необходимо удалить пользовательскую схему, если она существует
-#            - drop_user_schema | bool
-            - create_user_schema is defined # Необходимо создать пользовательскую схему, если она не существует
-            - create_user_schema | bool
-            - restore_user_schema is defined  # Необходимо восстановить пользовательскую схему, если она существует
+            - restore_user_schema_template is defined
+            - restore_user_schema_template == false
+            - restore_user_schema is defined
             - restore_user_schema | bool
-
 ...
 
 #
