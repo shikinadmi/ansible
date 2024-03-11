@@ -38,17 +38,17 @@
 
     # --- Trigers
     create_database: true
-    restore_database: true # fixme - завершить все пользовательские сессии перед удалением и проверить наличие файла дампа БД
+    restore_database: true
     # --- Dump File DB / Schema User / Schema Template
     dump_database_template_schema: true
-    dump_database_user_schema: false
-    dump_database: false
+    dump_database_user_schema: true
+    dump_database: true
 
     # ---
     drop_user_schema: true
     create_user_schema: true
     restore_user_schema: true
-    restore_user_schema_template: false
+    restore_user_schema_template: true
     # ---
     drop_template_schema: true
     create_template_schema: true
@@ -105,7 +105,7 @@
             msg: "Подключение к БД {{login_database_host}}:{{login_database_port}}/{{database_name}} не прошло"
           when: ping_result.is_available == false
 
-    - name: Схемы пользователя в БД
+    - name: Пользователь/Шаблонный, Схема, Удаление/Создание в БД
       block:
         - name: Удаление Шаблонной Схемы и пользователя Шаблонной Схемы из БД
           block:
@@ -132,7 +132,7 @@
             - drop_template_schema is defined # Необходимо пользователям дать возможность удалить шаблонную схему или нет.
             - drop_template_schema | bool
 
-        - name: Удаление схемы и пользователя из БД
+        - name: Удаление схемы и пользователя
           block:
             - name: "Удаление Схемы {{database_schema_name}} из БД {{database_name}}"
               postgresql_schema:
@@ -249,7 +249,7 @@
 
     - name: Создание дамп файла схемы и БД
       block:
-        - name: Создание Dump File Schema Template
+        - name: Создание Dump File Схемы Шаблонной
           block:
             - name: "Удаление старого Dump File Schema Template {{dump_template_schema_file}}"
               file:
@@ -279,7 +279,7 @@
             - dump_database_template_schema is defined
             - dump_database_template_schema | bool # Проверить, требуется ли создание дампа шаблонной схемы
 
-        - name: Создание Dump File Schema User
+        - name: Создание Dump File Пользовательной Схемы
           block:
             - name: "Удаление старого Dump File Schema User {{dump_schema_user_file}}"
               file:
@@ -445,7 +445,29 @@
             - restore_user_schema is defined
             - restore_user_schema | bool
 
-        # TODO - восстановление всей БД из дампа файла
+        - name: Восстановление всей БД c закрытием всех пользлвательских сессий
+          block:
+            - name: Закрытие всех сессий
+              postgresql_query:
+                db: "{{database_name}}"
+                query: "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '{{database_name}}' AND pid <> pg_backend_pid();"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: Восстановление всей БД
+              postgresql_db:
+                name: "{{database_name}}"
+                state: restore
+                target: "{{dump_schema_user_file}}"
+                target_opts: "-n {{database_schema_name}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+          when:
+            - restore_database is defined
+            - restore_database | bool
 ...
 
 #
