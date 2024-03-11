@@ -108,6 +108,14 @@
       block:
         - name: Удаление Шаблонной Схемы и пользователя Шаблонной Схемы из БД
           block:
+            - name: Завершение сессий пользователя {{database_template_user}} к схеме {{database_template_schema_name}}
+              postgresql_query:
+                db: "{{database_name}}"
+                query: "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '{{database_template_schema_name}}' AND pid <> pg_backend_pid();"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
             - name: "Удаление Шаблонной Схемы {{database_template_schema_name}} из БД {{database_name}}"
               postgresql_schema:
                 name: "{{database_template_schema_name}}"
@@ -127,12 +135,21 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+              ignore_errors: yes
           when:
             - drop_template_schema is defined # Необходимо пользователям дать возможность удалить шаблонную схему или нет.
             - drop_template_schema | bool
 
         - name: Удаление схемы и пользователя
           block:
+            - name: Завершение сессий пользователя {{database_user}} к схеме {{database_schema_name}}
+              postgresql_query:
+                db: "{{database_name}}"
+                query: "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '{{database_schema_name}}' AND pid <> pg_backend_pid();"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
             - name: "Удаление Схемы {{database_schema_name}} из БД {{database_name}}"
               postgresql_schema:
                 name: "{{database_schema_name}}"
@@ -191,6 +208,13 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+            - name: Тестовое подключение к БД {{database_name}} для проверки создания Шаблонной Схемы и Пользователя Шаблонной Схемы
+              postgresql_db:
+                name: "{{database_name}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{database_template_user}}"
+                login_password: "{{database_template_user}}"
           rescue:
             - name: Создание Шаблонной Схемы и Пользователя Шаблонной Схемы, назначение владельцем
               fail:
@@ -236,6 +260,13 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+            - name: Тестовое подключение к БД {{database_name}} для проверки создания Схемы и Пользователя
+              postgresql_db:
+                name: "{{database_name}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{database_user}}"
+                login_password: "{{database_password}}"
           rescue:
             - name: "Создание пользователя {{database_user}} в БД {{database_name}} не удалось"
               fail:
@@ -250,6 +281,13 @@
       block:
         - name: Создание Dump File Схемы Шаблонной
           block:
+            - name: "Тестовое подключение к БД {{database_name}} для проверки создания Шаблонной Схемы и Пользователя"
+              postgresql_db:
+                name: "{{database_name}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{database_template_user}}"
+                login_password: "{{database_template_user}}"
             - name: "Удаление старого Dump File Schema Template {{dump_template_schema_file}}"
               file:
                 path: "{{dump_template_schema_file}}"
@@ -280,6 +318,13 @@
 
         - name: Создание Dump File Пользовательной Схемы
           block:
+            - name: "Тестовое подключение к БД {{database_name}} для проверки создания Схемы и Пользователя"
+              postgresql_db:
+                name: "{{database_name}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{database_user}}"
+                login_password: "{{database_password}}"
             - name: "Удаление старого Dump File Schema User {{dump_schema_user_file}}"
               file:
                 path: "{{dump_schema_user_file}}"
@@ -489,6 +534,11 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+              register: result_close_all_sessions
+            - name: Вывод результата закрытия всех сессий
+              debug:
+                msg: "{{result_close_all_sessions}}"
+
             - name: "Удаление БД {{database_name}}"
               postgresql_db:
                 name: "{{database_name}}"
