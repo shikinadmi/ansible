@@ -38,7 +38,7 @@
 
     # --- Trigers
     create_database: true
-    restore_database: true
+    restore_database: true # fixme - завершить все пользовательские сессии перед удалением и проверить наличие файла дампа БД
     # --- Dump File DB / Schema User / Schema Template
     dump_database_template_schema: true
     dump_database_user_schema: false
@@ -199,7 +199,7 @@
               when:
                 - create_template_user == false
           when:
-            - create_template_schema is defined
+            - create_template_schema is defined # по умолчанию шаблонная схема создается, используется как проверка наличия шаблонной схемы
             - create_template_schema | bool
 
         - name: Создание Схемы и Пользователя, назначение владельцем
@@ -244,7 +244,7 @@
               when:
                 - creaate_user == false
           when:
-            - create_user_schema is defined
+            - create_user_schema is defined # по умолчанию пользователя создается, используется как проверка наличия схемы пользователя
             - create_user_schema | bool
 
     - name: Создание дамп файла схемы и БД
@@ -338,7 +338,7 @@
             - dump_database is defined
             - dump_database | bool  # Проверить, требуется ли создание дампа базы данных
 
-    - name: Восстановление схемы пользователя, шаблона
+    - name: Восстановление схемы пользователя, шаблона и всей БД
       block:
         - name: "Восстановление Шаблонной схемы из файла дампа {{dump_template_schema_file}}"
           block:
@@ -444,6 +444,8 @@
             - restore_user_schema_template == false
             - restore_user_schema is defined
             - restore_user_schema | bool
+
+        # TODO - восстановление всей БД из дампа файла
 ...
 
 #
