@@ -40,11 +40,11 @@
     create_database: true
     restore_database: true
     # ---
-    drop_user_schema: false
+    drop_user_schema: true
     create_user_schema: true
     restore_user_schema: true
     # ---
-    drop_template_schema: false
+    drop_template_schema: true
     create_template_schema: true
     restore_template_schema: true
 
