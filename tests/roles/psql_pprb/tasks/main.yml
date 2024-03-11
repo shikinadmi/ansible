@@ -68,7 +68,6 @@
     dump_schema_user_path: "{{dump_database_path}}/stand_{{database_user}}"
     dump_schema_user_file_name: "dump_schema_{{database_user}}"
     dump_schema_user_file: "{{dump_template_schema_file}}" # "{{dump_schema_user_path}}/{{dump_schema_user_file_name}}.tar.gz"
-
   block:
     - name: Проверка доступности БД / Cоздание БД
       block:
@@ -406,7 +405,7 @@
                 msg: "Восстановление пользовательной схемы из файла дампа шаблона не возможно"
               when: "(drop_user_schema == false or create_user_schema == false) and restore_user_schema_template == true"
           when:
-            - restore_user_schema_template is defined
+            - restore_user_schema_template is defined # Необходимо восстановить пользовательскую схему, если она существует
             - restore_user_schema_template | bool
 
         - name: "Восстановление пользовательной схемы из файла дампа {{dump_schema_user_file}}"
@@ -440,13 +439,41 @@
                 msg: "Восстановление пользовательной схемы из файла дампа {{dump_schema_user_file}} не возможно"
               when: "(drop_user_schema == false or create_user_schema == false) and restore_user_schema == true"
           when:
-            - restore_user_schema_template is defined
+            - restore_user_schema_template is defined  # Необходимо восстановить пользовательскую схему, если она существует
             - restore_user_schema_template == false
-            - restore_user_schema is defined
+            - restore_user_schema is defined # Необходимо восстановить пользовательскую схему, если она существует
             - restore_user_schema | bool
 
         - name: Восстановление всей БД c закрытием всех пользлвательских сессий
           block:
+#            - name: Предварительное создание БД {{database_name}}_testrestoredump
+#              block:
+            - name: Проверка доступности файла дампа БД
+              block:
+                - name: Проверка сушествования файла дампа БД для дальнейшего использования в восстановлении
+                  stat:
+                    path: "{{dump_database_file}}"
+                  register: dump_database_file_stat
+                - fail:
+                    msg: "Восстановление не возможно. Возможно не существует файла {{dump_database_file}}"
+                  when: dump_database_file_stat.exists is false
+            - name: "Создание БД {{database_name}}_testrestoredump"
+              postgresql_db:
+                name: "{{database_name}}_testrestoredump"
+                state: present
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: "Восстановление БД {{database_name}}_testrestoredump"
+              postgresql_db:
+                name: "{{database_name}}_testrestoredump"
+                state: restore
+                target: "{{dump_database_file}}"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
             - name: Закрытие всех сессий
               postgresql_query:
                 db: "{{database_name}}"
@@ -455,18 +482,36 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+            - name: "Удаление БД {{database_name}}"
+              postgresql_db:
+                name: "{{database_name}}"
+                state: absent
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
             - name: Восстановление всей БД
               postgresql_db:
                 name: "{{database_name}}"
-                state: restore
-                target: "{{dump_schema_user_file}}"
-                target_opts: "-n {{database_schema_name}}"
+                state: present
+                owner: "{{login_database_user}}"
+#                target: "{{dump_schema_user_file}}"
+#                target_opts: "-n {{database_schema_name}}"
+                template: "{{database_name}}_testrestoredump"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: "Удаление БД {{database_name}}_testrestoredump"
+              postgresql_db:
+                name: "{{database_name}}_testrestoredump"
+                state: absent
                 login_host: "{{login_database_host}}"
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
           when:
-            - restore_database is defined
+            - restore_database is defined # Необходимо восстановить БД, если она существует
             - restore_database | bool
 ...
 
