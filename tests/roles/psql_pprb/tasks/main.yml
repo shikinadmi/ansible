@@ -538,7 +538,6 @@
             - name: Вывод результата закрытия всех сессий
               debug:
                 msg: "{{result_close_all_sessions}}"
-
             - name: "Удаление БД {{database_name}}"
               postgresql_db:
                 name: "{{database_name}}"
