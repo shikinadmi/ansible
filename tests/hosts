@@ -1,6 +1,6 @@
 [localhost]
 local    ansible_connection=local  # ansible_user=cloud      # ssh-keygen && cat .ssh/id_rsa.pub
-#postgres ansible_host=postgres #ansible_connection=docker
+#postgres ansible_host=postgres ansible_connection=ssh ansible_user=postgres ansible_password=postgres
 
 # [ya_cloud]
 # ya_cloud ansible_host=178.154.220.62 ansible_user=cloud         # ssh-keygen && cat .ssh/id_rsa.pub

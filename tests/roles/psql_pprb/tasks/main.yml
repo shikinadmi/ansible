@@ -4,7 +4,11 @@
 # Данная роль подключается к внешней БД PostgreSQL вызывается через ansible glaxy и создает схемы пользователя, шаблона пользователя, схемы шаблона и базы данных
 # vars - переменные для создания схемы пользователя, шаблона пользователя, схемы шаблона и базы данных могут наследоваться из основного playbook - stand_pprb
 
-#- name: install python-psycopg2
+# задать пароль пользователя postgres через утилиту psql
+# psql -d postgres -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+# необходимо выполнить на мащине с БД postgres
+
+#- name: install python-psycopg2 # необходима установка python-psycopg2 на магине исполнителе ansible task
 #  yum:
 #    name: python-psycopg2
 #  become: yes
@@ -103,6 +107,22 @@
         - fail:
             msg: "Подключение к БД {{login_database_host}}:{{login_database_port}}/{{database_name}} не прошло"
           when: ping_result.is_available == false
+
+#    - name: Добавление сетевого доступа к БД в pg_hba.conf для host postgres # Необходимо наличие ssh доступа к мащине с БД
+#      postgresql_pg_hba:
+#        dest: /var/lib/postgresql/data/pg_hba.conf
+#        contype: host
+#        users: "{{item}}"
+#        source: 0.0.0.0/0
+#        databases: "{{database_name}}"
+#        method: md5
+#        create: true
+#      with_items:
+#        - "{{database_user}}"
+#        - "{{database_template_user}}"
+#      delegate_to: postgres
+
+
 
     - name: Пользователь/Шаблонный, Схема, Удаление/Создание в БД
       block:
@@ -279,6 +299,7 @@
 
     - name: Создание дамп файла схемы и БД
       block:
+
         - name: Создание Dump File Схемы Шаблонной
           block:
             - name: "Тестовое подключение к БД {{database_name}} для проверки создания Шаблонной Схемы и Пользователя"
@@ -381,6 +402,25 @@
           when:
             - dump_database is defined
             - dump_database | bool  # Проверить, требуется ли создание дампа базы данных
+
+        - name: Поиск и удаление старых файлов дампов схем пользователя # в корневом каталоге файлов дампов дата создания которых превышает 2 месяца
+          block:
+            - name: Поиск устаревших файлов дампов схем пользователя {{dump_schema_user_path}}
+              find:
+                paths: "{{dump_schema_user_path}}"
+                age: "2m" # 2 месяца
+                recurse: yes
+                file_type: file
+              register: dump_files
+            - debug:
+                var: dump_files
+            - name: Удаление устаревших файлов дампов схем пользователя {{dump_schema_user_path}}
+              file:
+                path: "{{item.path}}"
+                state: absent
+              with_items:
+                - "{{dump_files.files}}"
+          become: true
 
     - name: Восстановление схемы пользователя, шаблона и всей БД
       block:
