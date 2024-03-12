@@ -47,6 +47,9 @@
     dump_database_template_schema: true
     dump_database_user_schema: true
     dump_database: true
+    # ---
+    copy_user_schema_file: true
+    copy_template_schema_file: true
 
     # ---
     drop_user_schema: true
@@ -60,7 +63,7 @@
 
     # --- Paths
     dump_database_path: "/database"
-    restore_database_file: "/database/dump_{{database_name}}.tar.gz"
+    restore_database_file: "{{dump_database_path}}/dump_{{database_name}}.tar.gz"
     # ---
     dump_database_file_name: "dump_{{database_name}}"
     dump_database_file: "{{dump_database_path}}/{{dump_database_file_name}}.tar.gz"
@@ -71,7 +74,7 @@
     # ---
     dump_schema_user_path: "{{dump_database_path}}/stand_{{database_user}}"
     dump_schema_user_file_name: "dump_schema_{{database_user}}"
-    dump_schema_user_file: "{{dump_template_schema_file}}" # "{{dump_schema_user_path}}/{{dump_schema_user_file_name}}.tar.gz"
+    dump_schema_user_file: "{{dump_schema_user_path}}/{{dump_schema_user_file_name}}.tar.gz"
   block:
     - name: Проверка доступности БД / Cоздание БД
       block:
@@ -402,6 +405,43 @@
           when:
             - dump_database is defined
             - dump_database | bool  # Проверить, требуется ли создание дампа базы данных
+
+        - name: Копии дампов в каталог щаблона и в каталог пользователя
+          block:
+#            - name: Удаление файла пользователя
+#              file:
+#                path: "{{dump_schema_user_file}}"
+#                state: absent  # Удалить старый файл дампа шаблона, если он существует
+            - name: Копия дампа пользователя в каталог щаблона
+              block:
+#                - name: Проверка наличия файла дампа пользователя
+#                  stat:
+#                    path: "{{dump_schema_user_file}}"
+#                  register: dump_schema_user_file_stat
+                - name: Копирование дампа пользователя в каталог щаблона если он существует
+                  copy:
+                    src: "{{dump_schema_user_file}}"
+                    dest: "{{dump_template_schema_file}}"
+                    remote_src: yes
+#                  when: dump_schema_user_file_stat.stat.exists == true
+              when:
+                - copy_user_schema_file is defined
+                - copy_user_schema_file | bool
+            - name: Копия дампа шаблона в каталог пользователя
+              block:
+#                - name: Проверка наличия файла дампа шаблона
+#                  stat:
+#                    path: "{{dump_template_schema_file}}"
+#                  register: dump_template_schema_file_stat
+                - name: Копирование дампа шаблона в каталог пользователя если он существует
+                  copy:
+                    src: "{{dump_schema_user_file}}"
+                    dest: "{{dump_template_schema_file}}"
+                    remote_src: yes
+#                  when: dump_template_schema_file_stat.stat.exists == true
+              when:
+                - copy_template_schema_file is defined
+                - copy_template_schema_file | bool
 
         - name: Поиск и удаление старых файлов дампов схем пользователя # в корневом каталоге файлов дампов дата создания которых превышает 2 месяца
           block:
