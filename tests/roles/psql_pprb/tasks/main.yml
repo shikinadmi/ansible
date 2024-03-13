@@ -30,36 +30,36 @@
     login_database_password: postgres
     # --- Database
     database_name: pprb
+
     # --- User Schema
     database_user: "pprb_user_{{stand_name | lower | replace('_', '')}}" # replace - замена подстроки в строке по регулярному выражению
     database_password: pprb_user
     database_schema_name: "{{database_user}}"
-
     # --- TemplateUser Schema
     database_template_user: template_users
     database_template_password: template_users
     database_template_schema_name: "{{database_template_user}}"
 
     # --- Trigers
-    create_database: true
-    restore_database: true
+    create_database: true # для отладки в тестах | на стадии разработки | на стенде каждый раз выполнять не нужно
+    restore_database: false
     # --- Dump File DB / Schema User / Schema Template
-    dump_database_template_schema: true
-    dump_database_user_schema: true
-    dump_database: true
+    dump_database_template_schema: false
+    dump_database_user_schema: false
+    dump_database: false
     # ---
-    copy_user_schema_file: true
-    copy_template_schema_file: true
+    copy_user_schema_file: false
+    copy_template_schema_file: "{{dump_database_template_schema}}"
 
-    # ---
-    drop_user_schema: true
+    # --- Drop / Create / Restore Schema User and Template
+    drop_user_schema: "{{create_user_schema}}"
     create_user_schema: true
     restore_user_schema: true
-    restore_user_schema_template: true
+    restore_user_schema_template: "{{create_user_schema if restore_user_schema == true else 'false'}}"
     # ---
-    drop_template_schema: true
-    create_template_schema: true
-    restore_template_schema: true
+    drop_template_schema: "{{create_template_schema}}"
+    create_template_schema: false
+    restore_template_schema: "{{create_template_schema}}" # fixme - перепроверить логику востановления шаблона
 
     # --- Paths
     dump_database_path: "/database"
@@ -414,6 +414,13 @@
 #                state: absent  # Удалить старый файл дампа шаблона, если он существует
             - name: Копия дампа пользователя в каталог щаблона
               block:
+                - name: Создание каталога щаблона для копии дампа пользователя
+                  file:
+                    path: "{{item}}"
+                    state: directory
+                  with_items:
+                    - "{{dump_template_schema_path}}"
+#                    - "{{dump_schema_user_path}}"
 #                - name: Проверка наличия файла дампа пользователя
 #                  stat:
 #                    path: "{{dump_schema_user_file}}"
@@ -429,6 +436,13 @@
                 - copy_user_schema_file | bool
             - name: Копия дампа шаблона в каталог пользователя
               block:
+                -  name: Создание каталога пользователя для копии дампа шаблона
+                   file:
+                     path: "{{item}}"
+                     state: directory
+                   with_items:
+                     - "{{dump_template_schema_path}}"
+                     - "{{dump_schema_user_path}}"
 #                - name: Проверка наличия файла дампа шаблона
 #                  stat:
 #                    path: "{{dump_template_schema_file}}"
