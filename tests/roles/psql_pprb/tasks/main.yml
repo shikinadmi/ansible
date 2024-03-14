@@ -309,8 +309,8 @@
             - name: "Создание пользователя {{database_user}} в БД {{database_name}} не удалось"
               fail:
                 msg: "Создание пользователя {{database_user}} в БД {{database_name}} не удалось"
-              when:
-                - creaate_user == false
+#              when:
+#                - create_user == false
           when:
             - create_user_schema is defined # по умолчанию пользователя создается, используется как проверка наличия схемы пользователя
             - create_user_schema | bool
