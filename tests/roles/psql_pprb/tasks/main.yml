@@ -10,6 +10,12 @@
 
 # задать пароль пользователя postgres через утилиту psql
 # psql -d postgres -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+# Создать пользователя psql в БД postgres через утилиту psql и задать пароль
+# psql -d postgres -U postgres -c "CREATE USER psql WITH PASSWORD 'psql';"
+# выдать права на роль postgres пользователю USER_PPRB в БД postgres через утилиту psql
+# psql -d postgres -U postgres -c "GRANT postgres TO USER_PPRB;"
+# Выдать все права на роль postgres пользователю USER_PPRB в БД postgres через утилиту psql
+# psql -d postgres -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE postgres TO USER_PPRB;"
 # необходимо выполнить на мащине с БД postgres
 
 #- name: install python-psycopg2 # необходима установка python-psycopg2 на магине исполнителе ansible task
