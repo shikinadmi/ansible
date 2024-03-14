@@ -4,8 +4,21 @@
   gather_facts: yes
   strategy: free
   roles:
+    # Роль обязательна для запуска, подготавливает БД и пользователя для приложения loans4b
+    - role: psql_pprb
+      vars:
+        create_database: true
+        create_user_schema: true
+        restore_user_schema_template: "{{create_user_schema if restore_user_schema == true else 'false'}}"
+        create_template_schema: false
+        restore_template_schema: "{{create_template_schema}}"
+        # --- Dump File DB / Schema User / Schema Template
+        dump_database_template_schema: false # Содание дампа текущей схемы пользователя в шаблон
+        dump_database_user_schema: false
+        dump_schema_user_file_name: "dump_schema_{{database_user}}"
+        dump_database: false
 #    - pgsql
-    - psql_pprb
+#    - psql_pprb
 #    - tests
 #    - create_users
 #    - configuration

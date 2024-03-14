@@ -1,4 +1,8 @@
 ---
+# Документация и описание кода работы с внешней БД PostgreSQL
+# Данный код выполняется на мащине с внешней БД PostgreSQL для создания схемы пользователя, шаблона пользователя, схемы шаблона и базы данных
+# Для использования данной роли необходимо наличие ssh доступа к мащине с БД PostgreSQL
+# Для использования данной роли необходимо наличие утилиты psql на мащине с БД PostgreSQL для создания схемы пользователя, шаблона пользователя, схемы шаблона и базы данных
 
 # Анотация к коду работы с внешней БД PostgreSQL
 # Данная роль подключается к внешней БД PostgreSQL вызывается через ansible glaxy и создает схемы пользователя, шаблона пользователя, схемы шаблона и базы данных
@@ -13,6 +17,13 @@
 #    name: python-psycopg2
 #  become: yes
 #  become_user: ansible
+
+# TODO - Указать роль в ansible-galaxy проекта stand-pprb
+# TODO - Создать в playbook stand-pprb обращние к роле и указать переменные по умолчанию в нем или закоментировать для справки
+# TODO - Редактирование роли для ее использования на удаленной машине а не в контейнере
+# TODO - задать в inventory хост postgres
+
+# TODO - мигрировать данные в ext postgres и создать шаблоны
 
 - name: >
     Проверка доступности БД /
@@ -67,7 +78,7 @@
     # ---
     dump_database_file_name: "dump_{{database_name}}"
     dump_database_file: "{{dump_database_path}}/{{dump_database_file_name}}.tar.gz"
-#    # ---
+    #    # ---
     dump_template_schema_path: '{{dump_database_path}}/schema'
     dump_template_schema_file_name: 'dump_template_schema'
     dump_template_schema_file: "{{dump_template_schema_path}}/{{dump_template_schema_file_name}}.tar.gz"
@@ -78,6 +89,20 @@
   block:
     - name: Проверка доступности БД / Cоздание БД
       block:
+        #    - name: Добавление сетевого доступа к БД в pg_hba.conf для host postgres # Необходимо наличие ssh доступа к мащине с БД
+        #      postgresql_pg_hba:
+        #        dest: /var/lib/postgresql/data/pg_hba.conf
+        #        contype: host
+        #        users: "{{item}}"
+        #        source: 0.0.0.0/0
+        #        databases: "{{database_name}}"
+        #        method: md5
+        #        create: true
+        #      with_items:
+        #        - "{{database_user}}"
+        #        - "{{database_template_user}}"
+        #      delegate_to: postgres
+
         # Для отладки на Docker
         # Создание БД и назначение владельца схемы
         - name: "Создание БД и назначение владельца схемы в БД {{database_name}}"
@@ -110,22 +135,6 @@
         - fail:
             msg: "Подключение к БД {{login_database_host}}:{{login_database_port}}/{{database_name}} не прошло"
           when: ping_result.is_available == false
-
-#    - name: Добавление сетевого доступа к БД в pg_hba.conf для host postgres # Необходимо наличие ssh доступа к мащине с БД
-#      postgresql_pg_hba:
-#        dest: /var/lib/postgresql/data/pg_hba.conf
-#        contype: host
-#        users: "{{item}}"
-#        source: 0.0.0.0/0
-#        databases: "{{database_name}}"
-#        method: md5
-#        create: true
-#      with_items:
-#        - "{{database_user}}"
-#        - "{{database_template_user}}"
-#      delegate_to: postgres
-
-
 
     - name: Пользователь/Шаблонный, Схема, Удаление/Создание в БД
       block:
@@ -585,8 +594,6 @@
 
         - name: Восстановление всей БД c закрытием всех пользлвательских сессий
           block:
-#            - name: Предварительное создание БД {{database_name}}_testrestoredump
-#              block:
             - name: Проверка доступности файла дампа БД
               block:
                 - name: Проверка сушествования файла дампа БД для дальнейшего использования в восстановлении
