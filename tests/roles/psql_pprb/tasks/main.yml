@@ -18,6 +18,13 @@
 # psql -d postgres -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE postgres TO USER_PPRB;"
 # необходимо выполнить на мащине с БД postgres
 
+# задать пароль пользователю user_pprb
+# psql -d postgres -U postgres -c "ALTER USER user_pprb WITH PASSWORD 'user_pprb';"
+# выдать права на роль postgres пользователю USER_PPRB в БД postgres через утилиту psql
+# psql -d postgres -U postgres -c "GRANT postgres TO USER_PPRB;"
+# Выдать все права на роль postgres пользователю USER_PPRB в БД postgres через утилиту psql
+# psql -d postgres -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE postgres TO USER_PPRB;"
+
 #- name: install python-psycopg2 # необходима установка python-psycopg2 на магине исполнителе ansible task
 #  yum:
 #    name: python-psycopg2
@@ -246,6 +253,15 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+            # grant postgres to database_template_user
+            - name: Alter role {{database_template_user}} with superuser
+              postgresql_query:
+                db: "{{database_name}}"
+                query: "ALTER ROLE {{database_template_user}} SUPERUSER;"
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
             - name: Тестовое подключение к БД {{database_name}} для проверки создания Шаблонной Схемы и Пользователя Шаблонной Схемы
               postgresql_db:
                 name: "{{database_name}}"
@@ -294,6 +310,14 @@
                 type: schema
                 roles: "{{database_user}}"
                 grant_option: yes
+                login_host: "{{login_database_host}}"
+                login_port: "{{login_database_port}}"
+                login_user: "{{login_database_user}}"
+                login_password: "{{login_database_password}}"
+            - name: Alter role {{database_user}} with superuser
+              postgresql_query:
+                db: "{{database_name}}"
+                query: "ALTER ROLE {{database_user}} SUPERUSER;"
                 login_host: "{{login_database_host}}"
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"

@@ -38,6 +38,4 @@
     - name: Print stdout_lines
       debug:
         var: output.stdout_lines
-
-
 ...
