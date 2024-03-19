@@ -27,9 +27,9 @@
 
 #- name: install python-psycopg2 # необходима установка python-psycopg2 на магине исполнителе ansible task
 #  yum:
-#    name: python-psycopg2
+#    name: python-psycopg2, libpq-devel, postgresql-devel
 #  become: yes
-#  become_user: ansible
+##  become_user: ansible
 
 # TODO - Указать роль в ansible-galaxy проекта stand-pprb
 # TODO - Создать в playbook stand-pprb обращние к роле и указать переменные по умолчанию в нем или закоментировать для справки
