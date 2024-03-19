@@ -119,6 +119,8 @@
         # Для отладки на Docker
         # Создание БД и назначение владельца схемы
         - name: "Создание БД и назначение владельца схемы в БД {{database_name}}"
+#          environment:
+#            PGOPTIONS: "-c password_encryption=scram-sha-256"
           postgresql_db:
             name: "{{database_name}}"
             encoding: UTF-8
@@ -128,18 +130,31 @@
             login_host: "{{login_database_host}}"
             login_port: "{{login_database_port}}"
             login_user: "{{login_database_user}}"
+            # пароль был задан ALTER USER postgres WITH ENCRYPTED PASSWORD 'user_pprb';
             login_password: "{{login_database_password}}"
+#            ssl_mode: allow
+#            connect_params:
+#              # весь перечень параметров для connect_params
+#              password_encryption: scram-sha-256
           when:
             - create_database is defined
             - create_database == true
+        # fixme - необходимо авторизоваваться по паролю с шифрованием где используется ENCRYPTED PASSWORD
+
 
         - name: "Проверка доступности БД  {{login_database_host}}:{{login_database_port}}/{{database_name}}"
+#          environment:
+#            PGOPTIONS: "-c password_encryption=scram-sha-256"
           postgresql_ping:
             db: "{{database_name}}"
             login_host: "{{login_database_host}}"
             login_port: "{{login_database_port}}"
             login_user: "{{login_database_user}}"
             login_password: "{{login_database_password}}"
+#            connect_params:
+#              password_encryption: scram-sha-256"
+#            method: scram-sha-256
+#          login_auth_method: scram-sha-256
           register: ping_result
         - name: "Доступность БД {{login_database_host}}:{{login_database_port}}/{{database_name}}"
           debug:
