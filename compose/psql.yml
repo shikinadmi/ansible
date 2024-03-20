@@ -38,6 +38,7 @@ services:
 #    environment:
 #      ORACLE_PASSWORD: oracle
 
+# после запуска не останавливать контейнер
   playbook:
     image: ansible:latest
 #    container_name: ansible_playbook
@@ -48,6 +49,7 @@ services:
     entrypoint: sh ./run.sh localhost
     depends_on:
       - db
+
 
 
 

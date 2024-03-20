@@ -44,63 +44,63 @@
     Cоздание DUMP File DB / DUMP File Schema User / DUMP File Schema Template/
     Воссстановеление схемы пользователя из DUMP File Schema Template /
     Восстановление схемы шаблона /
-  vars:
-    # --- Stand Name
-    stand_name: DomainLogin  # переменная задается только строчными буквами
-    # --- Login Database
-    login_database_host: postgres
-    login_database_port: 5432
-    login_database_user: postgres
-    login_database_password: postgres
-    # --- Database
-    database_name: pprb
-
-    # --- User Schema
-    database_user: "pprb_user_{{stand_name | lower | replace('_', '')}}" # replace - замена подстроки в строке по регулярному выражению
-    database_password: pprb_user
-    database_schema_name: "{{database_user}}"
-    # --- TemplateUser Schema
-    database_template_user: template_users
-    database_template_password: template_users
-    database_template_schema_name: "{{database_template_user}}"
-
-    # --- Trigers
-    create_database: true # для отладки в тестах | на стадии разработки | на стенде каждый раз выполнять не нужно
-    restore_database: false
-    # --- Dump File DB / Schema User / Schema Template
-    dump_database_template_schema: false
-    dump_database_user_schema: false
-    dump_database: false
-    # ---
-    copy_user_schema_file: false
-    copy_template_schema_file: "{{dump_database_template_schema}}"
-
-    # --- Drop / Create / Restore Schema User and Template
-    drop_user_schema: "{{create_user_schema}}"
-    create_user_schema: true
-    restore_user_schema: true
-    restore_user_schema_template: "{{create_user_schema if restore_user_schema == true else 'false'}}"
-    # ---
-    drop_template_schema: "{{create_template_schema}}"
-    create_template_schema: false
-    restore_template_schema: "{{create_template_schema}}" # fixme - перепроверить логику востановления шаблона
-
-    # --- Paths
-    dump_database_path: "/database"
-    restore_database_file: "{{dump_database_path}}/dump_{{database_name}}.tar.gz"
-    # ---
-    dump_database_file_name: "dump_{{database_name}}"
-    dump_database_file: "{{dump_database_path}}/{{dump_database_file_name}}.tar.gz"
-    #    # ---
-    dump_template_schema_path: '{{dump_database_path}}/schema'
-    dump_template_schema_file_name: 'dump_template_schema'
-    dump_template_schema_file: "{{dump_template_schema_path}}/{{dump_template_schema_file_name}}.tar.gz"
-    # ---
-    dump_schema_user_path: "{{dump_database_path}}/stand_{{database_user}}"
-    dump_schema_user_file_name: "dump_schema_{{database_user}}"
-    dump_schema_user_file: "{{dump_schema_user_path}}/{{dump_schema_user_file_name}}.tar.gz"
-  environment:
-    PATH: /usr/postgresql/bin:$PATH
+#  vars:
+#    # --- Stand Name
+#    stand_name: DomainLogin  # переменная задается только строчными буквами
+#    # --- Login Database
+#    login_database_host: postgres
+#    login_database_port: 5432
+#    login_database_user: postgres
+#    login_database_password: postgres
+#    # --- Database
+#    database_name: pprb
+#
+#    # --- User Schema
+#    database_user: "pprb_user_{{stand_name | lower | replace('_', '')}}" # replace - замена подстроки в строке по регулярному выражению
+#    database_password: pprb_user
+#    database_schema_name: "{{database_user}}"
+#    # --- TemplateUser Schema
+#    database_template_user: template_users
+#    database_template_password: template_users
+#    database_template_schema_name: "{{database_template_user}}"
+#
+#    # --- Trigers
+#    create_database: true # для отладки в тестах | на стадии разработки | на стенде каждый раз выполнять не нужно
+#    restore_database: true
+#    # --- Dump File DB / Schema User / Schema Template
+#    dump_database_template_schema: true
+#    dump_database_user_schema: true
+#    dump_database: true
+#    # ---
+#    copy_user_schema_file: true
+#    copy_template_schema_file: "{{dump_database_template_schema}}"
+#
+#    # --- Drop / Create / Restore Schema User and Template
+#    drop_user_schema: "{{create_user_schema}}"
+#    create_user_schema: true
+#    restore_user_schema: true
+#    restore_user_schema_template: "{{create_user_schema if restore_user_schema == true else 'false'}}"
+#    # ---
+#    drop_template_schema: "{{create_template_schema}}"
+#    create_template_schema: true
+#    restore_template_schema: "{{create_template_schema}}" # fixme - перепроверить логику востановления шаблона
+#
+#    # --- Paths
+#    dump_database_path: "/database"
+#    restore_database_file: "{{dump_database_path}}/dump_{{database_name}}.tar.gz"
+#    # ---
+#    dump_database_file_name: "dump_{{database_name}}"
+#    dump_database_file: "{{dump_database_path}}/{{dump_database_file_name}}.tar.gz"
+#    #    # ---
+#    dump_template_schema_path: '{{dump_database_path}}/schema'
+#    dump_template_schema_file_name: 'dump_template_schema'
+#    dump_template_schema_file: "{{dump_template_schema_path}}/{{dump_template_schema_file_name}}.tar.gz"
+#    # ---
+#    dump_schema_user_path: "{{dump_database_path}}/stand_{{database_user}}"
+#    dump_schema_user_file_name: "dump_schema_{{database_user}}"
+#    dump_schema_user_file: "{{dump_schema_user_path}}/{{dump_schema_user_file_name}}.tar.gz"
+#  environment:
+#    PATH: /usr/postgresql/bin:$PATH
   block:
     - name: Проверка доступности БД / Cоздание БД
       block:
@@ -153,6 +153,8 @@
             login_port: "{{login_database_port}}"
             login_user: "{{login_database_user}}"
             login_password: "{{login_database_password}}"
+          notify:
+            - ping_db_result
 #            connect_params:
 #              password_encryption: scram-sha-256"
 #            method: scram-sha-256
@@ -386,6 +388,8 @@
                 login_port: "{{login_database_port}}"
                 login_user: "{{login_database_user}}"
                 login_password: "{{login_database_password}}"
+              notify:
+                - create_template_file
           rescue:
             - name: Создание Dump File Schema Template не удалось
               fail:

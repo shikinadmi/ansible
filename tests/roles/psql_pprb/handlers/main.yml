@@ -1,0 +1,11 @@
+---
+- name: ping_db_result
+  debug:
+    msg: "Соединение с БД {{login_database_host}}:{{login_database_port}}/{{database_name}} прошло успешно"
+  listen: ping_db_result
+
+- name: create_template_file
+  debug:
+    msg: "Создание шаблона БД {{dump_template_schema_file}} прошло успешно"
+  listen: create_template_file
+...
