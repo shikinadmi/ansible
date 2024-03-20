@@ -42,6 +42,7 @@ services:
     image: ansible:latest
 #    container_name: ansible_playbook
     hostname: ansible
+#    restart: always
     volumes:
       - /Users/alexandr/IdeaProjects/ansible/tests/:/root
     entrypoint: sh ./run.sh localhost

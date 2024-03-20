@@ -99,6 +99,8 @@
     dump_schema_user_path: "{{dump_database_path}}/stand_{{database_user}}"
     dump_schema_user_file_name: "dump_schema_{{database_user}}"
     dump_schema_user_file: "{{dump_schema_user_path}}/{{dump_schema_user_file_name}}.tar.gz"
+  environment:
+    PATH: /usr/postgresql/bin:$PATH
   block:
     - name: Проверка доступности БД / Cоздание БД
       block:
