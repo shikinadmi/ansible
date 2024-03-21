@@ -1,0 +1,25 @@
+---
+- name: Gather system facts
+  setup:
+  register: system_facts
+
+#    - name: Display system information
+#      debug:
+#        var: system_facts.ansible_facts
+
+- name: Display CPU information
+  debug:
+    var: system_facts.ansible_cpu
+
+- name: Display memory information
+  debug:
+    var: system_facts.ansible_memtotal_mb
+
+- name: Display disk information
+  debug:
+    var: system_facts.ansible_facts.disks
+
+- name: Display network information
+  debug:
+    var: system_facts.ansible_facts.networks
+...
