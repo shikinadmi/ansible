@@ -638,8 +638,8 @@
                 msg: "Восстановление пользовательной схемы из файла дампа {{dump_schema_user_file}} не возможно"
               when: "(drop_user_schema == false or create_user_schema == false) and restore_user_schema == true"
           when:
-            - restore_user_schema_template is defined  # Необходимо восстановить пользовательскую схему, если она существует
-            - restore_user_schema_template == false
+#            - restore_user_schema_template is defined  # Необходимо восстановить пользовательскую схему, если она существует
+#            - restore_user_schema_template == false
             - restore_user_schema is defined # Необходимо восстановить пользовательскую схему, если она существует
             - restore_user_schema | bool
 

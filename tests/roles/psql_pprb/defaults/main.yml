@@ -33,7 +33,7 @@ copy_template_schema_file: "{{dump_database_template_schema}}"
 drop_user_schema: "{{create_user_schema}}"
 create_user_schema: true
 restore_user_schema: true
-restore_user_schema_template: "{{create_user_schema if restore_user_schema == true else 'false'}}"
+restore_user_schema_template: "{{create_user_schema if restore_user_schema == false else 'false'}}"
 # ---
 drop_template_schema: "{{create_template_schema}}"
 create_template_schema: true
