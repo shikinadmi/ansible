@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres:15 # pg_dump v15 ansible tasks
+    #    container_name: postgres
+    hostname: postgres
+    restart: always
+    #    deploy:
+    #      resources:
+    #        limits:
+    #          cpus: "4"
+    #          memory: 200M
+    # set shared memory limit when using docker-compose
+    #    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    #    volumes:
+    #      - type: tmpfs
+    #        target: /dev/shm
+    #        tmpfs:
+    #          size: 134217728 # 128*2^20 bytes = 128Mb
+    environment:
+      POSTGRES_PASSWORD: postgres
+    #      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+    #      POSTGRES_MAX_IDENTIFIER_LENGTH: 127
+    ports:
+      - '5432:5432'
+
+
+  # после запуска не останавливать контейнер
+  playbook:
+    image: ansible:latest
+    #    container_name: ansible_playbook
+    hostname: ansible
+    #    restart: always
+    volumes:
+      - /Users/alexandr/IdeaProjects/ansible/tests/:/root
+    entrypoint: sh ./run.sh localhost
+    depends_on:
+      - db
+
+  jenkins:
+    image: jenkins/jenkins
+    hostname: jenkins
+    restart: always
+    environment:
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+    ports:
+      - '8080:8080'
+    volumes:
+      -   /Users/alexandr/IdeaProjects/ansible/compose/jenkins_home:/var/jenkins_home
+    depends_on:
+      - db
+      - playbook
+
+networks: # сеть с возможностью подключения к интернету
+  tests:
+    driver: bridge
