@@ -1,0 +1,23 @@
+- project:
+    name: Tests
+    description: Tests for jenkinsjob_builder
+    jobs:
+      - Tests/test
+
+- job-template:
+    name: Tests/test
+    description: Tests for jenkinsjob_builder
+
+    parameters:
+    - choice:
+        name: "Запуск тестов"
+        description: "Запуск тестов"
+        choices:
+          - "Запуск тестов"
+          - "Создание задачи в jenkins"
+
+    build:
+    - shell:
+        command: |
+          echo "Запуск тестов"
+          echo "Создание задачи в jenkins"
