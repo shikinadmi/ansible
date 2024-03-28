@@ -1,0 +1,19 @@
+# docker compose file for jenkins
+version: '3.9'
+
+services:
+
+    jenkins:
+        image: jenkins:2.60.1
+        hostname: jenkins
+        restart: always
+        environment:
+            JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+        ports:
+            - '8080:8080'
+        volumes:
+            -   /Users/alexandr/IdeaProjects/ansible/compose/jenkins_home:/var/jenkins_home
+
+networks:
+  tests:
+    driver: local
