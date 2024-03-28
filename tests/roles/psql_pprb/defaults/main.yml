@@ -7,7 +7,7 @@ login_database_port: 5432
 login_database_user: postgres
 login_database_password: postgres
 # --- Database
-database_name: pprb
+database_name: rb
 
 # --- User Schema
 database_user: "pprb_user_{{stand_name | lower | replace('_', '')}}" # replace - замена подстроки в строке по регулярному выражению
