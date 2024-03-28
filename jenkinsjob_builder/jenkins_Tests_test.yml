@@ -4,20 +4,113 @@
     jobs:
       - Tests/test
 
+#- job-template:
+#    name: Tests/test
+#    project-type: pipeline
+#    sandbox: false
+#    pipeline-scm:
+#      scm:
+#        - git:
+#            url: https://github.com/shikinadmi/ansible.git
+#            branches:
+#              - origin/master
+#            credentialsId: shikinadmi
+#            clean: true
+#      script-path: tests/JenkinsFile.groovy
+#      lightweight-checkout: true
+
 - job-template:
     name: Tests/test
     description: Tests for jenkinsjob_builder
 
-    parameters:
-    - choice:
-        name: "Запуск тестов"
-        description: "Запуск тестов"
-        choices:
-          - "Запуск тестов"
-          - "Создание задачи в jenkins"
+    scm:
+      - git:
+          url: https://github.com/shikinadmi/ansible.git
+          branches:
+            - origin/master
+          credentialsId: shikinadmi
 
-    build:
-    - shell:
-        command: |
-          echo "Запуск тестов"
-          echo "Создание задачи в jenkins"
+#    builders:
+#      - ansible-playbook:
+#          playbook: "tests/playbook.yml"
+#          inventory-type: "path"
+#          inventory:
+#            path: "tests/hosts"
+#          variables:
+#            - name: "my_variable"
+#              value: "my_value"
+
+    builders:
+      - dsl:
+          target: "tests/JenkinsFile.groovy"
+          ignore-existing: "true"
+          removed-job-action: "DISABLE"
+          removed-view-action: "DELETE"
+          lookup-strategy: "SEED_JOB"
+          additional-classpath: "*.jar"
+
+#    builders:
+#      - ansible-playbook:
+#          playbook: "tests/playbook.yml"
+#          inventory-type: "content"
+##          inventory: "tests/hosts"
+#          inventory:
+#            content: |
+#              [all]
+#              machine01.example.com
+#              machine02.example.com
+#          hosts: "localhost"
+#          tags-to-run: "ose"
+#          tags-to-skip: "ovirt"
+#          task-to-start-at: "Deploy application"
+#          workers: 2
+#          credentials-id: "0891c950-487b-4749-aa69-d87425e14459"
+#          vault-credentials-id: "0421b950-487b-4749-aa69-d87425e14459"
+#          sudo: true
+#          sudo-user: "cloud-user"
+#          unbuffered-output: false
+#          colorized-output: true
+#          additional-parameters: "-vvv"
+#          variables:
+#            - name: "complete_var"
+#              value: "complete value"
+#              hidden: false
+#            - name: "empty_var"
+#            - name: "hidden_var"
+#              value: "Do not appear in console"
+#              hidden: true
+#    project-type: pipeline
+#    sandbox: true
+#    pipeline-scm:
+#      scm:
+#        - hg:
+#            url: https://github.com/shikinadmi/ansible.git
+#            branches:
+#              - origin/master
+#            credentialsId: shikinadmi
+#            clean: true
+#      script-path: tests/JenkinsFile.groovy
+#      lightweight-checkout: true
+
+#    parameters:
+#      - choice:
+#          name: "Запуск тестов"
+#          description: "Запуск тестов"
+#          choices:
+#            - "Запуск тестов"
+#            - "Создание задачи в jenkins"
+
+#    scm:
+#      - git:
+#          url: https://github.com/shikinadmi/ansible.git
+#          branches:
+#            - origin/master
+#          credentialsId: shikinadmi
+
+#    build:
+#      - groovy:
+#          file: jenkins_Tests_test.groovy
+#    - shell:
+#        command: |
+#          echo "Запуск тестов"
+#          echo "Создание задачи в jenkins"
