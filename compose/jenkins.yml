@@ -4,7 +4,7 @@ version: '3.9'
 services:
 
     jenkins:
-        image: jenkins:2.60.1
+        image: jenkins/jenkins
         hostname: jenkins
         restart: always
         environment:
@@ -14,6 +14,6 @@ services:
         volumes:
             -   /Users/alexandr/IdeaProjects/ansible/compose/jenkins_home:/var/jenkins_home
 
-networks:
+networks: # сеть с возможностью подключения к интернету
   tests:
-    driver: local
+    driver: bridge
