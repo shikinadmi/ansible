@@ -29,7 +29,9 @@
           branches:
             - origin/master
           credentialsId: shikinadmi
-
+    builders:
+      - shell: |
+          ansible-playbook tests/playbook.yml -i tests/hosts -e "HOSTS=localhost"
 #    builders:
 #      - ansible-playbook:
 #          playbook: "tests/playbook.yml"
@@ -40,14 +42,14 @@
 #            - name: "my_variable"
 #              value: "my_value"
 
-    builders:
-      - dsl:
-          target: "tests/JenkinsFile.groovy"
-          ignore-existing: "true"
-          removed-job-action: "DISABLE"
-          removed-view-action: "DELETE"
-          lookup-strategy: "SEED_JOB"
-          additional-classpath: "*.jar"
+#    builders:
+#      - dsl:
+#          target: "tests/JenkinsFile.groovy"
+#          ignore-existing: "true"
+#          removed-job-action: "DISABLE"
+#          removed-view-action: "DELETE"
+#          lookup-strategy: "SEED_JOB"
+#          additional-classpath: "*.jar"
 
 #    builders:
 #      - ansible-playbook:
