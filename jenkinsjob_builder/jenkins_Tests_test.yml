@@ -1,8 +1,8 @@
 - project:
     name: Tests
     description: Tests for jenkinsjob_builder
-    jobs:
-      - Tests/test
+#    jobs:
+#      - Tests/test
 
 #- job-template:
 #    name: Tests/test
@@ -19,9 +19,10 @@
 #      script-path: tests/JenkinsFile.groovy
 #      lightweight-checkout: true
 
-- job-template:
+- job:
     name: Tests/test
     description: Tests for jenkinsjob_builder
+
 
     scm:
       - git:
@@ -29,9 +30,17 @@
           branches:
             - origin/master
           credentialsId: shikinadmi
-    builders:
+
+
+
+
+    builders: # запуск JenkinsFile.groovy
       - shell: |
-          ansible-playbook tests/playbook.yml -i tests/hosts -e "HOSTS=localhost"
+          cd tests && \
+          echo "run playbook" && \
+          groovy JenkinsFile.groovy
+          
+
 #    builders:
 #      - ansible-playbook:
 #          playbook: "tests/playbook.yml"
@@ -81,6 +90,7 @@
 #            - name: "hidden_var"
 #              value: "Do not appear in console"
 #              hidden: true
+
 #    project-type: pipeline
 #    sandbox: true
 #    pipeline-scm:
