@@ -4,9 +4,8 @@
   gather_facts: no
 #  strategy: free
   roles:
-    - role: psql_pprb
-    - role: sys_info
-
+    - psql_pprb
+    - sys_info
 #    - pgsql
 #    - psql_pprb
 #    - tests
