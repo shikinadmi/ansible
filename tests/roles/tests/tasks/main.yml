@@ -1,14 +1,18 @@
 ---
-- set_fact:
-    url: 'https://SP-0.156/'
+#- set_fact:
+#    url: 'https://SP-0.156/'
+#
+#- name: filter
+#  debug:
+#    msg: "{{ url | regex_search ('(SP|P)-(\\d+).(\\d+)')}}"
+#
+#- name: cpu
+#  debug:
+#    msg: "{{ansible_processor_vcpus -2}}"
 
-- name: filter
+- name: V
   debug:
-    msg: "{{ url | regex_search ('(SP|P)-(\\d+).(\\d+)')}}"
-
-- name: cpu
-  debug:
-    msg: "{{ansible_processor_vcpus -2}}"
+    msg: "{{ GR.V|int + AP.V|int}}"
 
 #- until:
 #- shell: |
