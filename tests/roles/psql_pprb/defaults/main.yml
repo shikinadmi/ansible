@@ -10,8 +10,8 @@ login_database_password: postgres
 database_name: rb
 
 # --- User Schema
-database_user: "pprb_user_{{stand_name | lower | replace('_', '')}}" # replace - замена подстроки в строке по регулярному выражению
-database_password: pprb_user
+database_user: "user_{{stand_name | lower | replace('_', '')}}" # replace - замена подстроки в строке по регулярному выражению
+database_password: user
 database_schema_name: "{{database_user}}"
 # --- TemplateUser Schema
 database_template_user: template_users
