@@ -36,7 +36,7 @@ services:
     #    restart: always
     volumes:
       - /Users/alexandr/IdeaProjects/ansible/tests/:/root
-    entrypoint: sh ./run.sh localhost
+    entrypoint: sh ./run.sh localhost && sleep infinity
     depends_on:
       - db
 
