@@ -1,0 +1,16 @@
+#---
+#- name: Get access token
+#  uri:
+#    body_format: form-urlencoded
+#    body: "{{ kafka_cloud_token_request_urlencode_body }}"
+#    follow_redirects: all
+#    url: "{{ kafka_cloud_token_request_url }}"
+#    method: POST
+#    validate_certs: no
+#  register: token_response
+#  check_mode: no
+#
+#- name: Set token var
+#  set_fact:
+#    kafka_cloud_access_token: "{{ token_response.json.access_token }}"
+#  check_mode: no

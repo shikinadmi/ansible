@@ -1,0 +1,11 @@
+security.protocol={{ kafka_security_protocol }}
+
+{% if kafka_security_protocol is match("SSL") %}
+ssl.keystore.type={{ kafka_keystore_type|default("JKS") }}
+ssl.keystore.location={{ kafka_keystore_location }}
+ssl.keystore.password={{ kafka_keystore_password }}
+
+ssl.truststore.type={{ kafka_truststore_type|default("JKS") }}
+ssl.truststore.location={{ kafka_truststore_location }}
+ssl.truststore.password={{ kafka_truststore_password }} 
+{% endif %}

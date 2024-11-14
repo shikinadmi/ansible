@@ -1,0 +1,55 @@
+#---
+##kafka_cloud_sa_id: "{{CR_KAFKA_CLOUD_SA_ID}}" # ID сервисного аккаунта
+##kafka_cloud_sa_key: "{{CR_KAFKA_CLOUD_SA_KEY}}" # Секретный ключ сервисного аккаунта
+#kafka_cloud_order_id: 'eec615c7-3dc6-45be-ac8c-141e61324753' # ST kafka в PDOU # Идентификатор заказа в облаке
+#kafka_cloud_project_id: 'proj-hcwkm7wuxu' # Идентификатор проекта в облаке
+#
+#kafka_cloud_api_url: "https://api.cloud.vtb.ru/order-service/api/v1"  # URL API облака Kafka
+#
+#
+#
+#
+## Для включения\отключения операций по созданию топиков\acl\и т.д.
+#kafka_topics_config_enabled: True
+#kafka_acl_config_enabled: True
+#kafka_transaction_acl_config_enabled: False
+#
+##kafka_cloud_api_url: "https://prod-kong-service.cloud.vtb.ru/order-service/api/v1"  # URL API облака Kafka
+##kafka_cloud_api_url: "https://api.cloud.vtb.ru/order-service/api/v1"  # URL API облака Kafka
+##kafka_cloud_order_info: "{{ kafka_cloud_api_url }}/projects/{{ kafka_cloud_project_id }}/orders/{{ kafka_cloud_order_id }}"  # Информация о заказе в облаке Kafka
+##kafka_cloud_token_request_url: "https://auth.cloud.vtb.ru/auth/realms/Portal/protocol/openid-connect/token"  # URL запроса токена для облака Kafka
+#
+## Здесь перичисляем топики, которые должны быть или появиться, если их нет, в Cloud. В процессе выполнения в TC это проверяется, отсутствующие топики создаются.
+## Изменять здесь уже созданные в Cloud бесполезно, разве что для потомков. Есть вариант их удалить и создать заново в соседней ветке "plus_changes".
+## Ниже, за списком топиков, после kafka_acl_topic_list, идут блоки со списками для создания ACL. Принцип тот же: создаете новый блок для consumer или producer с новым CN
+## или добавляете имя топика в существующий. Отсутствующие создаются в Cloud.
+#
+#kafka_topics:
+#- {name: "adsd.dord.response.calculate.v1", partition: 1, retention: 1800000, cleanup_policy: "delete", cleanup_limit_by: "time"}
+#- {name: "adsd.iabs.event.passive-personal-account-operating-day-closed.v1", partition: 1, retention: 1800000, cleanup_policy: "delete", cleanup_limit_by: "time"}
+#
+#kafka_acl_topic_list:
+#
+#- {
+#   client_cn: "APD05.01-730-kafka-rr-client-default",
+#   topic_type: "by_name",
+#   client_role: "producer",
+#   topic_names:
+#     [
+#       "adsd.iabs.event.passive-personal-account-operating-day-closed.v1",
+#       "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+#      ]
+#  }
+#- {
+#   client_cn: "APD05.01-730-kafka-rr-client-default",
+#   topic_type: "by_name",
+#   client_role: "consumer",
+#   topic_names:
+#     [
+#       "adsd.iabs.event.passive-personal-account-operating-day-closed.v1",
+#       "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+#       ]
+#  }
+#
+## kafka_acl_topic_list: []
+#kafka_transaction_acl_list: []

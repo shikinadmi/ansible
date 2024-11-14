@@ -1,0 +1,3030 @@
+{
+  "access_control_expose_headers": "content-disposition,X-Request-ID",
+  "cache_control": "max-age=0, private, must-revalidate",
+  "changed": false,
+  "connection": "close",
+  "content_length": "65509",
+  "content_type": "application/json",
+  "cookies": {},
+  "cookies_string": "",
+  "date": "Sat, 09 Nov 2024 19:15:20 GMT",
+  "elapsed": 5,
+  "etag": "W/\"b21cdcd72df2cd4aa247665ee3f42b39\"",
+  "invocation": {
+    "module_args": {
+      "attributes": null,
+      "body": null,
+      "body_format": "raw",
+      "ca_path": null,
+      "client_cert": null,
+      "client_key": null,
+      "creates": null,
+      "dest": null,
+      "follow_redirects": "safe",
+      "force": false,
+      "force_basic_auth": false,
+      "group": null,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJxa0N0d1UxQnFXVi1LZWRSazNEb2dnakg3cDNDOHRKN2lib1RzcnNfX2ZZIn0.eyJleHAiOjE3MzExODMzMTQsImlhdCI6MTczMTE3OTcxNCwianRpIjoiZjAwZGIyM2ItZDc3NC00ZGVjLTgyZWEtZGFlYzZlNzI4OWJjIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLmNsb3VkLnZ0Yi5ydS9hdXRoL3JlYWxtcy9Qb3J0YWwiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZDY2NTY1YjktZGFlMy00ZWY4LWEzMzItNjRkMjJmOWFmNjNlIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic2FfcHJvai1oY3drbTd3dXh1LTI4dSIsInNlc3Npb25fc3RhdGUiOiIzZTM4M2QzYi0xM2Y4LTRlNjYtODQxOS02MDQ0ZDMwOGZiYjEiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1wb3J0YWwiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJzaWQiOiIzZTM4M2QzYi0xM2Y4LTRlNjYtODQxOS02MDQ0ZDMwOGZiYjEiLCJjbGllbnRIb3N0IjoiMTAuMTg1LjE3Mi4xNTkiLCJjbGllbnRJZCI6InNhX3Byb2otaGN3a203d3V4dS0yOHUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1zYV9wcm9qLWhjd2ttN3d1eHUtMjh1IiwiY2xpZW50QWRkcmVzcyI6IjEwLjE4NS4xNzIuMTU5In0.ZKeF0JRpV2U39C6AkcDM1pQDlmKzWA6gx_RYrEbsH0y84b7fBkmy8bo4OLXhIHqL3bloSTVEEH2QpzXEmwAI7RWxxXDZU8FocPQ8QPMZ18Xif60ccAuaANPSed4i_In9XRI4fU4cEYdqq5pKicTSWm81ksfdf7DIauem1HaAP-RoiZiDbkJInTisJGOWA0bPuYDHINmgoY54xTRglR7OB-ZwYhMvpbYIg1izJ8NqDkJSGnqrpG_BiQr8M-s7jDmg7U7veUN6XeJn0ytoYk1TVrUtoc2MsbS7UmjfePqhqFQdxN4aeq6_FXoYZ6wnfppq0xdRttX4JzXpX-XjhgP-kQ",
+        "Content-Type": "application/json;charset=UTF-8"
+      },
+      "http_agent": "ansible-httpget",
+      "method": "GET",
+      "mode": null,
+      "owner": null,
+      "remote_src": false,
+      "removes": null,
+      "return_content": false,
+      "selevel": null,
+      "serole": null,
+      "setype": null,
+      "seuser": null,
+      "src": null,
+      "status_code": [
+        200
+      ],
+      "timeout": 30,
+      "unix_socket": null,
+      "unsafe_writes": false,
+      "url": "https://prod-kong-service.cloud.vtb.ru/order-service/api/v1/projects/proj-hcwkm7wuxu/orders/eec615c7-3dc6-45be-ac8c-141e61324753",
+      "url_password": null,
+      "url_username": null,
+      "use_gssapi": false,
+      "use_proxy": true,
+      "validate_certs": false
+    }
+  },
+  "json": {
+    "attrs": {
+      "account_id": "88b6874d-718d-4cfb-9f49-2a3c0a118404",
+      "ad_integration": true,
+      "ad_logon_grants": [
+        {
+          "groups": [
+            "cloud-pdou-developers",
+            "cloud-pdou-test-dev"
+          ],
+          "role": "kafka_admin"
+        }
+      ],
+      "attrs_type": "kafka_aprod",
+      "availability_zone": "msk-t1",
+      "cluster_name": "kafka-aprod-7396",
+      "creator": {
+        "email": "ashikin@vtb.ru",
+        "id": "c3cce42a-2f57-437b-9aa8-c65d6109db30",
+        "realm": "Portal"
+      },
+      "data_center_ids": [
+        "e3c54a48-7f6d-4d7d-86f2-dcd8619e7886"
+      ],
+      "default_nic": {
+        "net_segment": "b2b-hce-ts-dev-srv-app"
+      },
+      "domain": "corp.dev.vtb",
+      "environment_prefix_id": "c6376614-b313-4adf-91d4-db7fef296c95",
+      "environment_type": "DEV",
+      "extra_mounts": [
+        {
+          "file_system": "xfs",
+          "path": "/app",
+          "size": 150
+        }
+      ],
+      "flavor": {
+        "cpus": 4,
+        "memory": 8,
+        "name": "c4m8",
+        "uuid": "1498c9c9-5f20-4c1e-8d53-683bb8c2c205"
+      },
+      "folder": "fold-xo591axvrx",
+      "geo_distribution": true,
+      "graph_version": "1.0.29",
+      "information_system_id": "f40d27a1-df7a-419e-9a1e-07772adcd3b6",
+      "information_system_priority": 2,
+      "kafka_log_retention_minutes": 30,
+      "kafka_version": "2.13-2.4.1",
+      "layout": "b5707060-50c9-4e4b-bec7-e1dadfb6e5dc",
+      "on_support": true,
+      "orders_ids_for_lock": null,
+      "organization_name": "vtb",
+      "os_version": "1.7",
+      "platform": "OpenStack",
+      "preview_items": [
+        {
+          "action_id": "4508f813-c3ae-4795-b7e5-d6510d47f559",
+          "created_row_dt": "2024-08-23T12:41:17.961075",
+          "data": {
+            "build": {
+              "cluster_os_family": "astra",
+              "setup_version": "1.2.2"
+            },
+            "config": {
+              "acls": [
+                {
+                  "client_cn": "2208-kafka-st-client-pdou",
+                  "client_role": "consumer",
+                  "topic_names": [
+                    "tslg-app-logs"
+                  ],
+                  "topic_type": "by_name"
+                },
+                {
+                  "client_cn": "2208-kafka-st-client-pdou",
+                  "client_role": "producer",
+                  "topic_names": [
+                    "tslg-app-logs"
+                  ],
+                  "topic_type": "by_name"
+                },
+                {
+                  "client_cn": "2208-kafka-st-client-tsau",
+                  "client_role": "consumer",
+                  "topic_names": [
+                    "audit",
+                    "initial-audit"
+                  ],
+                  "topic_type": "by_name"
+                },
+                {
+                  "client_cn": "2208-kafka-st-client-tsau",
+                  "client_role": "producer",
+                  "topic_names": [
+                    "audit",
+                    "initial-audit"
+                  ],
+                  "topic_type": "by_name"
+                },
+                {
+                  "client_cn": "2208-kafka-st-client-tstr",
+                  "client_role": "consumer",
+                  "topic_names": [
+                    "TSTR_CLIENT_PDOU"
+                  ],
+                  "topic_type": "by_name"
+                },
+                {
+                  "client_cn": "2208-kafka-st-client-tstr",
+                  "client_role": "producer",
+                  "topic_names": [
+                    "TSTR_CLIENT_PDOU"
+                  ],
+                  "topic_type": "by_name"
+                },
+                {
+                  "client_cn": "04.03.011.02-d5-kafka-pdou",
+                  "client_role": "consumer",
+                  "topic_name": "ocba",
+                  "topic_type": "by_mask"
+                },
+                {
+                  "client_cn": "04.03.011.02-d5-kafka-pdou",
+                  "client_role": "producer",
+                  "topic_name": "ocba",
+                  "topic_type": "by_mask"
+                }
+              ],
+              "admin_read_topics": true,
+              "certificate_cn": "2208-kafka-d5-cluster-kafka-aprod-7396",
+              "certificate_expiration": "2025-08-23T12:28:38+00:00",
+              "certificate_valid_from": "2024-08-23T12:28:38+00:00",
+              "cluster_name": "kafka-aprod-7396",
+              "connection_url": "d5pdou-kfc002lk.corp.dev.vtb:9092",
+              "dc_structure": {
+                "kafka_DC1": [
+                  "d5pdou-kfc002lk.corp.dev.vtb"
+                ],
+                "kafka_DC2": [],
+                "zookeeper_DC1": [
+                  "d5pdou-kfc002lk.corp.dev.vtb"
+                ],
+                "zookeeper_DC2": [],
+                "zookeeper_DCQ": []
+              },
+              "grafana_dashboard_url": "https://oko.vtb.ru/d/akjf34h6asd-oko-kafka-dev/kafka-dashboard-dev?var-clusters=2208-kafka-d5-cluster-kafka-aprod-7396\n",
+              "group_acls": [
+                {
+                  "host": "*",
+                  "name": "*",
+                  "operation": "READ",
+                  "patternType": "LITERAL",
+                  "permissionType": "ALLOW",
+                  "principal": "*",
+                  "resourceType": "GROUP"
+                }
+              ],
+              "idempotent_acls": [],
+              "kafka_client_url": "https://storage.cloud.vtb.ru/product/kafka_client_2.4.1.zip",
+              "kafka_log_retention_minutes": 30,
+              "kafka_version": "2.13-2.4.1",
+              "quotas": [],
+              "topics": [
+                {
+                  "cleanup_policy": "delete",
+                  "compression_type": "default",
+                  "min_insync_replicas": "1",
+                  "partitions_number": "1",
+                  "replication_factor": "1",
+                  "retention_bytes": "default",
+                  "retention_ms": "1800000",
+                  "segment_bytes": "134217728",
+                  "topic_name": "initial-audit"
+                },
+                {
+                  "cleanup_policy": "delete",
+                  "compression_type": "default",
+                  "min_insync_replicas": "1",
+                  "partitions_number": "1",
+                  "replication_factor": "1",
+                  "retention_bytes": "default",
+                  "retention_ms": "1800000",
+                  "segment_bytes": "1073741824",
+                  "topic_name": "ocba-upload-pools-pdou"
+                },
+                {
+                  "cleanup_policy": "delete",
+                  "compression_type": "default",
+                  "min_insync_replicas": "1",
+                  "partitions_number": "1",
+                  "replication_factor": "1",
+                  "retention_bytes": "default",
+                  "retention_ms": "1800000",
+                  "segment_bytes": "1073741824",
+                  "topic_name": "ocba-open-registers"
+                },
+                {
+                  "cleanup_policy": "delete",
+                  "compression_type": "default",
+                  "min_insync_replicas": "1",
+                  "partitions_number": "1",
+                  "replication_factor": "1",
+                  "retention_bytes": "default",
+                  "retention_ms": "1800000",
+                  "segment_bytes": "134217728",
+                  "topic_name": "audit"
+                },
+                {
+                  "cleanup_policy": "delete",
+                  "compression_type": "default",
+                  "min_insync_replicas": "1",
+                  "partitions_number": "1",
+                  "replication_factor": "1",
+                  "retention_bytes": "default",
+                  "retention_ms": "1800000",
+                  "segment_bytes": "134217728",
+                  "topic_name": "TSTR_CLIENT_PDOU"
+                },
+                {
+                  "cleanup_policy": "delete",
+                  "compression_type": "default",
+                  "min_insync_replicas": "1",
+                  "partitions_number": "4",
+                  "replication_factor": "1",
+                  "retention_bytes": "default",
+                  "retention_ms": "1800000",
+                  "segment_bytes": "134217728",
+                  "topic_name": "tslg-app-logs"
+                },
+                {
+                  "cleanup_policy": "delete",
+                  "compression_type": "default",
+                  "min_insync_replicas": "1",
+                  "partitions_number": "1",
+                  "replication_factor": "1",
+                  "retention_bytes": "default",
+                  "retention_ms": "1800000",
+                  "segment_bytes": "1073741824",
+                  "topic_name": "ocba-close-registers"
+                }
+              ],
+              "transaction_acls": [],
+              "vtb_kafka_version": "3.241.3",
+              "zookeeper_version": "3.6.3"
+            },
+            "ext_relations": {
+              "primary": [],
+              "secondary": []
+            },
+            "provider": "kafka",
+            "state": "on"
+          },
+          "external_provider_id": "",
+          "graph_id": "8975c85e-3f90-482f-a765-86d06013db27",
+          "item_id": "6f24955c-41f1-5b8d-be20-68d8492554e7",
+          "order_id": "eec615c7-3dc6-45be-ac8c-141e61324753",
+          "parent": null,
+          "provider": "kafka",
+          "type": "cluster",
+          "update_dt": "2024-10-15T16:40:40.200470"
+        },
+        {
+          "action_id": "4508f813-c3ae-4795-b7e5-d6510d47f559",
+          "created_row_dt": "2024-08-23T12:29:10.939709",
+          "data": {
+            "acls": [
+              {
+                "members": [
+                  "cloud-pdou-developers",
+                  "cloud-pdou-test-dev"
+                ],
+                "role": "kafka_admin"
+              }
+            ],
+            "config": {
+              "ad_integration": true,
+              "boot_disk": {
+                "path": "/dev/sda",
+                "purpose": "boot",
+                "size": 50,
+                "uuid": "ee6473e7-861d-46f7-94e9-f5a6eb23c46a"
+              },
+              "default_nic": {
+                "address_assignment": "DHCP",
+                "addresses": [
+                  {
+                    "address": "10.243.79.226",
+                    "type": "ipv4"
+                  }
+                ],
+                "mac_address": "02:49:86:79:74:ae",
+                "mtu": 1500,
+                "name": "eth0",
+                "net_segment": "b2b-hce-ts-dev-srv-app",
+                "subnet": {
+                  "name": "B2B-HCE-TS-DEV-SRV-APP@ALL",
+                  "uuid": "d6490259-f98c-43ba-b5d9-630b4eed47e4"
+                },
+                "uuid": "49867974-ae2a-4289-a216-af989e694919"
+              },
+              "default_v4_address": "10.243.79.226",
+              "default_v6_address": "None",
+              "domain": "corp.dev.vtb",
+              "environment": "DEV",
+              "environment_type": "DEV",
+              "extra_disks": [
+                {
+                  "path": "/dev/sdb",
+                  "purpose": "general",
+                  "size": 150,
+                  "uuid": "6870cb61-ce93-4da0-b95c-10eb5b070ba6"
+                }
+              ],
+              "extra_mounts": [
+                {
+                  "device": "/dev/mapper/vg_02-lv_app",
+                  "fstype": "xfs",
+                  "mount": "/app",
+                  "options": "rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota",
+                  "size": 150.0
+                }
+              ],
+              "extra_nics": [],
+              "flavor": {
+                "cpus": 4,
+                "memory": 8,
+                "name": "c4m8",
+                "uuid": "1498c9c9-5f20-4c1e-8d53-683bb8c2c205"
+              },
+              "hostname": "d5pdou-kfc002lk",
+              "image": {
+                "name": "tpl_linux_astra_1.7_x86_64_en",
+                "os": {
+                  "architecture": "x86_64",
+                  "distribution": "astra",
+                  "localization": "en",
+                  "type": "linux",
+                  "vendor": "rusbitech",
+                  "version": "1.7"
+                },
+                "size": 30,
+                "uuid": "a6b24e32-18a9-4fa4-a22f-d5fbd406855d"
+              },
+              "node_roles": [
+                "kafka",
+                "zookeeper"
+              ],
+              "on_support": true,
+              "os_version": "1.7_x86-64",
+              "resource_pool": {
+                "data_center": {
+                  "code": "t",
+                  "name": "TS Cloud",
+                  "site": "TS Cloud"
+                },
+                "domain": "vtb-internal",
+                "endpoint": "https://10.243.66.3:5000",
+                "hardware_group": "vtb-internal",
+                "name": "d3p1k01",
+                "platform": "openstack",
+                "quota_label": "DEV HYBRID(T1) OPENSTACK",
+                "resource_management": "private",
+                "tenant_prefix": "d3p1k01",
+                "ui_link": "https://10.243.66.3",
+                "uuid": "f0001e2f-0e28-5032-948e-06f94afd94f1"
+              },
+              "storage_profile": "HDD",
+              "swap_size": 1,
+              "tenant": {
+                "name": "d3p1k01-d5pdou",
+                "uuid": "73ccbdb32c0649db8048279f328bd360"
+              }
+            },
+            "ext_relations": {
+              "primary": [],
+              "secondary": []
+            },
+            "parent": "6f24955c-41f1-5b8d-be20-68d8492554e7",
+            "provider": "openstack",
+            "state": "on",
+            "tm_pool": "openstack"
+          },
+          "external_provider_id": "",
+          "graph_id": "8975c85e-3f90-482f-a765-86d06013db27",
+          "item_id": "f0fe7901-418a-4f9e-b5a1-2361b2a3ea87",
+          "order_id": "eec615c7-3dc6-45be-ac8c-141e61324753",
+          "parent": "6f24955c-41f1-5b8d-be20-68d8492554e7",
+          "provider": "openstack",
+          "type": "vm",
+          "update_dt": "2024-09-12T16:27:15.372141"
+        }
+      ],
+      "product_title": "Apache Kafka Cluster Astra",
+      "project_environment_id": "ce11798a-e5f6-4e54-9582-78770f15b52a",
+      "project_name": "proj-hcwkm7wuxu",
+      "project_path": "/organization/vtb/folder/fold-ujj1rh9wu1/folder/fold-x10860unxg/folder/fold-7qvqsat8p3/folder/fold-xo591axvrx/project/proj-hcwkm7wuxu/",
+      "tariff_plan_id": "2d23f685-e5be-4a23-b68b-576029c224ac"
+    },
+    "available_renewals": null,
+    "category": "vm",
+    "category_v2": "application_integration",
+    "created_at": "2024-08-23T15:27:55+03:00",
+    "data": [
+      {
+        "action_id": "4508f813-c3ae-4795-b7e5-d6510d47f559",
+        "actions": [
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2023-09-11T04:17:28.249860+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "Переименование имени кластера, после чего будет перевыпущен кластерный сертификат.\nОперация выполняется с временной недоступностью сервиса.",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "a4bc7e7f-f6be-46e3-97f5-0d29e6fb86a6",
+            "graph_name": "kafka_release_edit_cluster_name",
+            "graph_title": "Изменить имя кластера",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.43",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "42fd3650-4a3f-4f7e-9445-ced69c48d914",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version']  >= '1.1.1'",
+            "last_version": "1.0.8",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_edit_cluster_name",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Изменить имя кластера",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:03.621914+03:00",
+            "version": "1.0.8",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-04-24T13:59:03.126032+03:00",
+            "version_list": [
+              "1.0.5",
+              "1.0.6",
+              "1.0.7",
+              "1.0.8"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.config.topics",
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "515bad0c-df0e-4684-a607-43ed3f1d19fa",
+            "graph_name": "kafka_release_edit_topics",
+            "graph_title": "Изменить параметр топиков Kafka Cluster",
+            "graph_version": "",
+            "graph_version_calculated": "1.1.18",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "963ebc7c-76e8-4c9c-b905-444e6a062a9e",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.6",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_edit_topics_release",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Изменить параметр топиков Kafka Cluster",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:03.675759+03:00",
+            "version": "1.0.6",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-04-10T18:09:38.928544+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5",
+              "1.0.6"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "Будет перевыпущен кластерный сертификат Kafka.\nОперация выполняется с временной недоступностью сервиса.",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "44a31fa2-468d-47dc-a796-d10e08f0dd0f",
+            "graph_name": "kafka_release_update_certs",
+            "graph_title": "Обновление сертификатов Kafka",
+            "graph_version": "",
+            "graph_version_calculated": "1.1.6",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "2969d364-1f6c-4cb3-bfb6-12294b083c2b",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version']  >= '1.1.1'",
+            "last_version": "1.0.11",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_update_certs",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": null,
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Обновить кластерный сертификат",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:03.947044+03:00",
+            "version": "1.0.11",
+            "version_changed_by_user": "dca849c1-355b-44b8-8356-7a970a00b6f7",
+            "version_create_dt": "2024-07-18T05:12:43.434716+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5",
+              "1.0.6",
+              "1.0.7",
+              "1.0.8",
+              "1.0.9",
+              "1.0.10",
+              "1.0.11"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2023-09-11T04:04:11.274326+03:00",
+            "current_version": "",
+            "data_config_fields": [
+              "with_interrupt=True"
+            ],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "Будет перевыпущен кластерный сертификат Kafka.\nОперация выполняется с временной недоступностью сервиса.",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "22694f71-ab83-4ec4-a595-9cd8f1e649c9",
+            "graph_name": "kafka_release_update_certs_interrupting",
+            "graph_title": "Обновление сертификатов Kafka (аварийное)",
+            "graph_version": "",
+            "graph_version_calculated": "1.1.6",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "ae3c9467-29f5-43c4-8da9-64e1d447a97a",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": null,
+            "last_version": "1.0.5",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_update_certs_interrupting",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": null,
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": false,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Обновить кластерный сертификат (аварийно)",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:03.961542+03:00",
+            "version": "1.0.5",
+            "version_changed_by_user": "11e4d42a-cba1-451a-8c34-7ae99a191081",
+            "version_create_dt": "2024-09-23T12:18:52.575303+03:00",
+            "version_list": [
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2024-03-06T18:20:04.830672+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "7048c7a4-9685-4a3b-bd65-a680c1dd117d",
+            "graph_name": "kafka_release_update_os_check_rfc",
+            "graph_title": "Обновить ОС кластера Kafka (проверка ЗНИ)",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.79",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "481ce734-1424-4023-a3b4-5a1de7c54108",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] >= '1.1.1'",
+            "last_version": "1.0.4",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_update_os_check_rfc",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": null,
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Обновить ОС Linux",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.065300+03:00",
+            "version": "1.0.4",
+            "version_changed_by_user": "fca87c7b-3b98-4e1d-9cba-deae8a3eabf6",
+            "version_create_dt": "2024-07-12T13:17:26.047168+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2023-05-22T18:54:33.077578+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "Обновление ядра ВТБ-Кафка до версии 2.13-2.8.2.\nОбновление доступно если для установки используется ядро версии 2.13-2.4.1.",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "770ed663-d5ec-4064-b5e4-32a6292fd658",
+            "graph_name": "kafka_release_upgrade_28x",
+            "graph_title": "Обновление до Kafka 2.8.2",
+            "graph_version": "",
+            "graph_version_calculated": "1.1.8",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "a975f2de-fab2-4aaa-b089-3f52581539dd",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "'1.1.1' <= build['setup_version']  < '2.0.5'",
+            "last_version": "1.0.11",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_upgrade_28x",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": null,
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": false,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Обновление ядра Kafka до версии 2.8.2",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.230646+03:00",
+            "version": "1.0.11",
+            "version_changed_by_user": "fca87c7b-3b98-4e1d-9cba-deae8a3eabf6",
+            "version_create_dt": "2024-07-10T15:10:11.930155+03:00",
+            "version_list": [
+              "1.0.5",
+              "1.0.6",
+              "1.0.7",
+              "1.0.8",
+              "1.0.9",
+              "1.0.10",
+              "1.0.11"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.config.acls",
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "e704930a-b5a6-42ce-a737-fc64f69562bb",
+            "graph_name": "kafka_release_create_acls",
+            "graph_title": "Пакетное создание ACL Kafka",
+            "graph_version": "",
+            "graph_version_calculated": "1.1.5",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "a7bc462c-f7d5-49f4-9258-8393d87fee7f",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.13",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_create_acls",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Пакетное создание ACL Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.302747+03:00",
+            "version": "1.0.13",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-04-10T18:10:13.837272+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5",
+              "1.0.6",
+              "1.0.7",
+              "1.0.8",
+              "1.0.9",
+              "1.0.10",
+              "1.0.11",
+              "1.0.12",
+              "1.0.13"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.config.transaction_acls",
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "5738b64e-57d3-4f19-a987-7d805e2f3076",
+            "graph_name": "kafka_release_create_transaction_acls",
+            "graph_title": "Cоздание ACL на транзакцию Kafka",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.43",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "378d88cc-4e27-40b5-a83d-23b9e14129eb",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.8",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_create_transaction_acls",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Пакетное создание ACL на транзакцию Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.321368+03:00",
+            "version": "1.0.8",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-06-06T18:46:05.520194+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5",
+              "1.0.6",
+              "1.0.7",
+              "1.0.8"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.config.topics",
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "c1b57d35-3d3c-4480-bebb-619e8be7d783",
+            "graph_name": "kafka_release_create_topics",
+            "graph_title": "Пакетное создание Topic-ов Kafka",
+            "graph_version": "",
+            "graph_version_calculated": "1.1.24",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "63b34f24-5d36-42c0-8d24-5d47dba74783",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.17",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_create_topics",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Пакетное создание Topic-ов Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.338737+03:00",
+            "version": "1.0.17",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-04-10T18:10:07.358290+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5",
+              "1.0.6",
+              "1.0.7",
+              "1.0.8",
+              "1.0.9",
+              "1.0.10",
+              "1.0.11",
+              "1.0.12",
+              "1.0.13",
+              "1.0.14",
+              "1.0.15",
+              "1.0.16",
+              "1.0.17"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.config.acls",
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "731c9d9e-4de0-4dbb-86c2-b4245bff1b45",
+            "graph_name": "kafka_release_delete_acls",
+            "graph_title": "Удаление ACL Kafka (DEV)",
+            "graph_version": "",
+            "graph_version_calculated": "1.1.11",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "3c007058-0b03-4c23-bf99-23834ddc7a6b",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.5",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_delete_acls",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": true,
+            "title": "Пакетное удаление ACL Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.370423+03:00",
+            "version": "1.0.5",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-04-10T18:10:02.579219+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.config.transaction_acls",
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "fa64827d-2a90-4fd5-b381-c317a1a2081c",
+            "graph_name": "kafka_release_delete_transaction_acls",
+            "graph_title": "Удаление ACL на транзакцию Kafka",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.36",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "f340e456-f57b-4801-a352-11be1c71dd4a",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.7",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_delete_transaction_acls",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": true,
+            "title": "Пакетное удаление ACL на транзакцию Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.391140+03:00",
+            "version": "1.0.7",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-06-07T09:15:16.854002+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5",
+              "1.0.6",
+              "1.0.7"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.config.topics",
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "98d3d9ae-20c1-4202-bf15-9782f454d0a2",
+            "graph_name": "kafka_release_delete_topics",
+            "graph_title": "Удаление Topic`ов Kafka",
+            "graph_version": "",
+            "graph_version_calculated": "1.1.8",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "d61bc5bb-6287-4fb5-a776-4de5b3a37337",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.7",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_delete_topics",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": true,
+            "title": "Пакетное удаление Topic-ов Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.405589+03:00",
+            "version": "1.0.7",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-04-10T18:09:52.129981+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5",
+              "1.0.6",
+              "1.0.7"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2023-05-22T18:35:33.847370+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.config.topics",
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "d8214b01-530f-4063-920f-e938618b9e6f",
+            "graph_name": "kafka_release_clean_topics",
+            "graph_title": "Пакетное Удаление данных в топиках Kafka",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.61",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "2dc46303-fc63-4be8-b5b2-9005163e9f98",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version']  >= '1.1.0'",
+            "last_version": "1.0.5",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_clean_topics",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": true,
+            "title": "Пакетное удаление данных топиков Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.423052+03:00",
+            "version": "1.0.5",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-04-10T14:01:48.928527+03:00",
+            "version_list": [
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "0177c00b-9b4f-4e24-b462-af98f6be52ae",
+            "graph_name": "kafka_release_send_config",
+            "graph_title": "Прислать конфигурацию кластера",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.54",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "ab8b3a9a-5d18-4b58-9973-570ef7c7445a",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.7",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_send_config",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": null,
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": false,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Прислать конфигурацию брокера Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.600378+03:00",
+            "version": "1.0.7",
+            "version_changed_by_user": "fca87c7b-3b98-4e1d-9cba-deae8a3eabf6",
+            "version_create_dt": "2024-07-10T15:11:15.934049+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5",
+              "1.0.6",
+              "1.0.7"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "Будет выполнена синхронизация созданных в Kafka топиков и ACL с Web-интерфейсом портала.",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "defb8fa0-09cf-4deb-b5dc-59c340ecf308",
+            "graph_name": "kafka_release_sync_info",
+            "graph_title": "Синхронизация конфигурации кластера Kafka",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.66",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "4ca872eb-2348-4726-9a1b-4e334fe6133d",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": true,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.6",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_sync_info",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": null,
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": false,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Синхронизировать конфигурацию кластера Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.796000+03:00",
+            "version": "1.0.6",
+            "version_changed_by_user": "fca87c7b-3b98-4e1d-9cba-deae8a3eabf6",
+            "version_create_dt": "2024-07-12T13:13:23.101284+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.5",
+              "1.0.6"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2023-09-11T04:35:33.524740+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.config.idempotent_acls",
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "a6c5b433-7a92-472c-83f0-03817fb02d9f",
+            "graph_name": "kafka_release_create_idempotent_acls",
+            "graph_title": "Создание идемпотентных ACL Kafka",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.55",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "b555ae12-7db6-4e2a-b8ca-1314bf8527b0",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] < '2.0.0' and build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.9",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_create_idempotent_acls_release",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Создание идемпотентных ACL Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:04.854843+03:00",
+            "version": "1.0.9",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-06-06T18:45:36.342807+03:00",
+            "version_list": [
+              "1.0.7",
+              "1.0.8",
+              "1.0.9"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2023-09-11T04:35:57.319672+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.config.idempotent_acls",
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "53e01610-b9b1-41e8-a014-ee16f60b2348",
+            "graph_name": "kafka_release_delete_idempotent_acls",
+            "graph_title": "Удаление идемпотентных ACL Kafka",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.55",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "af69808e-aef6-408d-952c-5a3ed5ef0a21",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version'] not in ['1.1.0']",
+            "last_version": "1.0.6",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_delete_idempotent_acls_release",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": true,
+            "title": "Удаление идемпотентных ACL Kafka",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:05.020627+03:00",
+            "version": "1.0.6",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-04-10T18:09:57.803725+03:00",
+            "version_list": [
+              "1.0.5",
+              "1.0.6"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": false,
+            "create_dt": "2023-09-11T04:08:05.349188+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "Изменение количества CPU/RAM на брокерах Kafka. Операция выполняется с поочерёдным перезапуском всех брокеров.\nОперация выполняется без недоступности сервиса, если текущее состояние кластера и параметры топиков позволяют обеспечить отказоустойчивость.",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "3d7ee0a1-1747-4955-a678-68ab4a85cef3",
+            "graph_name": "kafka_release_resize_cluster_vms",
+            "graph_title": "Изменить конфигурацию кластера",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.143",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "bc1a58c5-2db9-4447-9c5e-9df060d57653",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version']  >= '1.1.1'",
+            "last_version": "1.0.12",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "resize_kafka_cluster_vms",
+            "number": 51,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": false,
+            "skip_request_resource_pools": false,
+            "skip_reservation": false,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Вертикальное масштабирование",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:05.605623+03:00",
+            "version": "1.0.12",
+            "version_changed_by_user": "a43b38df-53a8-4bd1-958e-662c0eacbf92",
+            "version_create_dt": "2024-06-18T22:15:43.614060+03:00",
+            "version_list": [
+              "1.0.7",
+              "1.0.8",
+              "1.0.9",
+              "1.0.10",
+              "1.0.11",
+              "1.0.12"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": false,
+            "create_dt": "2023-09-11T05:21:19.083487+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "Увеличить размер точки монтирования нод кластера\nОперация выполняется без недоступности сервиса.",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "f1061dd3-4d39-4db3-b5b8-c0f0969ef95e",
+            "graph_name": "kafka_release_expand_mount_point",
+            "graph_title": "Добавить диски кластеру",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.31",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "d7f421cc-e010-4741-8d1e-3f470c2ec645",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "build['setup_version']  >= '1.1.1'",
+            "last_version": "1.0.10",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_expand_mount_point",
+            "number": 60,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": false,
+            "skip_request_resource_pools": false,
+            "skip_reservation": false,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Увеличить дисковое пространство",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:05.748786+03:00",
+            "version": "1.0.10",
+            "version_changed_by_user": "2bc0eb42-db16-4b8a-842a-c166fde04018",
+            "version_create_dt": "2024-06-25T16:39:48.135328+03:00",
+            "version_list": [
+              "1.0.7",
+              "1.0.8",
+              "1.0.9",
+              "1.0.10"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2024-01-31T19:05:27.796499+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "4f9f484a-b112-4201-b30a-4f83caed5d9d",
+            "graph_name": "kafka_release_ban_reading_from_topics",
+            "graph_title": "Запрет на чтение из топиков прикладным администратором",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.33",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "9a013ed0-a688-4b58-9d4c-6b977d1ad9e1",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "config['admin_read_topics'] == True and build['setup_version'] in ['1.2.2', '2.2.2']",
+            "last_version": "1.0.2",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "kafka_ban_reading_from_topics",
+            "number": 90,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": {},
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": true,
+            "skip_request_resource_pools": true,
+            "skip_reservation": true,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Запрет на чтение из топиков прикладным администраторам",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:05.864719+03:00",
+            "version": "1.0.2",
+            "version_changed_by_user": "442dea11-dec8-456d-8eaa-76cc2632cd42",
+            "version_create_dt": "2024-04-24T14:00:20.037321+03:00",
+            "version_list": [
+              "1.0.1",
+              "1.0.2"
+            ]
+          },
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": true,
+            "create_dt": "2022-03-24T18:36:35.111277+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": null,
+            "description": "",
+            "event_type_provider": [
+              {
+                "event_provider": "flink",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "kafka",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "nginx",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "redis",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "podman",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "artemis",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "haproxy",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "wildfly",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "scylladb",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "clickhouse",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "postgresql",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "postgrespro",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "kafka_develop",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "nginx_develop",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "wildfly_develop",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "tarantool",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "taas_develop",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "taas",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "artemis_develop",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "polaris_gslb",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "flink",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "kafka",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "nginx",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "redis",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "podman",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "artemis",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "haproxy",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "wildfly",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "clickhouse",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "postgresql",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "postgrespro",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "kafka_develop",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "nginx_develop",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "wildfly_develop",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "tarantool",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "taas_develop",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "taas",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "artemis_develop",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "polaris_gslb",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "debezium",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "debezium",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "grafana",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "kafka_v1",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "redis_sentinel",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "artemis_lt",
+                "event_type": "app"
+              },
+              {
+                "event_provider": "rabbitmq_develop",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "kafka_communal",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "ktaas",
+                "event_type": "cluster"
+              },
+              {
+                "event_provider": "rabbitmq",
+                "event_type": "app"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "c8df29d7-cb51-4b0f-867d-4619f9463483",
+            "graph_name": "two_layer_product_delete",
+            "graph_title": "Удаление parent-child продукта",
+            "graph_version": "",
+            "graph_version_calculated": "1.0.20",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "8f2f39e9-5877-42e0-87aa-396be2f48790",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": true,
+            "is_show_inactive": false,
+            "item_restriction": null,
+            "last_version": "1.0.30",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "delete_two_layer",
+            "number": 99,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": null,
+            "required_item_statuses": [
+              "on",
+              "off"
+            ],
+            "required_order_statuses": [
+              "success",
+              "damaged"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": false,
+            "skip_request_resource_pools": false,
+            "skip_reservation": false,
+            "skip_restriction_service": false,
+            "skip_validate_checker": false,
+            "title": "Удалить рекурсивно",
+            "type": "delete",
+            "update_dt": "2024-11-06T06:06:05.931320+03:00",
+            "version": "1.0.30",
+            "version_changed_by_user": "9a4b2c99-bd83-473c-a3dc-27542f348ac0",
+            "version_create_dt": "2024-07-18T18:59:55.574264+03:00",
+            "version_list": [
+              "1.0.0",
+              "1.0.1",
+              "1.0.2",
+              "1.0.3",
+              "1.0.4",
+              "1.0.6",
+              "1.0.7",
+              "1.0.8",
+              "1.0.9",
+              "1.0.10",
+              "1.0.11",
+              "1.0.12",
+              "1.0.13",
+              "1.0.14",
+              "1.0.15",
+              "1.0.16",
+              "1.0.17",
+              "1.0.18",
+              "1.0.19",
+              "1.0.20",
+              "1.0.21",
+              "1.0.22",
+              "1.0.23",
+              "1.0.24",
+              "1.0.25",
+              "1.0.26",
+              "1.0.27",
+              "1.0.28",
+              "1.0.29",
+              "1.0.30"
+            ]
+          }
+        ],
+        "created_row_dt": "2024-08-23T12:41:17.961075",
+        "data": {
+          "build": {
+            "cluster_os_family": "astra",
+            "setup_version": "1.2.2"
+          },
+          "children": [
+            "f0fe7901-418a-4f9e-b5a1-2361b2a3ea87"
+          ],
+          "config": {
+            "acls": [
+              {
+                "client_cn": "2208-kafka-st-client-pdou",
+                "client_role": "consumer",
+                "topic_names": [
+                  "tslg-app-logs"
+                ],
+                "topic_type": "by_name"
+              },
+              {
+                "client_cn": "2208-kafka-st-client-pdou",
+                "client_role": "producer",
+                "topic_names": [
+                  "tslg-app-logs"
+                ],
+                "topic_type": "by_name"
+              },
+              {
+                "client_cn": "2208-kafka-st-client-tsau",
+                "client_role": "consumer",
+                "topic_names": [
+                  "audit",
+                  "initial-audit"
+                ],
+                "topic_type": "by_name"
+              },
+              {
+                "client_cn": "2208-kafka-st-client-tsau",
+                "client_role": "producer",
+                "topic_names": [
+                  "audit",
+                  "initial-audit"
+                ],
+                "topic_type": "by_name"
+              },
+              {
+                "client_cn": "2208-kafka-st-client-tstr",
+                "client_role": "consumer",
+                "topic_names": [
+                  "TSTR_CLIENT_PDOU"
+                ],
+                "topic_type": "by_name"
+              },
+              {
+                "client_cn": "2208-kafka-st-client-tstr",
+                "client_role": "producer",
+                "topic_names": [
+                  "TSTR_CLIENT_PDOU"
+                ],
+                "topic_type": "by_name"
+              },
+              {
+                "client_cn": "04.03.011.02-d5-kafka-pdou",
+                "client_role": "consumer",
+                "topic_name": "ocba",
+                "topic_type": "by_mask"
+              },
+              {
+                "client_cn": "04.03.011.02-d5-kafka-pdou",
+                "client_role": "producer",
+                "topic_name": "ocba",
+                "topic_type": "by_mask"
+              }
+            ],
+            "admin_read_topics": true,
+            "certificate_cn": "2208-kafka-d5-cluster-kafka-aprod-7396",
+            "certificate_expiration": "2025-08-23T12:28:38+00:00",
+            "certificate_valid_from": "2024-08-23T12:28:38+00:00",
+            "cluster_name": "kafka-aprod-7396",
+            "connection_url": "d5pdou-kfc002lk.corp.dev.vtb:9092",
+            "dc_structure": {
+              "kafka_DC1": [
+                "d5pdou-kfc002lk.corp.dev.vtb"
+              ],
+              "kafka_DC2": [],
+              "zookeeper_DC1": [
+                "d5pdou-kfc002lk.corp.dev.vtb"
+              ],
+              "zookeeper_DC2": [],
+              "zookeeper_DCQ": []
+            },
+            "grafana_dashboard_url": "https://oko.vtb.ru/d/akjf34h6asd-oko-kafka-dev/kafka-dashboard-dev?var-clusters=2208-kafka-d5-cluster-kafka-aprod-7396\n",
+            "group_acls": [
+              {
+                "host": "*",
+                "name": "*",
+                "operation": "READ",
+                "patternType": "LITERAL",
+                "permissionType": "ALLOW",
+                "principal": "*",
+                "resourceType": "GROUP"
+              }
+            ],
+            "idempotent_acls": [],
+            "kafka_client_url": "https://storage.cloud.vtb.ru/product/kafka_client_2.4.1.zip",
+            "kafka_log_retention_minutes": 30,
+            "kafka_version": "2.13-2.4.1",
+            "quotas": [],
+            "topics": [
+              {
+                "cleanup_policy": "delete",
+                "compression_type": "default",
+                "min_insync_replicas": "1",
+                "partitions_number": "1",
+                "replication_factor": "1",
+                "retention_bytes": "default",
+                "retention_ms": "1800000",
+                "segment_bytes": "134217728",
+                "topic_name": "initial-audit"
+              },
+              {
+                "cleanup_policy": "delete",
+                "compression_type": "default",
+                "min_insync_replicas": "1",
+                "partitions_number": "1",
+                "replication_factor": "1",
+                "retention_bytes": "default",
+                "retention_ms": "1800000",
+                "segment_bytes": "1073741824",
+                "topic_name": "ocba-upload-pools-pdou"
+              },
+              {
+                "cleanup_policy": "delete",
+                "compression_type": "default",
+                "min_insync_replicas": "1",
+                "partitions_number": "1",
+                "replication_factor": "1",
+                "retention_bytes": "default",
+                "retention_ms": "1800000",
+                "segment_bytes": "1073741824",
+                "topic_name": "ocba-open-registers"
+              },
+              {
+                "cleanup_policy": "delete",
+                "compression_type": "default",
+                "min_insync_replicas": "1",
+                "partitions_number": "1",
+                "replication_factor": "1",
+                "retention_bytes": "default",
+                "retention_ms": "1800000",
+                "segment_bytes": "134217728",
+                "topic_name": "audit"
+              },
+              {
+                "cleanup_policy": "delete",
+                "compression_type": "default",
+                "min_insync_replicas": "1",
+                "partitions_number": "1",
+                "replication_factor": "1",
+                "retention_bytes": "default",
+                "retention_ms": "1800000",
+                "segment_bytes": "134217728",
+                "topic_name": "TSTR_CLIENT_PDOU"
+              },
+              {
+                "cleanup_policy": "delete",
+                "compression_type": "default",
+                "min_insync_replicas": "1",
+                "partitions_number": "4",
+                "replication_factor": "1",
+                "retention_bytes": "default",
+                "retention_ms": "1800000",
+                "segment_bytes": "134217728",
+                "topic_name": "tslg-app-logs"
+              },
+              {
+                "cleanup_policy": "delete",
+                "compression_type": "default",
+                "min_insync_replicas": "1",
+                "partitions_number": "1",
+                "replication_factor": "1",
+                "retention_bytes": "default",
+                "retention_ms": "1800000",
+                "segment_bytes": "1073741824",
+                "topic_name": "ocba-close-registers"
+              }
+            ],
+            "transaction_acls": [],
+            "vtb_kafka_version": "3.241.3",
+            "zookeeper_version": "3.6.3"
+          },
+          "ext_relations": {
+            "primary": [],
+            "secondary": []
+          },
+          "provider": "kafka",
+          "state": "on"
+        },
+        "external_provider_id": "",
+        "graph_id": "8975c85e-3f90-482f-a765-86d06013db27",
+        "item_id": "6f24955c-41f1-5b8d-be20-68d8492554e7",
+        "order_id": "eec615c7-3dc6-45be-ac8c-141e61324753",
+        "parent": null,
+        "provider": "kafka",
+        "type": "cluster",
+        "update_dt": "2024-10-15T16:40:40.200470"
+      },
+      {
+        "action_id": "4508f813-c3ae-4795-b7e5-d6510d47f559",
+        "actions": [
+          {
+            "active": true,
+            "additional_graphs": [],
+            "allowed_developers": [],
+            "allowed_groups": [],
+            "author_json": {},
+            "auto_removing_if_failed": false,
+            "available_with_cost_reduction": false,
+            "available_without_money": false,
+            "create_dt": "2022-08-04T19:00:28.367906+03:00",
+            "current_version": "",
+            "data_config_fields": [],
+            "data_config_key": null,
+            "data_config_path": "data.acls",
+            "description": "Добавить группу доступа",
+            "event_type_provider": [
+              {
+                "event_provider": "vcloud",
+                "event_type": "vm"
+              },
+              {
+                "event_provider": "nutanix",
+                "event_type": "vm"
+              },
+              {
+                "event_provider": "vsphere",
+                "event_type": "vm"
+              },
+              {
+                "event_provider": "openstack",
+                "event_type": "vm"
+              }
+            ],
+            "extra_data": {},
+            "graph_id": "c1d6e0b1-fa32-453f-8c40-3c4d9d8a4415",
+            "graph_name": "vm_acls_add_group_with_parent",
+            "graph_title": "Добавить группу",
+            "graph_version": "",
+            "graph_version_calculated": "1.2.3",
+            "icon_store_id": null,
+            "icon_url": "",
+            "id": "218d59f1-08f2-4e0e-aa7b-4435e6da1c08",
+            "ignore_restriction_service": false,
+            "is_delayable": false,
+            "is_for_items": true,
+            "is_only_for_api": false,
+            "is_restricted": false,
+            "is_safe": false,
+            "is_show_inactive": false,
+            "item_restriction": "'parent' in locals() and parent",
+            "last_version": "1.0.36",
+            "location_restriction": "",
+            "multiple": false,
+            "name": "vm_acls_add_with_parent",
+            "number": 50,
+            "object_info": "",
+            "priority": 0,
+            "redirect_info": null,
+            "required_item_statuses": [
+              "on"
+            ],
+            "required_order_statuses": [
+              "success"
+            ],
+            "restricted_developers": [],
+            "restricted_groups": [],
+            "skip_item_change": false,
+            "skip_item_with_secondary_rel": false,
+            "skip_on_prebilling": false,
+            "skip_request_resource_pools": false,
+            "skip_reservation": false,
+            "skip_restriction_service": false,
+            "skip_validate_checker": true,
+            "title": "Добавить группу доступа",
+            "type": "",
+            "update_dt": "2024-11-06T06:06:03.379187+03:00",
+            "version": "1.0.36",
+            "version_changed_by_user": "e37be25c-6210-4887-b8e0-1efe71d04032",
+            "version_create_dt": "2024-08-13T18:55:59.746493+03:00",
+            "version_list": [
+              "1.0.21",
+              "1.0.22",
+              "1.0.23",
+              "1.0.24",
+              "1.0.25",
+              "1.0.26",
+              "1.0.27",
+              "1.0.28",
+              "1.0.29",
+              "1.0.30",
+              "1.0.31",
+              "1.0.32",
+              "1.0.33",
+              "1.0.34",
+              "1.0.35",
+              "1.0.36"
+            ]
+          }
+        ],
+        "created_row_dt": "2024-08-23T12:29:10.939709",
+        "data": {
+          "acls": [
+            {
+              "members": [
+                "cloud-pdou-developers",
+                "cloud-pdou-test-dev"
+              ],
+              "role": "kafka_admin"
+            }
+          ],
+          "children": [],
+          "config": {
+            "ad_integration": true,
+            "boot_disk": {
+              "path": "/dev/sda",
+              "purpose": "boot",
+              "size": 50,
+              "uuid": "ee6473e7-861d-46f7-94e9-f5a6eb23c46a"
+            },
+            "default_nic": {
+              "address_assignment": "DHCP",
+              "addresses": [
+                {
+                  "address": "10.243.79.226",
+                  "type": "ipv4"
+                }
+              ],
+              "mac_address": "02:49:86:79:74:ae",
+              "mtu": 1500,
+              "name": "eth0",
+              "net_segment": "b2b-hce-ts-dev-srv-app",
+              "subnet": {
+                "name": "B2B-HCE-TS-DEV-SRV-APP@ALL",
+                "uuid": "d6490259-f98c-43ba-b5d9-630b4eed47e4"
+              },
+              "uuid": "49867974-ae2a-4289-a216-af989e694919"
+            },
+            "default_v4_address": "10.243.79.226",
+            "default_v6_address": "None",
+            "domain": "corp.dev.vtb",
+            "environment": "DEV",
+            "environment_type": "DEV",
+            "extra_disks": [
+              {
+                "path": "/dev/sdb",
+                "purpose": "general",
+                "size": 150,
+                "uuid": "6870cb61-ce93-4da0-b95c-10eb5b070ba6"
+              }
+            ],
+            "extra_mounts": [
+              {
+                "device": "/dev/mapper/vg_02-lv_app",
+                "fstype": "xfs",
+                "mount": "/app",
+                "options": "rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota",
+                "size": 150.0
+              }
+            ],
+            "extra_nics": [],
+            "flavor": {
+              "cpus": 4,
+              "memory": 8,
+              "name": "c4m8",
+              "uuid": "1498c9c9-5f20-4c1e-8d53-683bb8c2c205"
+            },
+            "hostname": "d5pdou-kfc002lk",
+            "image": {
+              "name": "tpl_linux_astra_1.7_x86_64_en",
+              "os": {
+                "architecture": "x86_64",
+                "distribution": "astra",
+                "localization": "en",
+                "type": "linux",
+                "vendor": "rusbitech",
+                "version": "1.7"
+              },
+              "size": 30,
+              "uuid": "a6b24e32-18a9-4fa4-a22f-d5fbd406855d"
+            },
+            "node_roles": [
+              "kafka",
+              "zookeeper"
+            ],
+            "on_support": true,
+            "os_version": "1.7_x86-64",
+            "resource_pool": {
+              "data_center": {
+                "code": "t",
+                "name": "TS Cloud",
+                "site": "TS Cloud"
+              },
+              "domain": "vtb-internal",
+              "endpoint": "https://10.243.66.3:5000",
+              "hardware_group": "vtb-internal",
+              "name": "d3p1k01",
+              "platform": "openstack",
+              "quota_label": "DEV HYBRID(T1) OPENSTACK",
+              "resource_management": "private",
+              "tenant_prefix": "d3p1k01",
+              "ui_link": "https://10.243.66.3",
+              "uuid": "f0001e2f-0e28-5032-948e-06f94afd94f1"
+            },
+            "storage_profile": "HDD",
+            "swap_size": 1,
+            "tenant": {
+              "name": "d3p1k01-d5pdou",
+              "uuid": "73ccbdb32c0649db8048279f328bd360"
+            }
+          },
+          "ext_relations": {
+            "primary": [],
+            "secondary": []
+          },
+          "parent": "6f24955c-41f1-5b8d-be20-68d8492554e7",
+          "parent_item": {
+            "data": {
+              "build": {
+                "cluster_os_family": "astra",
+                "setup_version": "1.2.2"
+              },
+              "children": [
+                "f0fe7901-418a-4f9e-b5a1-2361b2a3ea87"
+              ],
+              "config": {
+                "acls": [
+                  {
+                    "client_cn": "2208-kafka-st-client-pdou",
+                    "client_role": "consumer",
+                    "topic_names": [
+                      "tslg-app-logs"
+                    ],
+                    "topic_type": "by_name"
+                  },
+                  {
+                    "client_cn": "2208-kafka-st-client-pdou",
+                    "client_role": "producer",
+                    "topic_names": [
+                      "tslg-app-logs"
+                    ],
+                    "topic_type": "by_name"
+                  },
+                  {
+                    "client_cn": "2208-kafka-st-client-tsau",
+                    "client_role": "consumer",
+                    "topic_names": [
+                      "audit",
+                      "initial-audit"
+                    ],
+                    "topic_type": "by_name"
+                  },
+                  {
+                    "client_cn": "2208-kafka-st-client-tsau",
+                    "client_role": "producer",
+                    "topic_names": [
+                      "audit",
+                      "initial-audit"
+                    ],
+                    "topic_type": "by_name"
+                  },
+                  {
+                    "client_cn": "2208-kafka-st-client-tstr",
+                    "client_role": "consumer",
+                    "topic_names": [
+                      "TSTR_CLIENT_PDOU"
+                    ],
+                    "topic_type": "by_name"
+                  },
+                  {
+                    "client_cn": "2208-kafka-st-client-tstr",
+                    "client_role": "producer",
+                    "topic_names": [
+                      "TSTR_CLIENT_PDOU"
+                    ],
+                    "topic_type": "by_name"
+                  },
+                  {
+                    "client_cn": "04.03.011.02-d5-kafka-pdou",
+                    "client_role": "consumer",
+                    "topic_name": "ocba",
+                    "topic_type": "by_mask"
+                  },
+                  {
+                    "client_cn": "04.03.011.02-d5-kafka-pdou",
+                    "client_role": "producer",
+                    "topic_name": "ocba",
+                    "topic_type": "by_mask"
+                  }
+                ],
+                "admin_read_topics": true,
+                "certificate_cn": "2208-kafka-d5-cluster-kafka-aprod-7396",
+                "certificate_expiration": "2025-08-23T12:28:38+00:00",
+                "certificate_valid_from": "2024-08-23T12:28:38+00:00",
+                "cluster_name": "kafka-aprod-7396",
+                "connection_url": "d5pdou-kfc002lk.corp.dev.vtb:9092",
+                "dc_structure": {
+                  "kafka_DC1": [
+                    "d5pdou-kfc002lk.corp.dev.vtb"
+                  ],
+                  "kafka_DC2": [],
+                  "zookeeper_DC1": [
+                    "d5pdou-kfc002lk.corp.dev.vtb"
+                  ],
+                  "zookeeper_DC2": [],
+                  "zookeeper_DCQ": []
+                },
+                "grafana_dashboard_url": "https://oko.vtb.ru/d/akjf34h6asd-oko-kafka-dev/kafka-dashboard-dev?var-clusters=2208-kafka-d5-cluster-kafka-aprod-7396\n",
+                "group_acls": [
+                  {
+                    "host": "*",
+                    "name": "*",
+                    "operation": "READ",
+                    "patternType": "LITERAL",
+                    "permissionType": "ALLOW",
+                    "principal": "*",
+                    "resourceType": "GROUP"
+                  }
+                ],
+                "idempotent_acls": [],
+                "kafka_client_url": "https://storage.cloud.vtb.ru/product/kafka_client_2.4.1.zip",
+                "kafka_log_retention_minutes": 30,
+                "kafka_version": "2.13-2.4.1",
+                "quotas": [],
+                "topics": [
+                  {
+                    "cleanup_policy": "delete",
+                    "compression_type": "default",
+                    "min_insync_replicas": "1",
+                    "partitions_number": "1",
+                    "replication_factor": "1",
+                    "retention_bytes": "default",
+                    "retention_ms": "1800000",
+                    "segment_bytes": "134217728",
+                    "topic_name": "initial-audit"
+                  },
+                  {
+                    "cleanup_policy": "delete",
+                    "compression_type": "default",
+                    "min_insync_replicas": "1",
+                    "partitions_number": "1",
+                    "replication_factor": "1",
+                    "retention_bytes": "default",
+                    "retention_ms": "1800000",
+                    "segment_bytes": "1073741824",
+                    "topic_name": "ocba-upload-pools-pdou"
+                  },
+                  {
+                    "cleanup_policy": "delete",
+                    "compression_type": "default",
+                    "min_insync_replicas": "1",
+                    "partitions_number": "1",
+                    "replication_factor": "1",
+                    "retention_bytes": "default",
+                    "retention_ms": "1800000",
+                    "segment_bytes": "1073741824",
+                    "topic_name": "ocba-open-registers"
+                  },
+                  {
+                    "cleanup_policy": "delete",
+                    "compression_type": "default",
+                    "min_insync_replicas": "1",
+                    "partitions_number": "1",
+                    "replication_factor": "1",
+                    "retention_bytes": "default",
+                    "retention_ms": "1800000",
+                    "segment_bytes": "134217728",
+                    "topic_name": "audit"
+                  },
+                  {
+                    "cleanup_policy": "delete",
+                    "compression_type": "default",
+                    "min_insync_replicas": "1",
+                    "partitions_number": "1",
+                    "replication_factor": "1",
+                    "retention_bytes": "default",
+                    "retention_ms": "1800000",
+                    "segment_bytes": "134217728",
+                    "topic_name": "TSTR_CLIENT_PDOU"
+                  },
+                  {
+                    "cleanup_policy": "delete",
+                    "compression_type": "default",
+                    "min_insync_replicas": "1",
+                    "partitions_number": "4",
+                    "replication_factor": "1",
+                    "retention_bytes": "default",
+                    "retention_ms": "1800000",
+                    "segment_bytes": "134217728",
+                    "topic_name": "tslg-app-logs"
+                  },
+                  {
+                    "cleanup_policy": "delete",
+                    "compression_type": "default",
+                    "min_insync_replicas": "1",
+                    "partitions_number": "1",
+                    "replication_factor": "1",
+                    "retention_bytes": "default",
+                    "retention_ms": "1800000",
+                    "segment_bytes": "1073741824",
+                    "topic_name": "ocba-close-registers"
+                  }
+                ],
+                "transaction_acls": [],
+                "vtb_kafka_version": "3.241.3",
+                "zookeeper_version": "3.6.3"
+              },
+              "ext_relations": {
+                "primary": [],
+                "secondary": []
+              },
+              "provider": "kafka",
+              "state": "on"
+            },
+            "item_id": "6f24955c-41f1-5b8d-be20-68d8492554e7",
+            "type": "cluster"
+          },
+          "provider": "openstack",
+          "state": "on",
+          "tm_pool": "openstack"
+        },
+        "external_provider_id": "",
+        "graph_id": "8975c85e-3f90-482f-a765-86d06013db27",
+        "item_id": "f0fe7901-418a-4f9e-b5a1-2361b2a3ea87",
+        "order_id": "eec615c7-3dc6-45be-ac8c-141e61324753",
+        "parent": "6f24955c-41f1-5b8d-be20-68d8492554e7",
+        "provider": "openstack",
+        "type": "vm",
+        "update_dt": "2024-09-12T16:27:15.372141"
+      }
+    ],
+    "data_center": {
+      "code": "t",
+      "description": "(Ресурсы для гибридного облака)",
+      "id": "e3c54a48-7f6d-4d7d-86f2-dcd8619e7886",
+      "is_deleted": false,
+      "label": "TS Cloud (Ресурсы для гибридного облака)",
+      "name": "TS Cloud",
+      "restriction_reason": null,
+      "site": "TS Cloud",
+      "status": null,
+      "weight": 120
+    },
+    "data_centers": [
+      {
+        "code": "t",
+        "description": "(Ресурсы для гибридного облака)",
+        "id": "e3c54a48-7f6d-4d7d-86f2-dcd8619e7886",
+        "is_deleted": false,
+        "label": "TS Cloud (Ресурсы для гибридного облака)",
+        "name": "TS Cloud",
+        "restriction_reason": null,
+        "site": "TS Cloud",
+        "status": null,
+        "weight": 120
+      }
+    ],
+    "deletable": true,
+    "due_date": null,
+    "environment": "DEV",
+    "environment_type": "DEV",
+    "financial_source": {
+      "code": "2184",
+      "name": "1095 Импортозамещение инфраструктурных сервисов",
+      "source_type": "project",
+      "start_date": "2024-08-23T15:28:00+03:00"
+    },
+    "id": "eec615c7-3dc6-45be-ac8c-141e61324753",
+    "label": "Apache Kafka Cluster Astra ST",
+    "net_segment": {
+      "code": "b2b-hce-ts-dev-srv-app",
+      "data_center_ids": [
+        "e3c54a48-7f6d-4d7d-86f2-dcd8619e7886"
+      ],
+      "domain_ids": [
+        "cb8507c5-30af-4fcf-98b4-811eab212e15"
+      ],
+      "id": "a43e44cb-a14c-4871-b91a-713e87e71727",
+      "is_deleted": false,
+      "label": "B2B-HCE-TS-DEV-SRV-APP",
+      "project_environment_ids": [
+        "ce11798a-e5f6-4e54-9582-78770f15b52a",
+        "057a6be5-9677-4433-b0fd-3fe2f8b38aca"
+      ],
+      "restriction_reason": null,
+      "status": null,
+      "weight": 8
+    },
+    "power_status": [
+      {
+        "item_id": "f0fe7901-418a-4f9e-b5a1-2361b2a3ea87",
+        "status": "on"
+      }
+    ],
+    "product_data": [
+      {
+        "hostname": "d5pdou-kfc002lk",
+        "id": "f0fe7901-418a-4f9e-b5a1-2361b2a3ea87",
+        "ip": "10.243.79.226",
+        "parent_id": "6f24955c-41f1-5b8d-be20-68d8492554e7",
+        "type": "vm"
+      }
+    ],
+    "product_id": "eaf65228-beb9-4814-902f-d862face1531",
+    "product_name": "kafka_aprod",
+    "project_name": "proj-hcwkm7wuxu",
+    "status": "success",
+    "updated_at": "2024-11-06T21:23:52+03:00"
+  },
+  "msg": "OK (65509 bytes)",
+  "redirected": false,
+  "status": 200,
+  "strict_transport_security": "max-age=15724800; includeSubDomains",
+  "url": "https://prod-kong-service.cloud.vtb.ru/order-service/api/v1/projects/proj-hcwkm7wuxu/orders/eec615c7-3dc6-45be-ac8c-141e61324753",
+  "vary": "Origin, Origin",
+  "via": "kong/3.0.2",
+  "x_kong_proxy_latency": "95",
+  "x_kong_upstream_latency": "5371",
+  "x_request_id": "ba5c33718be458177e0b3c033965b196",
+  "x_runtime": "5.368644"
+}

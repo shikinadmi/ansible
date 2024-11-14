@@ -1,0 +1,16 @@
+{
+    "item_id": "{{ kafka_cloud_item_id }}",
+    "order": {
+        "attrs": {
+            "acls": [
+{% for kafka_transaction_acl in kafka_transaction_acl_list %}
+                {
+                    "client_cn": "{{ kafka_transaction_acl.client_cn }}",
+                    "transaction_id_type": "{{ kafka_transaction_acl.transaction_id_type }}",
+                    "transaction_id": "{{ kafka_transaction_acl.transaction_id }}"
+                }{% if not loop.last %},{% endif %}
+{% endfor %}
+            ]
+        }
+    }
+}

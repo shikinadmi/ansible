@@ -1,0 +1,104 @@
+---
+
+#kafka_cloud_sa_id: "{{CR_KAFKA_CLOUD_SA_ID}}" # ID сервисного аккаунта
+#kafka_cloud_sa_key: "{{CR_KAFKA_CLOUD_SA_KEY}}" # Секретный ключ сервисного аккаунта
+kafka_cloud_project_id: 'proj-hcwkm7wuxu' # Идентификатор проекта в облаке - PDOU dev
+kafka_cloud_order_id: '0e625e88-9ce4-4dac-85a1-aff7bc39171c' # ST kafka в PDOU # Идентификатор заказа в облаке
+kafka_cloud_item_id: '6138d263-e4e2-5c3a-aca5-f2a69066c063' # Debezium kafka
+
+
+# Файл настроек по умолчанию для kafka-iac
+kafka_topics_config_enabled: True  # Включить конфигурацию топик Kafka
+kafka_acl_config_enabled: True  # Включить конфигурацию ACL Kafka
+kafka_transaction_acl_config_enabled: False  # Включить конфигурацию транзакционных ACL Kafka
+kafka_all_topics_list: "{{ kafka_topics|json_query('[].name') }}"  # Список всех топик Kafka
+cloud_topics_diff: []
+
+# Настройки API облака Kafka
+kafka_cloud_api_url: "https://prod-kong-service.cloud.vtb.ru/order-service/api/v1"  # URL API облака Kafka
+kafka_cloud_order_info: "{{ kafka_cloud_api_url }}/projects/{{ kafka_cloud_project_id }}/orders/{{ kafka_cloud_order_id }}"  # Информация о заказе в облаке Kafka
+kafka_cloud_token_request_url: "https://auth.cloud.vtb.ru/auth/realms/Portal/protocol/openid-connect/token"  # URL запроса токена для облака Kafka
+kafka_cloud_token_request_urlencode_body: {
+  "client_id": "{{ kafka_cloud_sa_id }}",
+  "client_secret": "{{ kafka_cloud_sa_key }}",
+  "grant_type": "client_credentials",
+  "scope": "openid"
+}
+
+# Настройки действий в облаке Kafka
+kafka_cloud_action_url: "{{ kafka_cloud_api_url }}/projects/{{ kafka_cloud_project_id }}/orders/{{ kafka_cloud_order_id }}/actions"  # URL действий в облаке Kafka
+kafka_cloud_topic_create_url: "{{ kafka_cloud_action_url }}/kafka_create_topics"  # URL создания топик в облаке Kafka
+kafka_cloud_acl_create_url: "{{ kafka_cloud_action_url }}/kafka_create_acls"  # URL создания ACL в облаке Kafka
+kafka_cloud_transaction_acl_create_url: "{{ kafka_cloud_action_url }}/kafka_create_transaction_acls"  # URL создания транзакционных ACL в облаке Kafka
+kafka_cloud_action_headers: {
+  "Accept": "application/json, text/plain, */*",
+  "Authorization": "Bearer {{ kafka_cloud_access_token }}",
+  "Content-Type": "application/json;charset=UTF-8"
+}
+
+# Настройки истории действий в облаке Kafka
+kafka_cloud_history_action_url: "{{ kafka_cloud_action_url }}/history/{{ kafka_cloud_action_id }}"  # URL истории действий в облаке Kafka
+
+# Списки топик и ACL для создания в облаке Kafka
+kafka_cloud_topics_to_create: []  # Список топик для создания в облаке Kafka
+kafka_cloud_acls_to_create: []  # Список ACL для создания в облаке Kafka
+
+
+kafka_topics:
+  - {name: "adsd.clients.event.reserve-passive-account-admin-order-created.v1", partition: 1, retention: 1800000, cleanup_policy: "delete", cleanup_limit_by: "time"}
+  - {name: "adsd.iabs.event.passive-personal-account-operating-day-closed.v1", partition: 1, retention: 1800000, cleanup_policy: "delete", cleanup_limit_by: "time"}
+
+# kafka_topics в yaml формате
+kafka_topics_yaml:
+  - name: "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+    partition: 1
+    retention: 1800000
+    cleanup_policy: "delete"
+    cleanup_limit_by: "time"
+  - name: "adsd.iabs.event.passive-personal-account-operating-day-closed.v1"
+    partition: 1
+    retention: 1800000
+    cleanup_policy: "delete"
+    cleanup_limit_by: "time"
+
+
+kafka_acl_topic_list:
+  - {
+    client_cn: "APD05.01-730-kafka-rr-client-default",
+    topic_type: "by_name",
+    client_role: "producer",
+    topic_names:
+      [
+        "adsd.iabs.event.passive-personal-account-operating-day-closed.v1",
+        "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+      ]
+  }
+  - {
+    client_cn: "APD05.01-730-kafka-rr-client-default",
+    topic_type: "by_name",
+    client_role: "consumer",
+    topic_names:
+      [
+        "adsd.iabs.event.passive-personal-account-operating-day-closed.v1",
+        "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+      ]
+  }
+
+# kafka_acl_topic_list в yaml формате
+kafka_acl_topic_list_yaml:
+  - client_cn: "APD05.01-730-kafka-rr-client-default"
+    topic_type: "by_name"
+    client_role: "producer"
+    topic_names:
+      - "adsd.iabs.event.passive-personal-account-operating-day-closed.v1"
+      - "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+  - client_cn: "APD05.01-730-kafka-rr-client-default"
+    topic_type: "by_name"
+    client_role: "consumer"
+    topic_names:
+      - "adsd.iabs.event.passive-personal-account-operating-day-closed.v1"
+      - "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+
+#kafka_acl_topic_list: []
+#kafka_transaction_acl_list: []
+...
