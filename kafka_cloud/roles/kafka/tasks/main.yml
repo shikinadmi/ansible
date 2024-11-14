@@ -231,27 +231,27 @@
       when: kafka_cloud_acls_to_create|length > 0
   when: kafka_acl_config_enabled and kafka_acl_topic_list_yaml is defined
 
-## Создание транзакционной ACL через Cloud API
-#- name: Создать транзакционную ACL через Cloud API
-#  block:
-#    # Создание транзакционной ACL в облаке
-#    - name: Создать транзакционную ACL в облаке
-#      uri:
-#        url: "{{ kafka_cloud_transaction_acl_create_url }}"
-#        method: PATCH
-#        headers: "{{ kafka_cloud_action_headers }}"
-#        body: "{{ lookup('template', 'templates/kafka_cloud/kafka-transaction-acl-add.j2') }}"
-#        body_format: json
-#        validate_certs: no
-#      register: kafka_cloud_transaction_acl_create_response
-#
-#    # Установка факта action_id
-#    - name: Установить факт action_id
-#      set_fact:
-#        kafka_cloud_action_id: "{{ kafka_cloud_transaction_acl_create_response.json.action_id }}"
-#
-#    # Проверка статуса действия
-#    - name: Проверить статус действия
-#      include_tasks: kafka-cloud/check-action-status.yml
-#  when: kafka_transaction_acl_config_enabled and kafka_transaction_acl_list is defined
+# Создание транзакционной ACL через Cloud API
+- name: Создать транзакционную ACL через Cloud API
+  block:
+    # Создание транзакционной ACL в облаке
+    - name: Создать транзакционную ACL в облаке
+      uri:
+        url: "{{ kafka_cloud_transaction_acl_create_url }}"
+        method: PATCH
+        headers: "{{ kafka_cloud_action_headers }}"
+        body: "{{ lookup('template', 'templates/kafka_cloud/kafka-transaction-acl-add.j2') }}"
+        body_format: json
+        validate_certs: no
+      register: kafka_cloud_transaction_acl_create_response
+
+    # Установка факта action_id
+    - name: Установить факт action_id
+      set_fact:
+        kafka_cloud_action_id: "{{ kafka_cloud_transaction_acl_create_response.json.action_id }}"
+
+    # Проверка статуса действия
+    - name: Проверить статус действия
+      include_tasks: kafka-cloud/check-action-status.yml
+  when: kafka_transaction_acl_config_enabled and kafka_transaction_acl_list is defined
 ...
