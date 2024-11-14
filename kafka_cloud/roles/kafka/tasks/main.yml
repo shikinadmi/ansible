@@ -1,5 +1,8 @@
 ---
 
+# Описание роли и назначение
+# Данные щаги используются для создания и удаления топиков и ACL в облаке VTB Cloud
+
 # Конфигурация Kafka через Cloud API
 # Данные щаги используются для создания и удаления топиков
 # В качестве параметров используются:
@@ -42,7 +45,7 @@
         body: "{{ kafka_cloud_token_request_urlencode_body }}"
 #        follow_redirects: all
 #        return_content: true
-#        status_code: 200
+        status_code: 200
         url: "{{ kafka_cloud_token_request_url }}"
         method: POST
         validate_certs: no
