@@ -57,6 +57,7 @@
       set_fact:
         kafka_cloud_access_token: "{{ token_response.json.access_token }}"
       check_mode: no
+  no_log: True
 
 # Создание топиков через Cloud API
 - name: Создание топиков через Cloud API с проверкой разницы между конфигурацией и списком топиков

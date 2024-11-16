@@ -34,7 +34,7 @@ pipeline {
                             sh '''#!/bin/bash
                             source ${ansible4100}/bin/activate ${ansible4100} && \
                             ansible --version && \
-                            ansible-playbook playbook.yml -i hosts.yml -vvv \
+                            ansible-playbook playbook.yml -i hosts.yml \
                             -e KAFKA_STAND="dev" \
                             -e CR_KAFKA_CLOUD_SA_ID="$CR_KAFKA_CLOUD_SA_ID" \
                             -e CR_KAFKA_CLOUD_SA_KEY="$CR_KAFKA_CLOUD_SA_KEY"
