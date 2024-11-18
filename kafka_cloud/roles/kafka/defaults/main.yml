@@ -44,9 +44,9 @@ kafka_cloud_topics_to_create: []  # Список топик для создан�
 kafka_cloud_acls_to_create: []  # Список ACL для создания в облаке Kafka
 
 
-kafka_topics:
-  - {name: "adsd.clients.event.reserve-passive-account-admin-order-created.v1", partition: 1, retention: 1800000, cleanup_policy: "delete", cleanup_limit_by: "time"}
-  - {name: "adsd.iabs.event.passive-personal-account-operating-day-closed.v1", partition: 1, retention: 1800000, cleanup_policy: "delete", cleanup_limit_by: "time"}
+#kafka_topics:
+#  - {name: "adsd.clients.event.reserve-passive-account-admin-order-created.v1", partition: 1, retention: 1800000, cleanup_policy: "delete", cleanup_limit_by: "time"}
+#  - {name: "adsd.iabs.event.passive-personal-account-operating-day-closed.v1", partition: 1, retention: 1800000, cleanup_policy: "delete", cleanup_limit_by: "time"}
 
 # kafka_topics в yaml формате
 kafka_topics_yaml:
@@ -62,27 +62,27 @@ kafka_topics_yaml:
     cleanup_limit_by: "time"
 
 
-kafka_acl_topic_list:
-  - {
-    client_cn: "APD05.01-730-kafka-rr-client-default",
-    topic_type: "by_name",
-    client_role: "producer",
-    topic_names:
-      [
-        "adsd.iabs.event.passive-personal-account-operating-day-closed.v1",
-        "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
-      ]
-  }
-  - {
-    client_cn: "APD05.01-730-kafka-rr-client-default",
-    topic_type: "by_name",
-    client_role: "consumer",
-    topic_names:
-      [
-        "adsd.iabs.event.passive-personal-account-operating-day-closed.v1",
-        "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
-      ]
-  }
+#kafka_acl_topic_list:
+#  - {
+#    client_cn: "APD05.01-730-kafka-rr-client-default",
+#    topic_type: "by_name",
+#    client_role: "producer",
+#    topic_names:
+#      [
+#        "adsd.iabs.event.passive-personal-account-operating-day-closed.v1",
+#        "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+#      ]
+#  }
+#  - {
+#    client_cn: "APD05.01-730-kafka-rr-client-default",
+#    topic_type: "by_name",
+#    client_role: "consumer",
+#    topic_names:
+#      [
+#        "adsd.iabs.event.passive-personal-account-operating-day-closed.v1",
+#        "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+#      ]
+#  }
 
 # kafka_acl_topic_list в yaml формате
 kafka_acl_topic_list_yaml:

@@ -255,4 +255,190 @@
     - name: Проверить статус действия
       include_tasks: kafka-cloud/check-action-status.yml
   when: kafka_transaction_acl_config_enabled and kafka_transaction_acl_list is defined
+
+# Удаление ACL через Cloud API по имени топика PATH metod
+# Удаляем только те ACL, которые отсутствуют в конфигурации и не созданы топики
+# Устанавливаем факт kafka_cloud_acls_to_delete
+# Усли отсутствует связанный топик в облаке, то удаляем ACL, определив разницу по наличию топиков
+
+# Удаление ACL что не указаны в конфигурации
+- name: Удалить ACL что не указаны в конфигурации
+  block:
+
+    # Получаем разницу между конфигурацией и облаком
+    - name: Получить разницу между конфигурацией и облаком
+      set_fact:
+        acl_diff: "{{ kafka_acl_topic_by_name_list|difference(cloud_acl_list) }}"
+
+    # Устанавливаем факт kafka_cloud_acls_to_delete
+    - name: Установить факт kafka_cloud_acls_to_delete
+      set_fact:
+        kafka_cloud_acls_to_delete: "{{ acl_diff|json_query(acl_topic_query) }}"
+      vars:
+        acl_topic_query: "[?client_cn=='{{ item.client_cn }}' && client_role=='{{ item.client_role }}'].topic_names[]"
+      loop: "{{ acl_diff }}"
+
+    # Удаляем ACL
+    - name: Удалить ACL
+      uri:
+        url: "{{ kafka_cloud_acl_delete_url }}"
+        method: PATCH
+        headers: "{{ kafka_cloud_action_headers }}"
+        body: "{{ lookup('template', 'templates/kafka_cloud/kafka-acl-delete.j2') }}"
+        body_format: json
+        validate_certs: no
+      register: kafka_cloud_acl_delete_response
+
+    # Устанавливаем факт kafka_cloud_action_id
+    - name: Установить факт kafka_cloud_action_id
+      set_fact:
+        kafka_cloud_action_id: "{{ kafka_cloud_acl_delete_response.json.action_id }}"
+
+    # Проверяем статус действия
+    - name: Проверить статус действия
+      include_tasks: kafka-cloud/check-action-status.yml
+
+  when: kafka_acl_config_enabled and kafka_acl_topic_list_yaml is defined
+
+# Удаление топиков что не указаны в конфигурации
+- name: Удалить топики что не указаны в конфигурации
+  block:
+    # Получаем разницу между конфигурацией и облаком
+    - name: Получить разницу между конфигурацией и облаком
+      set_fact:
+        topic_diff: "{{ kafka_topics_yaml|difference(cloud_topic_list) }}"
+
+    # Устанавливаем факт kafka_cloud_topics_to_delete
+    - name: Установить факт kafka_cloud_topics_to_delete
+      set_fact:
+        kafka_cloud_topics_to_delete: "{{ topic_diff|json_query(topic_name_query) }}"
+      vars:
+        topic_name_query: "[?name=='{{ item }}'].name"
+      loop: "{{ topic_diff }}"
+
+    # Удаляем топики
+    - name: Удалить топики
+      uri:
+        url: "{{ kafka_cloud_topic_delete_url }}"
+        method: PATCH
+        headers: "{{ kafka_cloud_action_headers }}"
+        body: "{{ lookup('template', 'templates/kafka_cloud/kafka-topic-delete.j2') }}"
+        body_format: json
+        validate_certs: no
+      register: kafka_cloud_topic_delete_response
+
+    # Устанавливаем факт kafka_cloud_action_id
+    - name: Установить факт kafka_cloud_action_id
+      set_fact:
+        kafka_cloud_action_id: "{{ kafka_cloud_topic_delete_response.json.action_id }}"
+
+    # Проверяем статус действия
+    - name: Проверить статус действия
+      include_tasks: kafka-cloud/check-action-status.yml
+
+  when: kafka_topics_config_enabled and kafka_topics_yaml is defined
+
+
 ...
+
+## kafka_topics в yaml формате
+#kafka_topics_yaml:
+#  - name: "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+#    partition: 1
+#    retention: 1800000
+#    cleanup_policy: "delete"
+#    cleanup_limit_by: "time"
+#  - name: "adsd.iabs.event.passive-personal-account-operating-day-closed.v1"
+#    partition: 1
+#    retention: 1800000
+#    cleanup_policy: "delete"
+#    cleanup_limit_by: "time"
+
+## kafka_acl_topic_list в yaml формате
+#kafka_acl_topic_list_yaml:
+#  - client_cn: "APD05.01-730-kafka-rr-client-default"
+#    topic_type: "by_name"
+#    client_role: "producer"
+#    topic_names:
+#      - "adsd.iabs.event.passive-personal-account-operating-day-closed.v1"
+#      - "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+#  - client_cn: "APD05.01-730-kafka-rr-client-default"
+#    topic_type: "by_name"
+#    client_role: "consumer"
+#    topic_names:
+#      - "adsd.iabs.event.passive-personal-account-operating-day-closed.v1"
+#      - "adsd.clients.event.reserve-passive-account-admin-order-created.v1"
+
+# шаблон создания ACL через Cloud API
+#  {
+#    "item_id": "{{ kafka_cloud_item_id }}",
+#    "order": {
+#      "attrs": {
+#        "acls": [
+#          {% for kafka_acl in kafka_cloud_acls_to_create %}
+#          {
+#            "client_cn": "{{ kafka_acl.client_cn }}",
+#            "topic_type": "{{ kafka_acl.topic_type }}",
+#            "client_role": "{{ kafka_acl.client_role }}",
+#            {% if kafka_acl.topic_names is defined %}
+#            "topic_names": [
+#              {% for topic_name in kafka_acl.topic_names %}
+#              "{{ topic_name }}"{% if not loop.last %},{% endif %}
+#              {% endfor %}
+#            ]
+#            {% else %}
+#            "topic_name": "{{ kafka_acl.topic_name }}"
+#            {% endif %}
+#          }{% if not loop.last %},{% endif %}
+#          {% endfor %}
+#        ]
+#      }
+#    }
+#  }
+
+#шаблон удаления ACL через Cloud API
+#  {
+#    "item_id": "{{ kafka_cloud_item_id }}",
+#    "order": {
+#      "attrs": {
+#        "acls": [
+#          {% for kafka_acl in kafka_cloud_acls_to_delete %}
+#          {
+#            "client_cn": "{{ kafka_acl.client_cn }}",
+#            "topic_type": "{{ kafka_acl.topic_type }}",
+#            "client_role": "{{ kafka_acl.client_role }}",
+#            {% if kafka_acl.topic_names is defined %}
+#            "topic_names": [
+#              {% for topic_name in kafka_acl.topic_names %}
+#              "{{ topic_name }}"{% if not loop.last %},{% endif %}
+#              {% endfor %}
+#            ]
+#            {% else %}
+#            "topic_name": "{{ kafka_acl.topic_name }}"
+#            {% endif %}
+#          }{% if not loop.last %},{% endif %}
+#          {% endfor %}
+#        ]
+#      }
+#    }
+#  }
+
+# шаблон удаления топиков через Cloud API
+#  {
+#    "item_id": "{{ kafka_cloud_item_id }}",
+#    "order": {
+#      "attrs": {
+#        "topics": [
+#          {% for kafka_topic in kafka_cloud_topics_to_delete %}
+#          {
+#            "name": "{{ kafka_topic.name }}",
+#            "partition": {{ kafka_topic.partition }},
+#            "retention": {{ kafka_topic.retention }},
+#            "cleanup_policy": "{{ kafka_topic.cleanup_policy }}",
+#            "cleanup_limit_by": "{{ kafka_topic.cleanup_limit_by }}"
+#          }{% if not loop.last %},{% endif %}
+#          {% endfor %}
+#        ]
+#      }
+#    }
+#  }
