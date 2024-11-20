@@ -1,5 +1,5 @@
 ---
-- name: Check action status
+- name: Check action
   uri:
     url: "{{ kafka_cloud_history_action_url }}"
     method: GET

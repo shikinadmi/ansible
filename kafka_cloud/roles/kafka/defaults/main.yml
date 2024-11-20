@@ -28,7 +28,9 @@ kafka_cloud_token_request_urlencode_body: {
 # Настройки действий в облаке Kafka
 kafka_cloud_action_url: "{{ kafka_cloud_api_url }}/projects/{{ kafka_cloud_project_id }}/orders/{{ kafka_cloud_order_id }}/actions"  # URL действий в облаке Kafka
 kafka_cloud_topic_create_url: "{{ kafka_cloud_action_url }}/kafka_create_topics"  # URL создания топик в облаке Kafka
+kafka_cloud_topic_delete_url: "{{ kafka_cloud_action_url }}/kafka_delete_topics"
 kafka_cloud_acl_create_url: "{{ kafka_cloud_action_url }}/kafka_create_acls"  # URL создания ACL в облаке Kafka
+kafka_cloud_acl_delete_url: "{{ kafka_cloud_action_url }}/kafka_delete_acls"
 kafka_cloud_transaction_acl_create_url: "{{ kafka_cloud_action_url }}/kafka_create_transaction_acls"  # URL создания транзакционных ACL в облаке Kafka
 kafka_cloud_action_headers: {
   "Accept": "application/json, text/plain, */*",
