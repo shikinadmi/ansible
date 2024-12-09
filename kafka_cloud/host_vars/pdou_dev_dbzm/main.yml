@@ -1,0 +1,1077 @@
+---
+
+#  # CN - 2208-kafka-d5-client-pdou
+#  - name: 'test_topic_1'
+#    partition: 1
+#    retention: 1800000
+#    #    retention_bytes: 134217728 # не указывается для cleanup_limit_by: 'time'
+#    #    segment_bytes: 134217728   # не указывается для cleanup_limit_by: 'time'
+#    cleanup_policy: 'delete'
+#    cleanup_limit_by: 'time'    # по времени
+#  - name: 'test_topic_2'
+#    partition: 1
+#    retention: 1800000
+#    cleanup_policy: 'delete'
+#    cleanup_limit_by: 'time'
+#  # CN - 2208-kafka-d5-client-dbzm
+#  - name: 'dbzm_topic_1'
+#    partition: 1
+#    retention_bytes: 134217728
+#    segment_bytes: 134217728    # 128mb 134217728, 256 mb 268435456, 512mb 536870912, [default 1024 1073741824] если не задано
+#    cleanup_policy: 'delete'
+#    cleanup_limit_by: 'size'    # по размеру
+#  - name: 'dbzm_topic_2'
+#    partition: 1
+#    retention_bytes: 134217728
+#    segment_bytes: 134217728
+#    cleanup_policy: 'delete'
+#    cleanup_limit_by: 'size'
+
+## CN - 2208-kafka-d5-client-pdou
+#- client_cn: '2208-kafka-d5-client-pdou'
+#  topic_type: 'by_name'
+#  client_role: 'producer'
+#  topic_names:
+#    - 'test_topic_1'
+#    - 'test_topic_2'
+#- client_cn: '2208-kafka-d5-client-pdou'
+#  topic_type: 'by_name'
+#  client_role: 'consumer'
+#  topic_names:
+#    - 'test_topic_1'
+#    - 'test_topic_2'
+## CN - 2208-kafka-d5-client-dbzm
+#- client_cn: '2208-kafka-d5-client-dbzm'
+#  topic_type: 'by_name'
+#  client_role: 'consumer'
+#  topic_names:
+#    - 'dbzm_topic_1'
+#    - 'dbzm_topic_2'
+#- client_cn: '2208-kafka-d5-client-dbzm'
+#  topic_type: 'by_name'
+#  client_role: 'producer'
+#  topic_names:
+#    - 'dbzm_topic_1'
+#    - 'dbzm_topic_2'
+
+# kafka_topics в yaml формате
+kafka_topics_yaml:
+  # CN - APD00.00-2208-kafka-d5-client-pdou - consumer / producer
+  - name: '0000-task-completed'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'fromExchageServicetoMCT'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'fromMCTtoExchageService'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'security-officer-audit'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'security-officer-audit-failed'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'security-officer-audit-start'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'security-officer-audit-validated'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'topic-process'
+    partition: 1
+    retention: 864000000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'audit'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'audit-start'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'audit-validated'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'initial-audit'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'outbox_ack_entry_generator_adapter'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'outbox_ack_process'
+    partition: 1
+    retention: 864000000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'outbox_err_entry_generator_adapter'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'outbox_err_process'
+    partition: 1
+    retention: 864000000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'outbox_messages_entry_generator_adapter'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'outbox_resend0_entry_generator_adapter'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'outbox_resend1_entry_generator_adapter'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'outbox_resend1_process'
+    partition: 1
+    retention: 864000000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'outbox_resend2_process'
+    partition: 1
+    retention: 864000000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'outbox_signal_entry_generator_adapter'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'report-input'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'report-output'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ocba-change-pool'
+    partition: 1
+    retention: 1800000
+    segment_bytes: 134217728
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ocba-close-registers-result-pdou'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ocba-open-registers'
+    partition: 1
+    retention: 1800000
+    segment_bytes: 134217728
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ocba-open-registers-result-pdou'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ocba-upload-pools-pdou'
+    partition: 1
+    retention: 1800000
+    segment_bytes: 134217728
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'cpps2-in-product-instance'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'cpps2-in-product-register'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ift_ftwf-gpfx-reconscilation'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ift_ftwf-gpfx-reconscilation-status'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'sutp-global'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'sutp-to-pdou'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'sutp-to-sudo'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ss_input_topic'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ss_output_topic'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'pdou_streaming_topic'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'sudo_streaming_topic'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'fromMCTtoExchangeService'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'bscs.staff.card.2207'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'OSRF_CONSUMER_2207_SUDO'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'Assignments_AC_v2'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'AC_v2_oac_routing_key'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'AC_v2_SUDO'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'tslg-app-logs'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'dbzm-config-val'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'dbzm-offset-val'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'dbzm-status-val'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium-heartbeat.debezium_pdou_data'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_connect_configs'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_connect_offsets'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_connect_statuses'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_pdou_data'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_pdou_data.product_crud.databasechangeloglock'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_pdou_data.product_crud.t_products'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_heartbeat.debezium_product_crud'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium-heartbeat.product_crud'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_product_crud.product_crud.t_accr_products'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_product_crud.product_crud.t_collateral_fin'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_product_crud.product_crud.t_guar_products'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_product_crud.product_crud.t_products'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_heartbeat.debezium_pdou_data'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'debezium_heartbeat.product_crud'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'eod-topic'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'OSRF_CONSUMER_2208_PDOU'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'TSTR_CLIENT_SUDO'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'TSTR_CLIENT_PDOU'
+    partition: 1
+    segment_bytes: 134217728
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'gele-recons-pdou'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'pdou-pp-group'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'sudo-operations'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ift_sudo_uasp_fininstruction'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'ift_sudo_uasp_prodinstruction'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+  - name: 'gele-recons-sudo'
+    partition: 1
+    retention: 1800000
+    cleanup_policy: 'delete'
+    cleanup_limit_by: 'time'
+
+
+
+
+# kafka_acl_topic_list в yaml формате
+kafka_acl_topic_list_yaml:
+
+  # CN - APD00.00-2208-kafka-d5-client-pdou
+  - client_cn: 'APD00.00-2208-kafka-d5-client-pdou'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - '0000-task-completed'
+      - 'AC_v2_SUDO'
+      - 'AC_v2_oac_routing_key'
+      - 'Assignments_AC_v2'
+      - 'OSRF_CONSUMER_2208_PDOU'
+      - 'dbzm-config-val'
+      - 'dbzm-offset-val'
+      - 'dbzm-status-val'
+      - 'debezium-heartbeat.debezium_pdou_data'
+      - 'debezium-heartbeat.product_crud'
+      - 'debezium_connect_configs'
+      - 'debezium_connect_offsets'
+      - 'debezium_connect_statuses'
+      - 'debezium_heartbeat.debezium_product_crud'
+      - 'debezium_heartbeat.product_crud'
+      - 'debezium_pdou_data'
+      - 'debezium_pdou_data.product_crud.databasechangeloglock'
+      - 'debezium_pdou_data.product_crud.t_products'
+      - 'debezium_product_crud.product_crud.t_accr_products'
+      - 'debezium_product_crud.product_crud.t_collateral_fin'
+      - 'debezium_product_crud.product_crud.t_guar_products'
+      - 'debezium_product_crud.product_crud.t_products'
+      - 'eod-topic'
+      - 'fromExchageServicetoMCT'
+      - 'fromMCTtoExchageService'
+      - 'ocba-upload-pools-pdou'
+      - 'pdou-pp-group'
+      - 'report-input'
+      - 'report-output'
+      - 'security-officer-audit'
+      - 'security-officer-audit-failed'
+      - 'security-officer-audit-start'
+      - 'security-officer-audit-validated'
+      - 'ss_input_topic'
+      - 'ss_output_topic'
+      - 'topic-process'
+  - client_cn: 'APD00.00-2208-kafka-d5-client-pdou'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - '0000-task-completed'
+      - 'AC_v2_SUDO'
+      - 'AC_v2_oac_routing_key'
+      - 'Assignments_AC_v2'
+      - 'OSRF_CONSUMER_2208_PDOU'
+      - 'dbzm-config-val'
+      - 'dbzm-offset-val'
+      - 'dbzm-status-val'
+      - 'debezium-heartbeat.debezium_pdou_data'
+      - 'debezium-heartbeat.product_crud'
+      - 'debezium_connect_configs'
+      - 'debezium_connect_offsets'
+      - 'debezium_connect_statuses'
+      - 'debezium_heartbeat.debezium_product_crud'
+      - 'debezium_heartbeat.product_crud'
+      - 'debezium_pdou_data'
+      - 'debezium_pdou_data.product_crud.databasechangeloglock'
+      - 'debezium_pdou_data.product_crud.t_products'
+      - 'debezium_product_crud.product_crud.t_accr_products'
+      - 'debezium_product_crud.product_crud.t_collateral_fin'
+      - 'debezium_product_crud.product_crud.t_guar_products'
+      - 'debezium_product_crud.product_crud.t_products'
+      - 'eod-topic'
+      - 'fromExchageServicetoMCT'
+      - 'fromMCTtoExchageService'
+      - 'ocba-upload-pools-pdou'
+      - 'pdou-pp-group'
+      - 'report-input'
+      - 'report-output'
+      - 'security-officer-audit'
+      - 'security-officer-audit-failed'
+      - 'security-officer-audit-start'
+      - 'security-officer-audit-validated'
+      - 'ss_input_topic'
+      - 'ss_output_topic'
+      - 'topic-process'
+  # CN - APD04.03.0.11.01-2207-kafka-d5-client-pdou
+  - client_cn: 'APD04.03.0.11.01-2207-kafka-d5-client-pdou'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'AC_v2_SUDO'
+      - 'AC_v2_oac_routing_key'
+      - 'Assignments_AC_v2'
+      - 'OSRF_CONSUMER_2207_SUDO'
+      - 'audit'
+      - 'audit-start'
+      - 'audit-validated'
+      - 'bscs.staff.card.2207'
+      - 'fromExchageServicetoMCT'
+      - 'fromMCTtoExchangeService'
+      - 'initial-audit'
+      - 'report-input'
+      - 'report-output'
+      - 'security-officer-audit'
+      - 'security-officer-audit-failed'
+      - 'security-officer-audit-start'
+      - 'security-officer-audit-validated'
+      - 'sudo_streaming_topic'
+      - 'tslg-app-logs'
+  - client_cn: 'APD04.03.0.11.01-2207-kafka-d5-client-pdou'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'AC_v2_SUDO'
+      - 'AC_v2_oac_routing_key'
+      - 'Assignments_AC_v2'
+      - 'OSRF_CONSUMER_2207_SUDO'
+      - 'audit'
+      - 'audit-start'
+      - 'audit-validated'
+      - 'bscs.staff.card.2207'
+      - 'fromExchageServicetoMCT'
+      - 'fromMCTtoExchangeService'
+      - 'initial-audit'
+      - 'report-input'
+      - 'report-output'
+      - 'security-officer-audit'
+      - 'security-officer-audit-failed'
+      - 'security-officer-audit-start'
+      - 'security-officer-audit-validated'
+      - 'sudo_streaming_topic'
+      - 'tslg-app-logs'
+  # CN - 2207-kafka-d5-client-pdou
+  - client_cn: '2207-kafka-d5-client-pdou'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'audit'
+      - 'audit-start'
+      - 'audit-validated'
+      - 'initial-audit'
+      - 'outbox_ack_entry_generator_adapter'
+      - 'outbox_ack_process'
+      - 'outbox_err_entry_generator_adapter'
+      - 'outbox_err_process'
+      - 'outbox_messages_entry_generator_adapter'
+      - 'outbox_resend0_entry_generator_adapter'
+      - 'outbox_resend1_entry_generator_adapter'
+      - 'outbox_resend1_process'
+      - 'outbox_resend2_process'
+      - 'outbox_signal_entry_generator_adapter'
+      - 'security-officer-audit'
+      - 'security-officer-audit-failed'
+      - 'security-officer-audit-start'
+      - 'security-officer-audit-validated'
+      - 'report-input'
+      - 'report-output'
+      - 'TSTR_CLIENT_SUDO'
+  - client_cn: '2207-kafka-d5-client-pdou'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'audit'
+      - 'audit-start'
+      - 'audit-validated'
+      - 'initial-audit'
+      - 'outbox_ack_entry_generator_adapter'
+      - 'outbox_ack_process'
+      - 'outbox_err_entry_generator_adapter'
+      - 'outbox_err_process'
+      - 'outbox_messages_entry_generator_adapter'
+      - 'outbox_resend0_entry_generator_adapter'
+      - 'outbox_resend1_entry_generator_adapter'
+      - 'outbox_resend1_process'
+      - 'outbox_resend2_process'
+      - 'outbox_signal_entry_generator_adapter'
+      - 'security-officer-audit'
+      - 'security-officer-audit-failed'
+      - 'security-officer-audit-start'
+      - 'security-officer-audit-validated'
+      - 'report-input'
+      - 'report-output'
+      - 'TSTR_CLIENT_SUDO'
+  # CN - 2207-kafka-d5-client-sudo
+  - client_cn: '2207-kafka-d5-client-sudo'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'AC_v2_SUDO'
+      - 'TSTR_CLIENT_SUDO'
+      - 'dbzm-config-val'
+      - 'dbzm-offset-val'
+      - 'dbzm-status-val'
+      - 'outbox_ack_entry_generator_adapter'
+      - 'outbox_ack_process'
+      - 'outbox_err_entry_generator_adapter'
+      - 'outbox_err_process'
+      - 'outbox_messages_entry_generator_adapter'
+      - 'outbox_resend0_entry_generator_adapter'
+      - 'outbox_resend1_entry_generator_adapter'
+      - 'outbox_resend1_process'
+      - 'outbox_resend2_process'
+      - 'outbox_signal_entry_generator_adapter'
+      - 'sudo_streaming_topic'
+      - 'tslg-app-logs'
+      - 'sudo-operations'
+  - client_cn: '2207-kafka-d5-client-sudo'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'AC_v2_SUDO'
+      - 'TSTR_CLIENT_SUDO'
+      - 'dbzm-config-val'
+      - 'dbzm-offset-val'
+      - 'dbzm-status-val'
+      - 'outbox_ack_entry_generator_adapter'
+      - 'outbox_ack_process'
+      - 'outbox_err_entry_generator_adapter'
+      - 'outbox_err_process'
+      - 'outbox_messages_entry_generator_adapter'
+      - 'outbox_resend0_entry_generator_adapter'
+      - 'outbox_resend1_entry_generator_adapter'
+      - 'outbox_resend1_process'
+      - 'outbox_resend2_process'
+      - 'outbox_signal_entry_generator_adapter'
+      - 'sudo_streaming_topic'
+      - 'tslg-app-logs'
+      - 'sudo-operations'
+  # CN - 2207-kafka-d5-client-aceg
+  - client_cn: '2207-kafka-d5-client-aceg'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'outbox_ack_entry_generator_adapter'
+      - 'outbox_ack_process'
+      - 'outbox_err_entry_generator_adapter'
+      - 'outbox_err_process'
+      - 'outbox_messages_entry_generator_adapter'
+      - 'outbox_resend0_entry_generator_adapter'
+      - 'outbox_resend1_entry_generator_adapter'
+      - 'outbox_resend1_process'
+      - 'outbox_resend2_process'
+      - 'outbox_signal_entry_generator_adapter'
+  - client_cn: '2207-kafka-d5-client-aceg'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'outbox_ack_entry_generator_adapter'
+      - 'outbox_ack_process'
+      - 'outbox_err_entry_generator_adapter'
+      - 'outbox_err_process'
+      - 'outbox_messages_entry_generator_adapter'
+      - 'outbox_resend0_entry_generator_adapter'
+      - 'outbox_resend1_entry_generator_adapter'
+      - 'outbox_resend1_process'
+      - 'outbox_resend2_process'
+      - 'outbox_signal_entry_generator_adapter'
+  # CN - 2208-kafka-d5-client-tsau
+  - client_cn: '2208-kafka-d5-client-tsau'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'audit'
+      - 'audit-start'
+      - 'audit-validated'
+      - 'initial-audit'
+      - 'security-officer-audit'
+      - 'security-officer-audit-failed'
+      - 'security-officer-audit-start'
+      - 'security-officer-audit-validated'
+      - 'pdou_streaming_topic'
+  - client_cn: '2208-kafka-d5-client-tsau'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'audit'
+      - 'audit-start'
+      - 'audit-validated'
+      - 'initial-audit'
+      - 'security-officer-audit'
+      - 'security-officer-audit-failed'
+      - 'security-officer-audit-start'
+      - 'security-officer-audit-validated'
+      - 'pdou_streaming_topic'
+  # CN - 2208-kafka-d5-client-ocba
+  - client_cn: '2208-kafka-d5-client-ocba'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'ocba-change-pool'
+      - 'ocba-close-registers-result-pdou'
+      - 'ocba-open-registers'
+      - 'ocba-open-registers-result-pdou'
+      - 'ocba-upload-pools-pdou'
+  - client_cn: '2208-kafka-d5-client-ocba'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'ocba-change-pool'
+      - 'ocba-close-registers-result-pdou'
+      - 'ocba-open-registers'
+      - 'ocba-open-registers-result-pdou'
+      - 'ocba-upload-pools-pdou'
+  # CN - APD04.03.0.11.02-2208-kafka-if-client-cpps
+  - client_cn: 'APD04.03.0.11.02-2208-kafka-if-client-cpps'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'cpps2-in-product-instance'
+      - 'cpps2-in-product-register'
+  - client_cn: 'APD04.03.0.11.02-2208-kafka-if-client-cpps'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'cpps2-in-product-instance'
+      - 'cpps2-in-product-register'
+  # CN - 2208-kafka-d5-client-ftwf
+  - client_cn: '2208-kafka-d5-client-ftwf'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'ift_ftwf-gpfx-reconscilation'
+      - 'ift_ftwf-gpfx-reconscilation-status'
+  - client_cn: '2208-kafka-d5-client-ftwf'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'ift_ftwf-gpfx-reconscilation'
+      - 'ift_ftwf-gpfx-reconscilation-status'
+  # CN - 2207-kafka-d5-client-ftwf
+  - client_cn: '2207-kafka-d5-client-ftwf'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'ift_ftwf-gpfx-reconscilation'
+      - 'ift_ftwf-gpfx-reconscilation-status'
+  - client_cn: '2207-kafka-d5-client-ftwf'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'ift_ftwf-gpfx-reconscilation'
+      - 'ift_ftwf-gpfx-reconscilation-status'
+  # CN - 2207-kafka-d5-client-sutp
+  - client_cn: '2207-kafka-d5-client-sutp'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+#      - 'sutp-events'
+      - 'sutp-global'
+      - 'sutp-to-sudo'
+  - client_cn: '2207-kafka-d5-client-sutp'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'sutp-global'
+  # CN - 2208-kafka-d5-client-sutp
+  - client_cn: '2208-kafka-d5-client-sutp'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+#      - 'sutp-events'
+      - 'sutp-global'
+      - 'sutp-to-pdou'
+  - client_cn: '2208-kafka-d5-client-sutp'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'sutp-global'
+# CN - 2208-kafka-d5-client-uasp
+  - client_cn: '2208-kafka-d5-client-uasp'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'ift_pdou_uasp_lcopen'
+      - 'ift_pdou_uasp_register'
+  - client_cn: '2208-kafka-d5-client-uasp'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'ift_pdou_uasp_lcopen'
+      - 'ift_pdou_uasp_register'
+# CN - 2207-kafka-d5-client-uasp
+  - client_cn: '2207-kafka-d5-client-uasp'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'ift_sudo_uasp_fininstruction'
+      - 'ift_sudo_uasp_prodinstruction'
+  - client_cn: '2207-kafka-d5-client-uasp'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'ift_sudo_uasp_fininstruction'
+      - 'ift_sudo_uasp_prodinstruction'
+# CN - APD04.03.011.02-pdou-kafka
+  - client_cn: 'APD04.03.011.02-pdou-kafka'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'pdou_streaming_topic'
+      - 'eod-topic'
+  - client_cn: 'APD04.03.011.02-pdou-kafka'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'pdou_streaming_topic'
+      - 'eod-topic'
+# CN - 2208-kafka-d5-client-sudo
+  - client_cn: '2208-kafka-d5-client-sudo'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'sudo_streaming_topic'
+  - client_cn: '2208-kafka-d5-client-sudo'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'sudo_streaming_topic'
+# CN - 2208-kafka-d5-client-osrf
+  - client_cn: '2208-kafka-d5-client-osrf'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'OSRF_CONSUMER_2208_PDOU'
+  - client_cn: '2208-kafka-d5-client-osrf'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'OSRF_CONSUMER_2208_PDOU'
+# CN - 2208-kafka-d5-client-tstr
+  - client_cn: '2208-kafka-d5-client-tstr'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'TSTR_CLIENT_PDOU'
+  - client_cn: '2208-kafka-d5-client-tstr'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'TSTR_CLIENT_PDOU'
+# CN - 2208-kafka-d5-client-gele
+  - client_cn: '2208-kafka-d5-client-gele'
+    topic_type: 'by_name'
+    client_role: 'consumer'
+    topic_names:
+      - 'gele-recons-sudo'
+      - 'gele-recons-pdou'
+  - client_cn: '2208-kafka-d5-client-gele'
+    topic_type: 'by_name'
+    client_role: 'producer'
+    topic_names:
+      - 'gele-recons-sudo'
+      - 'gele-recons-pdou'
+
+
+
+#Название    Разделов,шт    Фактор репликации  Политика очистки   Время хранения данных  Максимальный объем раздела Размер сегмента    Тип сжатия
+#0000-task-completed 1  1  delete 1800000    default    1024 MB    default
+#AC_v2_oac_routing_key   1  1  delete 1800000    default    1024 MB    default
+#Assignments_AC_v2   1  1  default    default    default    1024 MB    default
+#OSRF_CONSUMER_2207_SUDO 3  1  delete 1800000    default    1024 MB    default
+#OSRF_CONSUMER_2208_PDOU 1  1  delete 1800000    default    1024 MB    default
+#TSTR_CLIENT_PDOU    1  1  delete 1800000    default    128 MB default
+#audit   1  1  delete 1800000    default    1024 MB    default
+#audit-start 1  1  delete 1800000    default    1024 MB    default
+#audit-validated 1  1  delete 1800000    default    1024 MB    default
+#bscs.staff.card.2207    1  1  delete 1800000    default    1024 MB    default
+#cpps2-in-product-instance   1  1  delete 1800000    default    1024 MB    default
+#cpps2-in-product-register   1  1  delete 1800000    default    1024 MB    default
+#dbzm-config-val 1  1  compact    default    default    1024 MB    default
+#dbzm-offset-val 1  1  compact    default    default    1024 MB    default
+#dbzm-status-val 1  1  compact    default    default    1024 MB    default
+#debezium-heartbeat.debezium_pdou_data   1  1  delete 1800000    default    1024 MB    default
+#debezium-heartbeat.product_crud 1  1  delete 1800000    default    128 MB default
+#debezium_connect_configs    1  1  delete 1800000    default    1024 MB    default
+#debezium_connect_offsets    1  1  delete 1800000    default    1024 MB    default
+#debezium_connect_statuses   1  1  delete 1800000    default    1024 MB    default
+#debezium_heartbeat.debezium_product_crud    1  1  delete 1800000    default    128 MB default
+#debezium_pdou_data  10 1  delete 1800000    default    1024 MB    default
+#debezium_pdou_data.product_crud.databasechangeloglock   1  1  delete 1800000    default    1024 MB    default
+#debezium_pdou_data.product_crud.t_products  1  1  delete 1800000    default    1024 MB    default
+#debezium_product_crud.product_crud.t_accr_products  1  1  delete 1800000    default    128 MB default
+#debezium_product_crud.product_crud.t_collateral_fin 1  1  delete 1800000    default    128 MB default
+#debezium_product_crud.product_crud.t_guar_products  1  1  delete 1800000    default    128 MB default
+#debezium_product_crud.product_crud.t_products   1  1  delete 1800000    default    128 MB default
+#eod-topic   1  1  delete 1800000    default    1024 MB    default
+#fromExchageServicetoMCT 1  1  delete 1800000    default    1024 MB    default
+#fromMCTtoExchageService 1  1  delete 1800000    default    1024 MB    default
+#gele-recons-sudo    1  1  delete 1800000    default    1024 MB    default
+#ift_ftwf-gpfx-reconscilation    1  1  delete 1800000    default    1024 MB    default
+#ift_ftwf-gpfx-reconscilation-status 1  1  delete 1800000    default    1024 MB    default
+#ift_pdou_uasp_lcopen    1  1  delete 1800000    default    1024 MB    default
+#ift_pdou_uasp_register  1  1  delete 1800000    default    1024 MB    default
+#ift_sudo_uasp_fininstruction    1  1  delete 1800000    default    1024 MB    default
+#initial-audit   1  1  delete 1800000    default    1024 MB    default
+#ocba-change-pool    1  1  delete 1800000    default    128 MB default
+#ocba-close-registers-result-pdou    1  1  delete 1800000    default    1024 MB    default
+#ocba-open-registers 1  1  delete 1800000    default    128 MB default
+#ocba-open-registers-result-pdou 1  1  delete 1800000    default    1024 MB    default
+#ocba-upload-pools-pdou  3  1  delete 1800000    default    128 MB default
+#outbox_ack_entry_generator_adapter  1  1  delete 1800000    default    1024 MB    default
+#outbox_ack_process  1  1  delete 864000000  default    1024 MB    default
+#outbox_err_entry_generator_adapter  1  1  delete 1800000    default    1024 MB    default
+#outbox_err_process  1  1  delete 864000000  default    1024 MB    default
+#outbox_messages_entry_generator_adapter 1  1  delete 1800000    default    1024 MB    default
+#outbox_resend0_entry_generator_adapter  1  1  delete 1800000    default    1024 MB    default
+#outbox_resend1_entry_generator_adapter  1  1  delete 1800000    default    1024 MB    default
+#outbox_resend1_process  1  1  delete 864000000  default    1024 MB    default
+#outbox_resend2_process  1  1  delete 864000000  default    1024 MB    default
+#outbox_signal_entry_generator_adapter   1  1  delete 1800000    default    1024 MB    default
+#pdou-pp-group   1  1  delete 1800000    default    1024 MB    default
+#pdou_streaming_topic    1  1  delete 1800000    default    1024 MB    default
+#report-input    1  1  delete 1800000    default    1024 MB    default
+#report-output   1  1  delete 1800000    default    1024 MB    default
+#security-officer-audit  1  1  delete 1800000    default    1024 MB    default
+#security-officer-audit-failed   1  1  delete 1800000    default    1024 MB    default
+#security-officer-audit-start    1  1  delete 1800000    default    1024 MB    default
+#security-officer-audit-validated    1  1  delete 1800000    default    1024 MB    default
+#sudo-operations 1  1  delete 1800000    default    1024 MB    default
+#sudo_streaming_topic    1  1  delete 1800000    default    1024 MB    default
+#sutp-global 1  1  delete 1800000    default    1024 MB    default
+#sutp-to-pdou    1  1  delete 1800000    default    1024 MB    default
+#sutp-to-sudo    1  1  delete 1800000    default    1024 MB    default
+#topic-process   1  1  delete 864000000  default    1024 MB    default
+#tslg-app-logs   1  1  delete 1800000    default    128 MB default
+
+#Тип применяемого ACL    Маска  Название топиков   Роль   CN сертификата клиента
+#По имени топика    AC_v2_SUDO,AC_v2_oac_routing_key,Assignments_AC_v2,OSRF_CONSUMER_2207_SUDO,bscs.staff.card.2207,fromMCTtoExchangeService,initial-audit,report-input,sudo_streaming_topic,tslg-app-logs producer   APD04.03.0.11.01-2207-kafka-d5-client-pdou
+#По имени топика    AC_v2_SUDO,AC_v2_oac_routing_key,Assignments_AC_v2,OSRF_CONSUMER_2207_SUDO,bscs.staff.card.2207,fromMCTtoExchangeService,initial-audit,report-output,sudo_streaming_topic,tslg-app-logs    consumer   APD04.03.0.11.01-2207-kafka-d5-client-pdou
+#По имени топика    AC_v2_SUDO,Assignments_AC_v2,OSRF_CONSUMER_2208_PDOU,dbzm-config-val,dbzm-offset-val,dbzm-status-val,debezium-heartbeat.debezium_pdou_data,debezium_connect_configs,debezium_connect_offsets,debezium_connect_statuses,debezium_pdou_data,debezium_pdou_data.product_crud.databasechangeloglock,debezium_pdou_data.product_crud.t_products,eod-topic,initial-audit,ocba-upload-pools-pdou,pdou_streaming_topic,tslg-app-logs   producer   2208-kafka-d5-client-pdou
+#По имени топика    AC_v2_SUDO,Assignments_AC_v2,OSRF_CONSUMER_2208_PDOU,dbzm-config-val,dbzm-offset-val,dbzm-status-val,eod-topic,initial-audit,ocba-upload-pools-pdou,pdou_streaming_topic,report-input,ss_input_topic,ss_output_topic   consumer   APD00.00-2208-kafka-d5-client-pdou
+#По имени топика    AC_v2_SUDO,Assignments_AC_v2,dbzm-config-val,dbzm-offset-val,dbzm-status-val,debezium-heartbeat.debezium_pdou_data,debezium_connect_configs,debezium_connect_offsets,debezium_connect_statuses,debezium_pdou_data,debezium_pdou_data.product_crud.databasechangeloglock,debezium_pdou_data.product_crud.t_products,eod-topic,initial-audit,ocba-upload-pools-pdou,pdou_streaming_topic,tslg-app-logs   consumer   2208-kafka-d5-client-pdou
+#По имени топика    AC_v2_SUDO,Assignments_AC_v2,dbzm-config-val,dbzm-offset-val,dbzm-status-val,eod-topic,initial-audit,ocba-upload-pools-pdou,pdou_streaming_topic,report-output,ss_input_topic,ss_output_topic,sudo_streaming_topic producer   APD00.00-2208-kafka-d5-client-pdou
+#По имени топика    AC_v2_SUDO,TSTR_CLIENT_SUDO,dbzm-config-val,dbzm-offset-val,dbzm-status-val,sudo_streaming_topic   consumer   2207-kafka-d5-client-sudo
+#По имени топика    OSRF_CONSUMER_2208_PDOU    consumer   2208-kafka-d5-client-osrf
+#По имени топика    OSRF_CONSUMER_2208_PDOU    producer   2208-kafka-d5-client-osrf
+#По имени топика    TSTR_CLIENT_PDOU   consumer   2208-kafka-d5-client-tstr
+#По имени топика    TSTR_CLIENT_PDOU   producer   2208-kafka-d5-client-tstr
+#По имени топика    TSTR_CLIENT_SUDO,dbzm-config-val,dbzm-offset-val,dbzm-status-val,sudo_streaming_topic,tslg-app-logs    producer   2207-kafka-d5-client-sudo
+#По имени топика    TSTR_CLIENT_SUDO,initial-audit producer   2207-kafka-d5-client-pdou
+#По имени топика    TSTR_CLIENT_SUDO,initial-audit,pdou_streaming_topic    consumer   2207-kafka-d5-client-pdou
+#По имени топика    eod-topic,pdou_streaming_topic consumer   APD04.03.011.02-pdou-kafka
+#По имени топика    gele-recons-pdou   consumer   2208-kafka-d5-client-gele
+#По имени топика    gele-recons-sudo   consumer   2207-kafka-d5-client-gele
+#По имени топика    ift_ftwf-gpfx-reconscilation   producer   2207-kafka-d5-client-ftwf
+#По имени топика    ift_ftwf-gpfx-reconscilation,ift_ftwf-gpfx-reconscilation-status   producer   2208-kafka-d5-client-ftwf
+#По имени топика    ift_ftwf-gpfx-reconscilation-status    consumer   2207-kafka-d5-client-ftwf
+#По имени топика    ift_ftwf-gpfx-reconscilation-status    consumer   2208-kafka-d5-client-ftwf
+#По имени топика    ift_sudo_uasp_fininstruction,ift_sudo_uasp_prodinstruction consumer   2207-kafka-d5-client-uasp
+#По имени топика    ift_sudo_uasp_fininstruction,ift_sudo_uasp_prodinstruction producer   2207-kafka-d5-client-uasp
+#По имени топика    ocba-open-registers-result-pdou    consumer   2208-kafka-d5-client-ocba
+#По имени топика    ocba-open-registers-result-pdou    producer   2208-kafka-d5-client-ocba
+#По имени топика    pdou_streaming_topic   consumer   2208-kafka-d5-client-tsau
+#По имени топика    pdou_streaming_topic   producer   2208-kafka-d5-client-tsau
+#По имени топика    pdou_streaming_topic   producer   APD04.03.011.02-pdou-kafka
+#По имени топика    ss_output_topic    consumer   04.03.011.02-d5-kafka ///////////
+#По имени топика    sudo_streaming_topic   consumer   2208-kafka-d5-client-sudo
+#По имени топика    sudo_streaming_topic   producer   2208-kafka-d5-client-sudo
+#По имени топика    sutp-events,sutp-global,sutp-to-pdou   consumer   2208-kafka-d5-client-sutp
+#По имени топика    sutp-events,sutp-global,sutp-to-sudo   consumer   2207-kafka-d5-client-sutp
+#По имени топика    sutp-global    producer   2207-kafka-d5-client-sutp
+#По имени топика    sutp-global    producer   2208-kafka-d5-client-sutp
+#По маске    0000      consumer   APD00.00-2208-kafka-d5-client-pdou
+#По маске    0000      producer   APD00.00-2208-kafka-d5-client-pdou
+#По маске    AC_v2_SUDO    consumer   2207-kafka-d5-client-pdou  ////////
+#По маске    audit     consumer   2207-kafka-d5-client-pdou
+#По маске    audit     consumer   2208-kafka-d5-client-tsau
+#По маске    audit     consumer   APD04.03.0.11.01-2207-kafka-d5-client-pdou
+#По маске    audit     producer   2207-kafka-d5-client-pdou
+#По маске    audit     producer   2208-kafka-d5-client-tsau
+#По маске    audit     producer   APD04.03.0.11.01-2207-kafka-d5-client-pdou
+#По маске    cpps2     consumer   APD04.03.0.11.02-2208-kafka-if-client-cpps
+#По маске    cpps2     producer   APD04.03.0.11.02-2208-kafka-if-client-cpps
+#По маске    debezium      consumer   2208-kafka-d5-client-pdou
+#По маске    debezium      producer   2208-kafka-d5-client-pdou
+#По маске    from      consumer   APD00.00-2208-kafka-d5-client-pdou
+#По маске    from      consumer   APD04.03.0.11.01-2207-kafka-d5-client-pdou
+#По маске    from      producer   APD00.00-2208-kafka-d5-client-pdou
+#По маске    from      producer   APD04.03.0.11.01-2207-kafka-d5-client-pdou
+#По маске    ift_ftwf-gpfx-reconscilation-status       producer   2208-kafka-d5-client-ftwf
+#По маске    ift_pdou_uasp     consumer   2208-kafka-d5-client-uasp
+#По маске    ift_pdou_uasp     producer   2208-kafka-d5-client-uasp
+#По маске    initial-audit     consumer   2208-kafka-d5-client-tsau
+#По маске    initial-audit     producer   2208-kafka-d5-client-tsau
+#По маске    ocba-     consumer   2208-kafka-d5-client-ocba
+#По маске    ocba-     producer   2208-kafka-d5-client-ocba
+#По маске    ocba-upload-pools-pdou    consumer   2208-kafka-d5-client-ocba
+#По маске    ocba-upload-pools-pdou    producer   2208-kafka-d5-client-ocba
+#По маске    outbox    consumer   2207-kafka-d5-client-aceg
+#По маске    outbox    consumer   2207-kafka-d5-client-pdou
+#По маске    outbox    consumer   2207-kafka-d5-client-sudo
+#По маске    outbox    producer   2207-kafka-d5-client-aceg
+#По маске    outbox    producer   2207-kafka-d5-client-pdou
+#По маске    outbox    producer   2207-kafka-d5-client-sudo
+#По маске    pdou      consumer   2208-kafka-d5-client-pdou
+#По маске    pdou      producer   2208-kafka-d5-client-pdou
+#По маске    report    consumer   2207-kafka-d5-client-pdou
+#По маске    report    consumer   2208-kafka-d5-client-pdou
+#По маске    report    producer   2207-kafka-d5-client-pdou
+#По маске    report    producer   2208-kafka-d5-client-pdou
+#По маске    security      consumer   APD00.00-2208-kafka-d5-client-pdou
+#По маске    security      consumer   APD04.03.0.11.01-2207-kafka-d5-client-pdou
+#По маске    security      producer   APD00.00-2208-kafka-d5-client-pdou
+#По маске    security      producer   APD04.03.0.11.01-2207-kafka-d5-client-pdou
+#По маске    ss    consumer   APD00.00-2208-kafka-d5-client-pdou
+#По маске    ss    consumer   APD04.03.0.11.01-2207-kafka-d5-client-pdou.   /////////
+#По маске    ss    producer   APD00.00-2208-kafka-d5-client-pdou
+#По маске    ss    producer   APD04.03.0.11.01-2207-kafka-d5-client-pdou    /////////
+#По маске    ss_input_topic    consumer   2208-kafka-d5-client-tsau
+#По маске    ss_input_topic    producer   2208-kafka-d5-client-tsau
+#По маске    sudo      consumer   2207-kafka-d5-client-sudo
+#По маске    sudo      producer   2207-kafka-d5-client-sudo
+#По маске    sutp      consumer   2208-kafka-d5-client-sutp
+#По маске    topic-process     consumer   APD00.00-2208-kafka-d5-client-pdou
+#По маске    topic-process     producer   APD00.00-2208-kafka-d5-client-pdou
+
+...

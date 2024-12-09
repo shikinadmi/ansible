@@ -1,0 +1,44 @@
+---
+
+# удаление файла дампа
+- name: удаление файла дампа
+  file:
+    path: ./dump.sql
+    state: absent
+# postgres снятие файла дампв с авторизацией к БД
+- name: postgres снятие файла дампв с авторизацией к БД
+  postgresql_db:
+    login_host: 127.0.0.1
+    login_port: 5432
+    login_user: postgres
+    login_password: postgres
+    name: postgres
+    target: "./dump.sql"
+    state: dump
+  check_mode: true
+
+
+# postgres удаление схемы пользователя с авторизацией к БД
+
+- name: postgres удаление схемы пользователя с авторизацией к БД
+  postgresql_schema:
+    login_host: 127.0.0.1
+    login_port: 5432
+    login_user: postgres
+    login_password: postgres
+    name: postgres
+    schema: postgres
+    state: absent
+  check_mode: true
+
+# postgres восстановление схемы пользователя с авторизацией к БД из файла дампа
+- name: postgres восстановление схемы пользователя с авторизацией к БД из файла дампа
+  postgresql_db:
+    login_host: 127.0.0.1
+    login_port: 5432
+    login_user: postgres
+    login_password: postgres
+    target: ./dump.sql
+    state: restore
+  check_mode: true
+...

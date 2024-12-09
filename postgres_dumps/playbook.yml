@@ -1,0 +1,8 @@
+---
+- name: postgres_dump
+  hosts: localhost
+  roles:
+    - { role: postgres_dump, tags: ['DUMP'] }
+#    - { role: postgres_restore, tags: ['RESTORE'] }
+
+...
