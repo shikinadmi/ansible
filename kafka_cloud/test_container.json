@@ -1,0 +1,19 @@
+// json format for test container
+{".schemaVersion": "1",
+    "item_id": "test",
+    ".schemaVersion": "1",
+    "order": {
+        "attrs": {
+            "acls": [
+                {
+                    "client_cn": "test",
+                    "topic_type": "test",
+                    ".schemaVersion": "1",
+                    "topic_names": [
+                        "test"
+                    ]
+                }
+            ]
+        }
+    }
+}
